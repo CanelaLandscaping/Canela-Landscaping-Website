@@ -1,0 +1,247 @@
+{
+  "nav": {
+    "about": "Sobre Nosotros",
+    "services": "Servicios",
+    "gallery": "Galería",
+    "contact": "Contacto",
+    "getQuote": "Cotizar"
+  },
+  "hero": {
+    "badge": "Jardinería de Primera",
+    "title": "Cuidado Experto para <1/> su Hogar Exterior.",
+    "subtitle": "Transformando sus espacios exteriores en obras maestras con precisión, pasión y experiencia inigualable.",
+    "cta": "Obtenga un Presupuesto Gratis",
+    "services": "Nuestros Servicios"
+  },
+  "trust": {
+    "rated5": "Calificación 5 Estrellas",
+    "fullyInsured": "Totalmente Asegurado",
+    "yearsExp": "15+ Años de Experiencia",
+    "certified": "Arboristas Certificados"
+  },
+  "footer": {
+    "quickLinks": "Enlaces Rápidos",
+    "contactUs": "Contáctenos",
+    "contactInfo": "Información de Contacto",
+    "description": "Servicios premium de diseño y mantenimiento de paisajes para espacios exteriores hermosos y funcionales.",
+    "rights": "Todos los derechos reservados.",
+    "links": {
+      "ourServices": "Nuestros Servicios",
+      "projectGallery": "Galería de Proyectos",
+      "aboutUs": "Sobre Nosotros",
+      "freeQuote": "Cotización Gratis"
+    },
+    "serviceLinks": {
+      "title": "Servicios",
+      "lawnMaintenance": "Mantenimiento de Césped",
+      "gardenCleanup": "Limpieza de Jardín",
+      "patioRepair": "Reparación de Patio",
+      "snowRemoval": "Remoción de Nieve"
+    }
+  },
+  "home": {
+    "whatWeDo": {
+      "badge": "Lo que hacemos",
+      "title": "Creando Experiencias <1/> Exteriores Excepcionales.",
+      "viewAll": "Ver Todos los Más de 15 Servicios",
+      "viewProof": "Ver Prueba"
+    },
+    "whyUs": {
+      "badge": "La Diferencia Canela",
+      "title": "Por qué los propietarios confían en nuestra visión.",
+      "stats": "Propiedades Restauradas",
+      "quality": {
+        "title": "Calidad Garantizada",
+        "desc": "Nunca escatimamos esfuerzos. Nuestro equipo utiliza materiales y equipos de la más alta calidad."
+      },
+      "reliable": {
+        "title": "Horarios Confiables",
+        "desc": "Nos presentamos cuando decimos que lo haremos. Su tiempo es valioso y lo respetamos."
+      },
+      "passionate": {
+        "title": "Cuidado Apasionado",
+        "desc": "Tratamos cada jardín como si fuera el nuestro, con atención a cada detalle."
+      }
+    },
+    "testimonials": {
+      "quote": "Canela Landscaping transformó completamente nuestro patio trasero. Su atención al detalle durante la limpieza de primavera fue diferente a todo lo que habíamos visto antes. ¡Nuestro césped nunca se ha visto mejor!",
+      "author": "Sarah & Michael J.",
+      "location": "Propietarios, Cleveland, Ohio"
+    },
+    "cta": {
+      "title": "¿Listo para comenzar su <1/> próximo proyecto?",
+      "subtitle": "Únase a cientos de propietarios felices hoy. Obtenga una cotización gratuita y sin compromiso.",
+      "button": "Comenzar Mi Transformación"
+    }
+  },
+  "services": {
+    "categories": {
+      "lawnCare": "Cuidado del Césped",
+      "maintenance": "Mantenimiento",
+      "specialty": "Especialidad",
+      "seasonal": "Estacional"
+    },
+    "lawn-mowing": {
+      "title": "Corte de Césped Profesional",
+      "description": "Corte de precisión con franjas y recortes profesionales para una apariencia impecable."
+    },
+    "edges": {
+      "title": "Bordes Limpios",
+      "description": "Bordes nítidos y limpios entre su césped y los pasillos o camas de jardín."
+    },
+    "lawn-maintenance": {
+      "title": "Mantenimiento del Césped",
+      "description": "Cuidado integral que incluye fertilización y aireación para mantener su césped saludable."
+    },
+    "bush-trimming": {
+      "title": "Poda de Arbustos y Setos",
+      "description": "Poda experta para mantener la forma y la salud de sus arbustos y setos."
+    },
+    "weeds": {
+      "title": "Arrancado de Malezas",
+      "description": "Eliminación completa de malezas invasoras de sus macizos de flores y césped."
+    },
+    "mulch": {
+      "title": "Instalación de Mantillo (Mulch)",
+      "description": "Mantillo fresco y de alta calidad para proteger la humedad del suelo y suprimir las malezas."
+    },
+    "top-soil": {
+      "title": "Tierra Vegetal y Nivelación",
+      "description": "Aplicación de suelo rico en nutrientes y nivelación para un crecimiento óptimo de las plantas."
+    },
+    "reseeding": {
+      "title": "Resiembra de Césped",
+      "description": "Reparación de áreas ralas o desnudas con mezclas de semillas de césped de primera calidad."
+    },
+    "storm-cleanup": {
+      "title": "Limpieza de Daños por Tormentas",
+      "description": "Respuesta rápida para limpiar escombros, ramas y suciedad después de un clima severo."
+    },
+    "yard-cleanup": {
+      "title": "Limpieza General del Patio",
+      "description": "Restaurando el orden en su espacio exterior con limpieza y transporte integral."
+    },
+    "leaf-cleanup": {
+      "title": "Recolección de Hojas",
+      "description": "Recolección y eliminación eficiente de hojas para proteger su césped durante el otoño."
+    },
+    "patios": {
+      "title": "Reparación de Patios y Masonería",
+      "description": "Reparación de adoquines agrietados, nivelación de superficies y restauración de elementos de piedra."
+    },
+    "seasonal-cleanup": {
+      "title": "Limpieza de Primavera y Otoño",
+      "description": "Limpieza profunda y preparación para el cambio de estaciones."
+    },
+    "gravel": {
+      "title": "Instalación de Grava de Río",
+      "description": "Hermosos elementos de grava de bajo mantenimiento y soluciones de drenaje."
+    },
+    "snow-plow": {
+      "title": "Remoción de Nieve",
+      "description": "Remoción de nieve confiable las 24 horas, los 7 días de la semana para entradas y pasillos durante el invierno."
+    }
+  },
+  "about": {
+    "story": {
+      "badge": "Nuestra Historia",
+      "title": "Arraigados en la <1/> Calidad.",
+      "content": "Fundada hace más de 15 años, Canela Landscaping comenzó con una misión simple: proporcionar el más alto nivel de artesanía y cuidado para cada espacio exterior que tocamos.",
+      "quote": "\"No solo cortamos el césped; cultivamos entornos donde las familias crecen y se crean recuerdos.\""
+    },
+    "mission": {
+      "title": "Nuestra Misión",
+      "content": "\"Elevar el estándar del paisajismo residencial a través de la innovación, la confiabilidad y el diseño artístico.\""
+    },
+    "promise": {
+      "title": "Nuestra Promesa",
+      "content": "Seguro completo, técnicos certificados y una garantía de satisfacción en cada proyecto que emprendemos."
+    },
+    "team": {
+      "badge": "Los Expertos",
+      "title": "Conozca a la Familia Canela.",
+      "description": "En Canela Landscaping, tratamos cada césped como si fuera el nuestro. Como un equipo operado y de propiedad familiar, nuestro presupuesto por la excelencia es un compromiso personal de nuestra familia para la suya, liderado con el corazón por Domingo y Nora.",
+      "card": {
+        "title": "Nuestro Equipo",
+        "description": "Un grupo dedicado de expertos en horticultura, diseñadores y profesionales de mantenimiento que aman lo que hacen."
+      }
+    },
+    "members": {
+      "domingo": "Fundador y Maestro Artesano",
+      "nora": "Co-fundadora y Operaciones"
+    }
+  },
+  "servicesPage": {
+    "badge": "Nuestra Experiencia",
+    "title": "Soluciones de Paisajismo <1/> Integrales.",
+    "subtitle": "Desde el mantenimiento de precisión del césped hasta reparaciones complejas de piedra y preparación estacional, cubrimos todos los aspectos de su entorno exterior.",
+    "filters": {
+      "all": "Todos",
+      "lawnCare": "Cuidado del Césped",
+      "maintenance": "Mantenimiento",
+      "specialty": "Especialidad",
+      "seasonal": "Estacional"
+    },
+    "cta": {
+      "title": "¿No ve lo que está buscando?",
+      "subtitle": "Ofrecemos paquetes personalizados de paisajismo y mantenimiento adaptados a sus necesidades específicas. Póngase en contacto para una consulta especializada.",
+      "button": "Solicitar Consulta Personalizada"
+    }
+  },
+  "gallery": {
+    "badge": "El Portafolio",
+    "title": "Nuestro Trabajo Extenso",
+    "subtitle": "Explore nuestra galería completa de transformaciones en todo Cleveland, organizada por tipos de servicio y categoría de proyecto.",
+    "nav": "Navegación",
+    "cta": {
+      "title": "¿Llisto para su <1/> próxima transformación?",
+      "subtitle": "Traiga la experiencia de Domingo Canela a su propiedad hoy.",
+      "button": "Contactar Ahora"
+    }
+  },
+  "contact": {
+    "badge": "Hablemos",
+    "title": "Comience Su <1/> Transformación.",
+    "subtitle": "¿Listo para elevar su espacio exterior? Complete el formulario, le proporcionaremos un presupuesto personalizado para su visión en el área de Cleveland.",
+    "info": {
+      "call": {
+        "title": "Llámenos",
+        "hours": "Lun - Vie, 8am - 6pm"
+      },
+      "email": {
+        "title": "Envíenos un Correo",
+        "reply": "Respondemos en 24h"
+      },
+      "area": {
+        "title": "Área de Servicio"
+      }
+    },
+    "form": {
+      "title": "Consulta de Proyecto",
+      "labels": {
+        "name": "Nombre Completo",
+        "email": "Correo Electrónico",
+        "phone": "Número de Teléfono",
+        "service": "Servicio de Interés",
+        "message": "Detalles del Proyecto"
+      },
+      "placeholders": {
+        "name": "Su nombre",
+        "email": "su@email.com",
+        "phone": "(555) 000-0000",
+        "service": "Seleccione un servicio",
+        "message": "Cuéntenos sobre su visión exterior..."
+      },
+      "button": "Enviar Mensaje",
+      "sending": "Enviando...",
+      "success": "¡Mensaje enviado! Nos pondremos en contacto pronto.",
+      "error": "Error al enviar el mensaje. Inténtelo de nuevo o llámenos."
+    }
+  },
+  "notFound": {
+    "title": "¡Vaya! Este camino está <1/> un poco descuidado.",
+    "subtitle": "La página que busca no existe o se ha movido a un nuevo paisaje.",
+    "backHome": "Volver al Inicio",
+    "goBack": "Atrás"
+  }
+}

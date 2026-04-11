@@ -1,0 +1,247 @@
+{
+  "nav": {
+    "about": "About",
+    "services": "Services",
+    "gallery": "Gallery",
+    "contact": "Contact",
+    "getQuote": "Get Quote"
+  },
+  "hero": {
+    "badge": "Premium Landscaping",
+    "title": "Expert Care for <1/> Your Outdoor Home.",
+    "subtitle": "Transforming your outdoor spaces into living masterpieces with precision, passion, and unparalleled expertise.",
+    "cta": "Get a Free Estimate",
+    "services": "Our Services"
+  },
+  "trust": {
+    "rated5": "Rated 5 Stars",
+    "fullyInsured": "Fully Insured",
+    "yearsExp": "15+ Years Experience",
+    "certified": "Certified Arborists"
+  },
+  "footer": {
+    "quickLinks": "Quick Links",
+    "contactUs": "Contact Us",
+    "contactInfo": "Contact Info",
+    "description": "Premium landscape design and maintenance services for beautiful, functional outdoor spaces.",
+    "rights": "All rights reserved.",
+    "links": {
+      "ourServices": "Our Services",
+      "projectGallery": "Project Gallery",
+      "aboutUs": "About Us",
+      "freeQuote": "Free Quote"
+    },
+    "serviceLinks": {
+      "title": "Services",
+      "lawnMaintenance": "Lawn Maintenance",
+      "gardenCleanup": "Garden Cleanup",
+      "patioRepair": "Patio Repair",
+      "snowRemoval": "Snow Removal"
+    }
+  },
+  "home": {
+    "whatWeDo": {
+      "badge": "What we do",
+      "title": "Crafting Exceptional <1/> Outdoor Experiences.",
+      "viewAll": "View All 15+ Services",
+      "viewProof": "View Proof"
+    },
+    "whyUs": {
+      "badge": "The Canela Difference",
+      "title": "Why homeowners trust us with their vision.",
+      "stats": "Properties Restored",
+      "quality": {
+        "title": "Quality Guaranteed",
+        "desc": "We never cut corners. Our team uses the highest-grade materials and equipment."
+      },
+      "reliable": {
+        "title": "Reliable Schedules",
+        "desc": "We show up when we say we will. Your time is valuable, and we respect it."
+      },
+      "passionate": {
+        "title": "Passionate Care",
+        "desc": "We treat every garden as if it were our own, with attention to every detail."
+      }
+    },
+    "testimonials": {
+      "quote": "Canela Landscaping completely transformed our backyard. Their attention to detail during the spring cleanup was unlike anything we've seen before. Our lawn has never looked better!",
+      "author": "Sarah & Michael J.",
+      "location": "Homeowners, Cleveland, Ohio"
+    },
+    "cta": {
+      "title": "Ready to start your <1/> next outdoor project?",
+      "subtitle": "Join hundreds of happy homeowners today. Get a free, no-obligation quote.",
+      "button": "Start My Transformation"
+    }
+  },
+  "services": {
+    "categories": {
+      "lawnCare": "Lawn Care",
+      "maintenance": "Maintenance",
+      "specialty": "Specialty",
+      "seasonal": "Seasonal"
+    },
+    "lawn-mowing": {
+      "title": "Professional Lawn Mowing",
+      "description": "Precision mowing with professional striping and trimming for a pristine look."
+    },
+    "edges": {
+      "title": "Clean Edging",
+      "description": "Sharp, clean borders between your lawn and walkways or garden beds."
+    },
+    "lawn-maintenance": {
+      "title": "Lawn Maintenance",
+      "description": "Comprehensive care including fertilization and aeration to keep your grass healthy."
+    },
+    "bush-trimming": {
+      "title": "Bush & Hedge Trimming",
+      "description": "Expert pruning to maintain the shape and health of your shrubs and hedges."
+    },
+    "weeds": {
+      "title": "Weed Pulling",
+      "description": "Thorough removal of invasive weeds from your garden beds and lawn."
+    },
+    "mulch": {
+      "title": "Mulch Installation",
+      "description": "Fresh, high-quality mulch to protect soil moisture and suppress weeds."
+    },
+    "top-soil": {
+      "title": "Top Soil & Grading",
+      "description": "Leveling and nutrient-rich soil application for optimal plant growth."
+    },
+    "reseeding": {
+      "title": "Lawn Reseeding",
+      "description": "Repairing thin or bare spots with premium grass seed blends."
+    },
+    "storm-cleanup": {
+      "title": "Storm Damage Clean-up",
+      "description": "Rapid response to clear debris, branches, and mess after severe weather."
+    },
+    "yard-cleanup": {
+      "title": "General Yard Cleanup",
+      "description": "Restoring order to your outdoor space with comprehensive clearing and hauling."
+    },
+    "leaf-cleanup": {
+      "title": "Leaf Removal",
+      "description": "Efficient leaf collection and removal to protect your grass during fall."
+    },
+    "patios": {
+      "title": "Patio Repair & Masonry",
+      "description": "Fixing cracked pavers, leveling surfaces, and restoring stone features."
+    },
+    "seasonal-cleanup": {
+      "title": "Spring & Fall Clean-up",
+      "description": "Deep cleaning and preparation for the changing seasons."
+    },
+    "gravel": {
+      "title": "River Gravel Installation",
+      "description": "Beautiful, low-maintenance gravel features and drainage solutions."
+    },
+    "snow-plow": {
+      "title": "Snow Plowing",
+      "description": "Reliable, 24/7 snow removal for driveways and walkways during winter."
+    }
+  },
+  "about": {
+    "story": {
+      "badge": "Our Story",
+      "title": "Rooted in <1/> Quality.",
+      "content": "Founded over 15 years ago, Canela Landscaping began with a simple mission: to provide the highest level of craftsmanship and care for every outdoor space we touch.",
+      "quote": "\"We don't just mow lawns; we cultivate environments where families grow and memories are made.\""
+    },
+    "mission": {
+      "title": "Our Mission",
+      "content": "\"To elevate the standard of residential landscaping through innovation, reliability, and artistic design.\""
+    },
+    "promise": {
+      "title": "Our Promise",
+      "content": "Full insurance, certified technicians, and a satisfaction guarantee on every single project we undertake."
+    },
+    "team": {
+      "badge": "The Experts",
+      "title": "Meet the Canela Family.",
+      "description": "At Canela Landscaping, we treat every lawn like our own. As a family-owned and operated team, our passion for excellence is a personal commitment from our family to yours—led with heart by Domingo and Nora.",
+      "card": {
+        "title": "Our Team",
+        "description": "A dedicated group of horticultural experts, designers, and maintenance pros who love what they do."
+      }
+    },
+    "members": {
+      "domingo": "Founder & Lead Technitian",
+      "nora": "Co-Founder & Operations"
+    }
+  },
+  "servicesPage": {
+    "badge": "Our Expertise",
+    "title": "Comprehensive <1/> Landscape Solutions.",
+    "subtitle": "From precision lawn maintenance to complex stone repairs and seasonal preparation, we cover every aspect of your outdoor environment.",
+    "filters": {
+      "all": "All",
+      "lawnCare": "Lawn Care",
+      "maintenance": "Maintenance",
+      "specialty": "Specialty",
+      "seasonal": "Seasonal"
+    },
+    "cta": {
+      "title": "Don't see what you're looking for?",
+      "subtitle": "We provide custom landscape and maintenance packages tailored to your specific needs. Reach out for a specialized consultation.",
+      "button": "Request Custom Consultation"
+    }
+  },
+  "gallery": {
+    "badge": "The Portfolio",
+    "title": "Our Extensive Work",
+    "subtitle": "Explore our comprehensive gallery of transformations across Cleveland, organized by service types and project category.",
+    "nav": "Navigation",
+    "cta": {
+      "title": "Ready for your <1/> next transformation?",
+      "subtitle": "Bring Domingo Canela's expertise to your property today.",
+      "button": "Contact Now"
+    }
+  },
+  "contact": {
+    "badge": "Let's Talk",
+    "title": "Start Your <1/> Transformation.",
+    "subtitle": "Ready to elevate your outdoor space? Fill out the form, we will provide a customized estimate for your vision in the Cleveland area.",
+    "info": {
+      "call": {
+        "title": "Call Us",
+        "hours": "Mon - Fri, 8am - 6pm"
+      },
+      "email": {
+        "title": "Email Us",
+        "reply": "We reply within 24h"
+      },
+      "area": {
+        "title": "Service Area"
+      }
+    },
+    "form": {
+      "title": "Project Inquiry",
+      "labels": {
+        "name": "Full Name",
+        "email": "Email Address",
+        "phone": "Phone Number",
+        "service": "Service of Interest",
+        "message": "Project Details"
+      },
+      "placeholders": {
+        "name": "Your name",
+        "email": "your@email.com",
+        "phone": "(555) 000-0000",
+        "service": "Select a service",
+        "message": "Tell us about your outdoor vision..."
+      },
+      "button": "Send Message",
+      "sending": "Sending...",
+      "success": "Message sent! We will contact you soon.",
+      "error": "Error sending message. Please try again or call us."
+    }
+  },
+  "notFound": {
+    "title": "Oops! This path is <1/> a bit overgrown.",
+    "subtitle": "The page you're looking for doesn't exist or has been moved to a new landscape.",
+    "backHome": "Back to Home",
+    "goBack": "Go Back"
+  }
+}
