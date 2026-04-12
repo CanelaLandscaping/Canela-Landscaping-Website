@@ -21,9 +21,9 @@ Deno.serve(async (req) => {
 
   try {
     const body = await req.json();
-    const { name, email, service, message } = body;
+    const { name, email, phone, service, message } = body;
 
-    if (!name || !email || !service || !message) {
+    if (!name || (!email && !phone) || !service || !message) {
       return new Response(JSON.stringify({ error: "Missing required fields" }), {
         status: 400,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -68,7 +68,13 @@ Deno.serve(async (req) => {
               <tr>
                 <td style="padding: 10px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">Email:</td>
                 <td style="padding: 10px; border-bottom: 1px solid #e2e8f0;">
-                  <a href="mailto:${email}" style="color: #047857;">${email}</a>
+                  ${email ? `<a href="mailto:${email}" style="color: #047857;">${email}</a>` : '<span style="color: #94a3b8;">Not provided</span>'}
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 10px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">Phone:</td>
+                <td style="padding: 10px; border-bottom: 1px solid #e2e8f0;">
+                  ${phone ? `<a href="tel:${phone}" style="color: #047857;">${phone}</a>` : '<span style="color: #94a3b8;">Not provided</span>'}
                 </td>
               </tr>
               <tr>

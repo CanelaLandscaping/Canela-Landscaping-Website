@@ -1,8 +1,10 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { services } from "../data/services";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useTranslation, Trans } from "react-i18next";
+import PageHeader from "../components/PageHeader";
+import SectionCTA from "../components/SectionCTA";
 
 const Gallery = () => {
   const { t } = useTranslation();
@@ -73,7 +75,7 @@ const Gallery = () => {
     const element = document.getElementById(id);
     if (element) {
       const isMobile = window.innerWidth < 1024;
-      const navHeight = isMobile ? 240 : 120; // Account for sticky navbars
+      const navHeight = isMobile ? 148 : 120; // Account for sticky navbars (72px navbar + ~76px sub-nav)
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - navHeight;
 
@@ -101,18 +103,23 @@ const Gallery = () => {
 
   const getCategoryLabel = (cat: string) => {
     switch (cat) {
-      case "Lawn Care": return t("servicesPage.filters.lawnCare");
-      case "Maintenance": return t("servicesPage.filters.maintenance");
-      case "Specialty": return t("servicesPage.filters.specialty");
-      case "Seasonal": return t("servicesPage.filters.seasonal");
-      default: return cat;
+      case "Lawn Care":
+        return t("servicesPage.filters.lawnCare");
+      case "Maintenance":
+        return t("servicesPage.filters.maintenance");
+      case "Specialty":
+        return t("servicesPage.filters.specialty");
+      case "Seasonal":
+        return t("servicesPage.filters.seasonal");
+      default:
+        return cat;
     }
   };
 
   return (
-    <div className="pt-56 pb-32 bg-white/50">
+    <div className="pt-48 md:pt-36 pb-32 bg-white/50">
       {/* Mobile/Tablet Fixed Navigation Bar */}
-      <div className="lg:hidden fixed top-20 left-0 w-full bg-white/95 backdrop-blur-md z-40 border-b border-slate-100 shadow-sm overflow-x-auto scrollbar-hide">
+      <div className="lg:hidden fixed top-[72px] left-0 w-full bg-white/95 backdrop-blur-md z-40 border-b border-slate-100 shadow-sm overflow-x-auto scrollbar-hide">
         <div className="container-gallery py-6 flex gap-4">
           {categories.map((category) => (
             <button
@@ -131,17 +138,13 @@ const Gallery = () => {
       </div>
 
       <div className="container-gallery">
-        {/* Header Section */}
-        <div className="text-center max-w-2xl mx-auto mb-20 lg:mb-24">
-          <span className="text-emerald-600 font-bold text-sm uppercase tracking-widest mb-4 block underline decoration-emerald-200 underline-offset-8">
-            {t("gallery.badge")}
-          </span>
-          <h1 className="text-5xl md:text-7xl font-black text-slate-950 mb-8 tracking-tight">
-            {t("gallery.title")}
-          </h1>
-          <p className="text-xl text-slate-500 leading-relaxed font-medium">
-            {t("gallery.subtitle")}
-          </p>
+        {/* Page header */}
+        <div className="mb-20 lg:mb-24">
+          <PageHeader
+            badge={t("gallery.badge")}
+            title={t("gallery.title")}
+            subtitle={t("gallery.subtitle")}
+          />
         </div>
 
         <div className="flex flex-col lg:flex-row gap-8 relative">
@@ -264,39 +267,20 @@ const Gallery = () => {
           </div>
         </div>
 
-        {/* Final Contact Section */}
-        <div className="mt-40 text-center bg-slate-950 py-32 rounded-[4rem] text-white relative overflow-hidden">
-          <div className="absolute inset-0 opacity-10">
-            <img
-              src="https://images.unsplash.com/photo-1592419044706-39796d40f98c?auto=format&fit=crop&q=80&w=2000"
-              className="w-full h-full object-cover"
-              alt="BG"
-              loading="lazy"
-            />
-          </div>
-          <div className="relative">
-            <h3 className="text-4xl md:text-6xl font-black mb-8 tracking-tight">
-              <Trans i18nKey="gallery.cta.title">
-                Ready for your <br />
-                <span className="text-emerald-500 italic">
-                  next transformation?
-                </span>
-              </Trans>
-            </h3>
-            <p className="text-xl text-white/50 mb-12 max-w-lg mx-auto">
-              {t("gallery.cta.subtitle")}
-            </p>
-            <Link to="/contact">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-emerald-600 text-white px-12 py-6 rounded-full font-bold text-lg shadow-2xl shadow-emerald-600/30 hover:bg-emerald-700 transition-all font-inter"
-              >
-                {t("gallery.cta.button")}
-              </motion.button>
-            </Link>
-          </div>
-        </div>
+        {/* Bottom CTA */}
+        <SectionCTA
+          variant="dark"
+          bgImage="https://images.unsplash.com/photo-1592419044706-39796d40f98c?auto=format&fit=crop&q=80&w=2000"
+          title={
+            <Trans i18nKey="gallery.cta.title">
+              Ready for your <br />
+              <span className="text-emerald-500 italic">next transformation?</span>
+            </Trans>
+          }
+          subtitle={t("gallery.cta.subtitle")}
+          buttonText={t("gallery.cta.button")}
+          buttonTo="/contact"
+        />
       </div>
     </div>
   );

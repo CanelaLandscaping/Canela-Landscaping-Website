@@ -8,6 +8,7 @@ export interface Lead {
   service: string;
   message: string;
   status: string;
+  phone?: string;
   created_at: string;
 }
 
@@ -16,6 +17,7 @@ export interface ContactFormData {
   email: string;
   service: string;
   message: string;
+  phone?: string;
 }
 
 /**

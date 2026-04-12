@@ -222,6 +222,7 @@
         "name": "Full Name",
         "email": "Email Address",
         "phone": "Phone Number",
+        "contactMethods": "Contact Details",
         "service": "Service of Interest",
         "message": "Project Details"
       },
@@ -235,7 +236,10 @@
       "button": "Send Message",
       "sending": "Sending...",
       "success": "Message sent! We will contact you soon.",
-      "error": "Error sending message. Please try again or call us."
+      "error": "Error sending message. Please try again or call us.",
+      "validation": {
+        "contactRequired": "Please provide either an email or a phone number"
+      }
     }
   },
   "notFound": {

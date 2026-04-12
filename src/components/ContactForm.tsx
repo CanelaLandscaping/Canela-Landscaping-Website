@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Send, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
-import { submitContactForm } from '../supabase/queries';
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Send, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import { submitContactForm } from "../supabase/queries";
 
 const ContactForm = () => {
   const { t } = useTranslation();
@@ -11,13 +11,18 @@ const ContactForm = () => {
   const [error, setError] = useState<string | null>(null);
 
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    service: 'Lawn Maintenance',
-    message: ''
+    name: "",
+    email: "",
+    phone: "",
+    service: "Lawn Maintenance",
+    message: "",
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >,
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -26,19 +31,36 @@ const ContactForm = () => {
     setIsSubmitting(true);
     setError(null);
 
+    if (!formData.email && !formData.phone) {
+      setError(t("contact.form.validation.contactRequired"));
+      setIsSubmitting(false);
+      return;
+    }
+
     try {
       await submitContactForm(formData);
       setSubmitted(true);
-      
+
       // Reset form after a few seconds
       setTimeout(() => {
         setSubmitted(false);
-        setFormData({ name: '', email: '', service: 'Lawn Maintenance', message: '' });
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          service: "Lawn Maintenance",
+          message: "",
+        });
       }, 5000);
-
     } catch (err: unknown) {
       console.error("Submission error:", err);
-      const errorMessage = err instanceof Error ? err.message : t("contact.form.error", { defaultValue: "Something went wrong. Please try again or call us." });
+      const errorMessage =
+        err instanceof Error
+          ? err.message
+          : t("contact.form.error", {
+              defaultValue:
+                "Something went wrong. Please try again or call us.",
+            });
       setError(errorMessage);
     } finally {
       setIsSubmitting(false);
@@ -47,13 +69,15 @@ const ContactForm = () => {
 
   if (submitted) {
     return (
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         className="bg-emerald-50 rounded-3xl p-12 text-center flex flex-col items-center justify-center min-h-[500px]"
       >
         <CheckCircle size={64} className="text-emerald-600 mb-6" />
-        <h3 className="text-3xl font-bold text-slate-900 mb-4">{t("contact.form.success")}</h3>
+        <h3 className="text-3xl font-bold text-slate-900 mb-4">
+          {t("contact.form.success")}
+        </h3>
         <p className="text-slate-600 max-w-sm">
           {t("contact.info.email.reply")}
         </p>
@@ -64,7 +88,7 @@ const ContactForm = () => {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       {error && (
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           className="bg-red-50 text-red-600 p-4 rounded-2xl flex items-start gap-3 text-sm font-medium border border-red-100"
@@ -74,12 +98,15 @@ const ContactForm = () => {
         </motion.div>
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="space-y-6">
         <div>
-          <label className="block text-sm font-bold text-slate-700 mb-2">{t("contact.form.labels.name")}</label>
-          <input 
+          <label className="block text-sm font-bold text-slate-700 mb-2">
+            {t("contact.form.labels.name")}{" "}
+            <span className="text-red-500">*</span>
+          </label>
+          <input
             required
-            type="text" 
+            type="text"
             name="name"
             value={formData.name}
             onChange={handleChange}
@@ -87,39 +114,77 @@ const ContactForm = () => {
             className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-200 focus:outline-none focus:border-emerald-500 transition-colors"
           />
         </div>
-        <div>
-          <label className="block text-sm font-bold text-slate-700 mb-2">{t("contact.form.labels.email")}</label>
-          <input 
-            required
-            type="email" 
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            placeholder={t("contact.form.placeholders.email")}
-            className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-200 focus:outline-none focus:border-emerald-500 transition-colors"
-          />
+
+        <div className="space-y-4">
+          <div className="flex flex-col justify-between gap-0.5">
+            <label className="block text-sm font-bold text-slate-700">
+              {t("contact.form.labels.contactMethods")}
+            </label>
+            <span className="text-[10px] font-bold text-emerald-600 uppercase tracking-widest italic opacity-70">
+              * {t("contact.form.validation.contactRequired")}
+            </span>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">
+                {t("contact.form.labels.email")}
+              </label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder={t("contact.form.placeholders.email")}
+                className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-200 focus:outline-none focus:border-emerald-500 transition-colors"
+              />
+            </div>
+            <div>
+              <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">
+                {t("contact.form.labels.phone")}
+              </label>
+              <input
+                type="tel"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                placeholder={t("contact.form.placeholders.phone")}
+                className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-200 focus:outline-none focus:border-emerald-500 transition-colors"
+              />
+            </div>
+          </div>
         </div>
       </div>
-      
+
       <div>
-        <label className="block text-sm font-bold text-slate-700 mb-2">{t("contact.form.labels.service")}</label>
-        <select 
+        <label className="block text-sm font-bold text-slate-700 mb-2">
+          {t("contact.form.labels.service")}
+        </label>
+        <select
           name="service"
           value={formData.service}
           onChange={handleChange}
           className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-200 focus:outline-none focus:border-emerald-500 transition-colors appearance-none"
         >
-          <option value="Lawn Maintenance">{t("services.lawn-maintenance.title")}</option>
-          <option value="Garden Cleanup">{t("services.yard-cleanup.title")}</option>
+          <option value="Lawn Maintenance">
+            {t("services.lawn-maintenance.title")}
+          </option>
+          <option value="Garden Cleanup">
+            {t("services.yard-cleanup.title")}
+          </option>
           <option value="Patio Repair">{t("services.patios.title")}</option>
           <option value="Snow Removal">{t("services.snow-plow.title")}</option>
-          <option value="Other / Multiple">{t("contact.form.placeholders.service")}</option>
+          <option value="Other / Multiple">
+            {t("contact.form.placeholders.service")}
+          </option>
         </select>
       </div>
 
       <div>
-        <label className="block text-sm font-bold text-slate-700 mb-2">{t("contact.form.labels.message")}</label>
-        <textarea 
+        <label className="block text-sm font-bold text-slate-700 mb-2">
+          {t("contact.form.labels.message")}{" "}
+          <span className="text-red-500">*</span>
+        </label>
+        <textarea
           required
           name="message"
           value={formData.message}
@@ -137,12 +202,17 @@ const ContactForm = () => {
         disabled={isSubmitting}
         className="w-full bg-emerald-600 text-white font-bold py-5 rounded-2xl shadow-xl hover:bg-emerald-700 disabled:opacity-70 disabled:hover:scale-100 flex items-center justify-center space-x-3 transition-colors"
       >
-        <span>{isSubmitting ? t("contact.form.sending") : t("contact.form.button")}</span>
-        {isSubmitting ? <Loader2 size={18} className="animate-spin" /> : <Send size={18} />}
+        <span>
+          {isSubmitting ? t("contact.form.sending") : t("contact.form.button")}
+        </span>
+        {isSubmitting ? (
+          <Loader2 size={18} className="animate-spin" />
+        ) : (
+          <Send size={18} />
+        )}
       </motion.button>
     </form>
   );
 };
 
 export default ContactForm;
-

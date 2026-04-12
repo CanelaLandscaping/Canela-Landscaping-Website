@@ -222,6 +222,7 @@
         "name": "Nombre Completo",
         "email": "Correo Electrónico",
         "phone": "Número de Teléfono",
+        "contactMethods": "Datos de Contacto",
         "service": "Servicio de Interés",
         "message": "Detalles del Proyecto"
       },
@@ -235,7 +236,10 @@
       "button": "Enviar Mensaje",
       "sending": "Enviando...",
       "success": "¡Mensaje enviado! Nos pondremos en contacto pronto.",
-      "error": "Error al enviar el mensaje. Inténtelo de nuevo o llámenos."
+      "error": "Error al enviar el mensaje. Inténtelo de nuevo o llámenos.",
+      "validation": {
+        "contactRequired": "Por favor, proporcione un correo electrónico o un número de teléfono"
+      }
     }
   },
   "notFound": {

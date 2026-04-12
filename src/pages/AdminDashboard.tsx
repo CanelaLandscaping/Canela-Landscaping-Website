@@ -137,6 +137,7 @@ const AdminDashboard = () => {
                   <thead>
                     <tr className="bg-slate-50/50">
                       <th className="px-8 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100">Customer</th>
+                      <th className="px-8 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100">Phone</th>
                       <th className="px-8 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100">Service</th>
                       <th className="px-8 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100">Date</th>
                       <th className="px-8 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100">Status</th>
@@ -153,8 +154,12 @@ const AdminDashboard = () => {
                           </a>
                         </td>
                         <td className="px-8 py-6">
+                          <p className="font-bold text-slate-900">{lead.phone || '-'}</p>
+                          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Phone</span>
+                        </td>
+                        <td className="px-8 py-6">
                           <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-600">
-                            {lead.service}
+                             {lead.service}
                           </span>
                         </td>
                         <td className="px-8 py-6">
