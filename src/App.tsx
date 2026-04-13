@@ -18,6 +18,8 @@ import AdminSettings from "./pages/AdminSettings";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { AuthProvider } from "./context/AuthProvider";
 import AdminServices from "./pages/AdminServices";
+import AdminHome from "./pages/AdminHome";
+import AdminAbout from "./pages/AdminAbout";
 
 function App() {
   const { pathname, hash } = useLocation();
@@ -90,6 +92,22 @@ function App() {
               element={
                 <ProtectedRoute>
                   <AdminSettings />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/home"
+              element={
+                <ProtectedRoute>
+                  <AdminHome />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/about"
+              element={
+                <ProtectedRoute>
+                  <AdminAbout />
                 </ProtectedRoute>
               }
             />

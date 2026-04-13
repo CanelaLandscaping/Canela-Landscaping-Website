@@ -254,6 +254,8 @@
       "dashboard": "Panel de Control",
       "contacts": "Contactos",
       "services": "Servicios",
+      "home": "Página de Inicio",
+      "about": "Página Sobre",
       "settings": "Ajustes"
     },
     "dashboard": {
@@ -383,6 +385,8 @@
           "descEs": "Descripción (Español)",
           "featured": "Destacado",
           "active": "Activo",
+          "icon": "Icono del Servicio",
+          "selectIcon": "Seleccionar Icono",
           "upload": "Subir desde dispositivo",
           "uploadHint": "Click para subir foto",
           "uploadLimit": "PNG, JPG, WebP (Máx 100KB automático)",

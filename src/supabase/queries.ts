@@ -42,6 +42,140 @@ export interface CMSImage {
   created_at: string;
 }
 
+export interface CMSPage {
+  id: string;
+  title_en: string;
+  title_es: string;
+  updated_at: string;
+}
+
+export interface CMSSection {
+  id: string;
+  page_id: string;
+  type: string;
+  content: CMSSectionContent;
+  display_order: number;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+// Detailed Section Content Interfaces
+export interface HeroContent {
+  badge_en: string;
+  badge_es: string;
+  title_en: string;
+  title_es: string;
+  subtitle_en: string;
+  subtitle_es: string;
+  cta_en: string;
+  cta_es: string;
+  cta_to?: string;
+  secondary_en?: string;
+  secondary_es?: string;
+  secondary_to?: string;
+  video_url?: string;
+  poster_url?: string;
+}
+
+export interface TrustBadgesContent {
+  badges: {
+    text_en: string;
+    text_es: string;
+    icon: string;
+  }[];
+}
+
+export interface WhyUsContent {
+  badge_en: string;
+  badge_es: string;
+  title_en: string;
+  title_es: string;
+  stats_count: string;
+  stats_label_en: string;
+  stats_label_es: string;
+  image_url: string;
+  points: {
+    title_en: string;
+    title_es: string;
+    desc_en: string;
+    desc_es: string;
+  }[];
+}
+
+export interface StoryContent {
+  badge_en: string;
+  badge_es: string;
+  title_en: string;
+  title_es: string;
+  content_en: string;
+  content_es: string;
+  quote_en: string;
+  quote_es: string;
+  image_url: string;
+}
+
+export interface ValuesContent {
+  mission: { title_en: string; title_es: string; content_en: string; content_es: string };
+  promise: { title_en: string; title_es: string; content_en: string; content_es: string };
+  team: { title_en: string; title_es: string; content_en: string; content_es: string };
+}
+
+export interface TeamContent {
+  badge_en: string;
+  badge_es: string;
+  title_en: string;
+  title_es: string;
+  description_en: string;
+  description_es: string;
+  members: {
+    name: string;
+    role_en: string;
+    role_es: string;
+    img: string;
+  }[];
+}
+
+export interface TestimonialContent {
+  quote_en: string;
+  quote_es: string;
+  author: string;
+  location_en: string;
+  location_es: string;
+}
+
+export interface CTAContent {
+  variant: "light" | "dark" | "emerald";
+  title_en: string;
+  title_es: string;
+  subtitle_en: string;
+  subtitle_es: string;
+  button_en: string;
+  button_es: string;
+  button_to?: string;
+}
+
+export interface FeaturedServicesContent {
+  badge_en: string;
+  badge_es: string;
+  title_en: string;
+  title_es: string;
+  viewAll_en: string;
+  viewAll_es: string;
+}
+
+export type CMSSectionContent = 
+  | HeroContent 
+  | TrustBadgesContent 
+  | WhyUsContent 
+  | StoryContent 
+  | ValuesContent 
+  | TeamContent 
+  | TestimonialContent 
+  | CTAContent 
+  | FeaturedServicesContent 
+  | Record<string, unknown>;
+
 export interface ContactFormData {
   name: string;
   email: string;
@@ -171,7 +305,7 @@ export const getSiteSettings = async (key: string) => {
   return data?.value;
 };
 
-export const updateSiteSetting = async (key: string, value: string | number | boolean | object | null) => {
+export const updateSiteSetting = async (key: string, value: unknown) => {
   if (!isSupabaseConfigured) return;
   const { error } = await supabase
     .from('cms_settings')
@@ -329,4 +463,86 @@ export const deleteImage = async (imageId: string, storagePath?: string) => {
     .eq('id', imageId);
 
   if (error) throw error;
+};
+
+/**
+ * Page & Section Management
+ */
+
+export const getCMSPages = async (): Promise<CMSPage[]> => {
+  if (!isSupabaseConfigured) return [];
+  const { data, error } = await supabase
+    .from('cms_pages')
+    .select('*')
+    .order('id');
+
+  if (error) throw error;
+  return (data as CMSPage[]) || [];
+};
+
+export const getPageSections = async (pageId: string): Promise<CMSSection[]> => {
+  if (!isSupabaseConfigured) return [];
+  const { data, error } = await supabase
+    .from('cms_sections')
+    .select('*')
+    .eq('page_id', pageId)
+    .order('display_order', { ascending: true });
+
+  if (error) throw error;
+  return (data as CMSSection[]) || [];
+};
+
+export const upsertPageSection = async (section: Partial<CMSSection>) => {
+  if (!isSupabaseConfigured) return;
+  const { error } = await supabase
+    .from('cms_sections')
+    .upsert({
+      ...section,
+      updated_at: new Date().toISOString()
+    });
+
+  if (error) throw error;
+};
+
+export const deletePageSection = async (id: string) => {
+  if (!isSupabaseConfigured) return;
+  const { error } = await supabase
+    .from('cms_sections')
+    .delete()
+    .eq('id', id);
+
+  if (error) throw error;
+};
+
+export const updateSectionsOrder = async (sectionIds: { id: string; display_order: number }[]) => {
+  if (!isSupabaseConfigured) return;
+
+  const updates = sectionIds.map((s) =>
+    supabase
+      .from('cms_sections')
+      .update({ display_order: s.display_order })
+      .eq('id', s.id)
+  );
+
+  await Promise.all(updates);
+};
+
+export const uploadCMSMedia = async (file: Blob, fileName: string, folder: string = 'media') => {
+  if (!isSupabaseConfigured) return {};
+
+  const storagePath = `${folder}/${Date.now()}_${fileName}`;
+
+  const { error: uploadError } = await supabase.storage
+    .from('cms-assets')
+    .upload(storagePath, file, {
+      upsert: true,
+    });
+
+  if (uploadError) throw uploadError;
+
+  const { data: { publicUrl } } = supabase.storage
+    .from('cms-assets')
+    .getPublicUrl(storagePath);
+
+  return { publicUrl, storagePath };
 };

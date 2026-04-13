@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { LayoutDashboard, Settings, Mail, Layers } from "lucide-react";
+import { LayoutDashboard, Settings, Mail, Layers, Home, Info } from "lucide-react";
 
 interface NavItem {
   label: string;
@@ -27,6 +27,16 @@ const AdminSidebar = () => {
       label: t("admin.sidebar.services"),
       path: "/admin/services",
       icon: <Layers size={16} />,
+    },
+    {
+      label: t("admin.sidebar.home"),
+      path: "/admin/home",
+      icon: <Home size={16} />,
+    },
+    {
+      label: t("admin.sidebar.about"),
+      path: "/admin/about",
+      icon: <Info size={16} />,
     },
     {
       label: t("admin.sidebar.settings"),

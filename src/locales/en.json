@@ -254,6 +254,8 @@
       "dashboard": "Dashboard",
       "contacts": "Contacts",
       "services": "Services",
+      "home": "Home Page",
+      "about": "About Page",
       "settings": "Settings"
     },
     "dashboard": {
@@ -383,6 +385,8 @@
           "descEs": "Description (Spanish)",
           "featured": "Featured",
           "active": "Active",
+          "icon": "Service Icon",
+          "selectIcon": "Select Icon",
           "upload": "Upload from device",
           "uploadHint": "Click to upload photo",
           "uploadLimit": "PNG, JPG, WebP (Max 100KB automatically)",

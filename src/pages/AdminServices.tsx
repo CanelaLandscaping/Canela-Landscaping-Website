@@ -12,7 +12,82 @@ import {
   Image as ImageIcon,
   Globe,
   PlusCircle,
+  Scissors,
+  Trees,
+  Flower,
+  Sprout,
+  Droplets,
+  Sun,
+  Wind,
+  Bug,
+  Palmtree,
+  Shovel,
+  Hammer,
+  Home,
+  ShieldCheck,
+  Star,
+  Award,
+  Leaf,
+  CheckCircle2,
+  Zap,
+  Mountain,
+  Fence,
+  CloudRain,
 } from "lucide-react";
+
+const ICON_OPTIONS = [
+  "Scissors",
+  "Trees",
+  "Flower",
+  "Sprout",
+  "Droplets",
+  "Sun",
+  "Wind",
+  "Bug",
+  "Palmtree",
+  "Shovel",
+  "Hammer",
+  "Home",
+  "ShieldCheck",
+  "Star",
+  "Award",
+  "Leaf",
+  "CheckCircle2",
+  "Zap",
+  "Mountain",
+  "Fence",
+  "CloudRain",
+  "Layers",
+];
+
+const IconRenderer = ({ name, size = 20, className = "" }: { name: string; size?: number; className?: string }) => {
+  const icons: Record<string, any> = {
+    Scissors,
+    Trees,
+    Flower,
+    Sprout,
+    Droplets,
+    Sun,
+    Wind,
+    Bug,
+    Palmtree,
+    Shovel,
+    Hammer,
+    Home,
+    ShieldCheck,
+    Star,
+    Award,
+    Leaf,
+    CheckCircle2,
+    Zap,
+    Mountain,
+    Fence,
+    CloudRain,
+    Layers,
+  };
+  const Icon = icons[name] || icons["Layers"];
+  return <Icon size={size} className={className} />;
+};
 import {
   getCategories,
   getServices,
@@ -679,7 +754,7 @@ const AdminServices = () => {
                         <td className="pl-8 pr-4 py-5">
                           <div className="flex items-center gap-3">
                             <div className="w-8 h-8 bg-slate-50 rounded-lg flex items-center justify-center text-slate-400 group-hover:bg-white transition-colors">
-                              <Layers size={16} />
+                              <IconRenderer name={serv.icon} size={16} />
                             </div>
                             <div className="font-bold text-slate-900 truncate max-w-[150px] lg:max-w-none">
                               {serv.title_en}
@@ -1038,6 +1113,33 @@ const AdminServices = () => {
                                       <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
                                     </label>
                                   </div>
+                                </div>
+                              </div>
+
+                              <div className="space-y-4 pt-4 border-t border-slate-100">
+                                <label className="text-xs font-black text-slate-400 uppercase tracking-widest px-1">
+                                  {t("admin.services.modal.labels.icon")}
+                                </label>
+                                <div className="grid grid-cols-6 sm:grid-cols-8 gap-3">
+                                  {ICON_OPTIONS.map((iconName) => (
+                                    <button
+                                      key={iconName}
+                                      onClick={() =>
+                                        setEditObj({
+                                          ...serv,
+                                          icon: iconName,
+                                        })
+                                      }
+                                      className={`p-3 rounded-xl border transition-all flex items-center justify-center hover:scale-110 active:scale-95 ${
+                                        serv.icon === iconName
+                                          ? "bg-emerald-600 border-emerald-600 text-white shadow-lg shadow-emerald-600/20"
+                                          : "bg-slate-50 border-slate-100 text-slate-400 hover:bg-white hover:border-emerald-200 hover:text-emerald-600 shadow-sm"
+                                      }`}
+                                      title={iconName}
+                                    >
+                                      <IconRenderer name={iconName} size={20} />
+                                    </button>
+                                  ))}
                                 </div>
                               </div>
                             </div>
