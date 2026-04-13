@@ -30,7 +30,7 @@ const HeroSection = ({
   videoUrl,
   posterUrl,
 }: HeroSectionProps) => (
-  <section className="relative h-screen flex items-center justify-center text-white">
+  <section className="relative h-screen flex items-center justify-center text-white px-6 md:px-12">
     {/* Background video */}
     <div className="absolute inset-0 overflow-hidden">
       <video

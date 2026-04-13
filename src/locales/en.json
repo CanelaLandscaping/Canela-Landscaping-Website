@@ -4,11 +4,12 @@
     "services": "Services",
     "gallery": "Gallery",
     "contact": "Contact",
-    "getQuote": "Get Quote"
+    "getQuote": "Get Quote",
+    "dashboard": "Dashboard"
   },
   "hero": {
     "badge": "Premium Landscaping",
-    "title": "Expert Care for <1/> Your Outdoor Home.",
+    "title": "Expert Care for Your Outdoor Home.",
     "subtitle": "Transforming your outdoor spaces into living masterpieces with precision, passion, and unparalleled expertise.",
     "cta": "Get a Free Estimate",
     "services": "Our Services"
@@ -42,7 +43,7 @@
   "home": {
     "whatWeDo": {
       "badge": "What we do",
-      "title": "Crafting Exceptional <1/> Outdoor Experiences.",
+      "title": "Crafting Exceptional Outdoor Experiences.",
       "viewAll": "View All 15+ Services",
       "viewProof": "View Proof"
     },
@@ -69,7 +70,7 @@
       "location": "Homeowners, Cleveland, Ohio"
     },
     "cta": {
-      "title": "Ready to start your <1/> next outdoor project?",
+      "title": "Ready to start your next outdoor project?",
       "subtitle": "Join hundreds of happy homeowners today. Get a free, no-obligation quote.",
       "button": "Start My Transformation"
     }
@@ -145,7 +146,7 @@
   "about": {
     "story": {
       "badge": "Our Story",
-      "title": "Rooted in <1/> Quality.",
+      "title": "Rooted in Quality.",
       "content": "Founded over 15 years ago, Canela Landscaping began with a simple mission: to provide the highest level of craftsmanship and care for every outdoor space we touch.",
       "quote": "\"We don't just mow lawns; we cultivate environments where families grow and memories are made.\""
     },
@@ -173,7 +174,7 @@
   },
   "servicesPage": {
     "badge": "Our Expertise",
-    "title": "Comprehensive <1/> Landscape Solutions.",
+    "title": "Comprehensive Landscape Solutions.",
     "subtitle": "From precision lawn maintenance to complex stone repairs and seasonal preparation, we cover every aspect of your outdoor environment.",
     "filters": {
       "all": "All",
@@ -194,14 +195,14 @@
     "subtitle": "Explore our comprehensive gallery of transformations across Cleveland, organized by service types and project category.",
     "nav": "Navigation",
     "cta": {
-      "title": "Ready for your <1/> next transformation?",
+      "title": "Ready for your next transformation?",
       "subtitle": "Bring Domingo Canela's expertise to your property today.",
       "button": "Contact Now"
     }
   },
   "contact": {
     "badge": "Let's Talk",
-    "title": "Start Your <1/> Transformation.",
+    "title": "Start Your Transformation.",
     "subtitle": "Ready to elevate your outdoor space? Fill out the form, we will provide a customized estimate for your vision in the Cleveland area.",
     "info": {
       "call": {
@@ -243,9 +244,187 @@
     }
   },
   "notFound": {
-    "title": "Oops! This path is <1/> a bit overgrown.",
+    "title": "Oops! This path is a bit overgrown.",
     "subtitle": "The page you're looking for doesn't exist or has been moved to a new landscape.",
     "backHome": "Back to Home",
     "goBack": "Go Back"
+  },
+  "admin": {
+    "sidebar": {
+      "dashboard": "Dashboard",
+      "contacts": "Contacts",
+      "services": "Services",
+      "settings": "Settings"
+    },
+    "dashboard": {
+      "welcome": "Welcome back, Canela Team!",
+      "subtitle": "Your landscaping business dashboard is ready. Manage your customer leads and snow plowing requests from here.",
+      "stats": {
+        "totalLeads": "Total Leads",
+        "activeProjects": "Active Projects",
+        "newInquiries": "New Inquiries"
+      },
+      "recentLeads": {
+        "title": "Recent Leads",
+        "subtitle": "Last {{limit}} contact submissions from the website.",
+        "viewAll": "View all",
+        "noLeads": "No recent leads yet.",
+        "noLeadsDesc": "When customers fill out the contact form, their details will appear here.",
+        "customer": "Customer",
+        "service": "Service",
+        "date": "Date",
+        "status": "Status"
+      }
+    },
+    "leads": {
+      "title": "Contact Submissions",
+      "subtitle": "Complete history of all leads from the website.",
+      "searchPlaceholder": "Search leads...",
+      "noResults": "No matching leads.",
+      "noResultsDesc": "Try searching for a different name, email, or service.",
+      "noLeads": "No leads yet.",
+      "noLeadsDesc": "Contact form submissions will appear here automatically.",
+      "customer": "Customer",
+      "phone": "Phone",
+      "service": "Service",
+      "date": "Date",
+      "status": "Status",
+      "new": "New",
+      "contacted": "Contacted",
+      "backToHistory": "Back to History"
+    },
+    "leadDetail": {
+      "back": "Back to list",
+      "title": "Submission Details",
+      "customerInfo": "Customer Info",
+      "projectInfo": "Project Info",
+      "message": "Inquiry Message",
+      "noMessage": "No message provided.",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "service": "Service",
+      "date": "Submitted",
+      "status": "Status",
+      "statusInsight": "Status Insight",
+      "statusNote": "This lead is currently marked as {{status}}.",
+      "notFound": "Lead not found",
+      "notFoundDesc": "The lead you are looking for does not exist or has been removed.",
+      "backToLeads": "Back to Contacts",
+      "loading": "Loading details...",
+      "call": "Call",
+      "emailBtn": "Email"
+    },
+    "services": {
+      "title": "Services & Categories",
+      "subtitle": "Manage how services are grouped and displayed on the public site.",
+      "tabs": {
+        "services": "Services",
+        "categories": "Categories",
+        "content": "Content Management"
+      },
+      "content": {
+        "servicesHeader": "Services Page Header",
+        "servicesSubtitle": "Top banner content for your services list page.",
+        "galleryHeader": "Gallery Page Header",
+        "gallerySubtitle": "Top banner content for your work portfolio page.",
+        "saveServices": "Save Services Content",
+        "saveGallery": "Save Gallery Content",
+        "labels": {
+          "badgeLayout": "Badge (EN / ES)",
+          "badgeEn": "English Badge",
+          "badgeEs": "Spanish Badge",
+          "titleLayout": "Title (EN / ES)",
+          "titleEn": "English Title",
+          "titleEs": "Spanish Title",
+          "subtitleLayout": "Subtitle (EN / ES)",
+          "subtitleEn": "English Subtitle",
+          "subtitleEs": "Spanish Subtitle"
+        }
+      },
+      "categories": {
+        "title": "Service Categories",
+        "add": "Add Category",
+        "name": "Name (EN/ES)",
+        "order": "Order",
+        "sorting": "Sorting",
+        "actions": "Actions"
+      },
+      "list": {
+        "title": "Services",
+        "total": "{{count}} Total Services",
+        "add": "Add Service",
+        "service": "Service",
+        "category": "Category",
+        "featured": "Featured",
+        "status": "Status",
+        "actions": "Actions",
+        "active": "Live",
+        "hidden": "Hidden"
+      },
+      "modal": {
+        "add": "Add New",
+        "edit": "Edit",
+        "details": "Service Details",
+        "gallery": "Gallery Photos",
+        "save": "Save",
+        "cancel": "Cancel",
+        "liveNote": "All changes are live immediately.",
+        "labels": {
+          "nameEn": "English Name",
+          "nameEs": "Spanish Name",
+          "order": "Display Order",
+          "sorting": "Sorting Method",
+          "slug": "Service Key (Slug)",
+          "category": "Category",
+          "titleEn": "Title (English)",
+          "titleEs": "Title (Spanish)",
+          "descEn": "Description (English)",
+          "descEs": "Description (Spanish)",
+          "featured": "Featured",
+          "active": "Active",
+          "upload": "Upload from device",
+          "uploadHint": "Click to upload photo",
+          "uploadLimit": "PNG, JPG, WebP (Max 100KB automatically)",
+          "link": "Attach Image Link",
+          "addLink": "Add Link",
+          "galleryTitle": "Target Gallery ({{count}})"
+        },
+        "placeholders": {
+          "slug": "e.g. lawn-mowing",
+          "selectCategory": "Select Category",
+          "link": "https://..."
+        },
+        "confirmDeleteImg": "Remove this image?",
+        "uploadError": "Failed to upload image. Make sure Supabase Storage is configured."
+      }
+    },
+    "settings": {
+      "title": "Site Settings",
+      "subtitle": "Manage your account and site-wide configuration.",
+      "leadsLimit": "Recent Leads Limit (Dashboard)",
+      "leadsLimitDesc": "Choose how many contact submissions are displayed on your main dashboard (range: 4 to 10).",
+      "save": "Save Configuration",
+      "saved": "Settings Saved",
+      "account": "Account",
+      "role": "Master Admin",
+      "signOut": "Sign Out",
+      "config": "Site Configuration",
+      "autoMarkRead": "Auto-mark leads as Read",
+      "autoMarkReadDesc": "Automatically change status to 'Read' when opening a lead detail page.",
+      "footerServices": "Footer Services",
+      "footerServicesDesc": "Select and order up to 10 services to display in the website footer. Ideally 5 per column.",
+      "sortAlpha": "Sort A-Z",
+      "activeFooter": "Selected Services",
+      "availableServices": "Available Services"
+    },
+    "login": {
+      "title": "Admin Access",
+      "subtitle": "Canela Landscaping Management Portal",
+      "email": "Email Address",
+      "password": "Password",
+      "button": "Sign In",
+      "error": "Invalid login credentials."
+    }
   }
 }

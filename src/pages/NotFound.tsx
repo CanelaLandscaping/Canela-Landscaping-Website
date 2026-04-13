@@ -7,7 +7,7 @@ const NotFound = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50 px-4 overflow-hidden relative">
+    <div className="min-h-screen flex items-center justify-center bg-slate-50 px-6 md:px-12 overflow-hidden relative">
       {/* Background Decor */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-100 rounded-full blur-[100px] -mr-48 -mt-48 opacity-50" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-emerald-200 rounded-full blur-[100px] -ml-48 -mb-48 opacity-30" />

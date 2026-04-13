@@ -11,8 +11,13 @@ import NotFound from "./pages/NotFound";
 import GalleryPrefetch from "./components/GalleryPrefetch";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
+import AdminLeads from "./pages/AdminLeads";
+import AdminLeadDetail from "./pages/AdminLeadDetail";
+import AdminSettings from "./pages/AdminSettings";
+
 import ProtectedRoute from "./components/ProtectedRoute";
 import { AuthProvider } from "./context/AuthProvider";
+import AdminServices from "./pages/AdminServices";
 
 function App() {
   const { pathname, hash } = useLocation();
@@ -30,12 +35,14 @@ function App() {
   }, [pathname, hash]);
 
   const isAdminPath = pathname.startsWith("/admin");
+  const isLoginPath = pathname === "/admin/login";
 
   return (
     <AuthProvider>
       <div className="min-h-screen bg-white">
         {!isAdminPath && <GalleryPrefetch />}
-        {!isAdminPath && <Navbar />}
+        {/* Shared Navbar shown on all routes except the login page */}
+        {!isLoginPath && <Navbar />}
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -43,22 +50,56 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/contact" element={<Contact />} />
-            
+
             {/* Admin Routes */}
             <Route path="/admin/login" element={<AdminLogin />} />
-            <Route 
-              path="/admin" 
+            <Route
+              path="/admin"
               element={
                 <ProtectedRoute>
                   <AdminDashboard />
                 </ProtectedRoute>
-              } 
+              }
             />
-            
+            <Route
+              path="/admin/contacts"
+              element={
+                <ProtectedRoute>
+                  <AdminLeads />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/contacts/:id"
+              element={
+                <ProtectedRoute>
+                  <AdminLeadDetail />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/services"
+              element={
+                <ProtectedRoute>
+                  <AdminServices />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/settings"
+              element={
+                <ProtectedRoute>
+                  <AdminSettings />
+                </ProtectedRoute>
+              }
+            />
+
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
-        {!isAdminPath && <Footer />}
+        <div>
+          <Footer />
+        </div>
       </div>
     </AuthProvider>
   );

@@ -2,7 +2,21 @@
 
 **Objective**: Migrate all hard-coded and i18n-file-driven content to a database-backed CMS, allowing the business owner to edit all page content (in both English and Spanish) from the `/admin` panel without needing a developer.
 
-**Status**: 📋 Planning — nothing implemented yet.
+**Status**: 🏗️ In Progress — Layout standardized, CMS Phase 1 complete.
+
+---
+
+## Recent Updates (April 2026)
+
+### Site-wide Layout Standardization (3-Layer Architecture)
+The entire website has been refactored to follow a strict 3-layer containerization pattern:
+1. **Outer Layer**: Background and horizontal padding (`px-6 md:px-12`).
+2. **Sub-wrapper Layer**: Standardized `.container-custom` (`max-width: 1400px`, centered).
+3. **Content Layer**: The actual UI elements.
+
+This migration ensures perfect alignment and premium UI consistency across all viewports, preparing the codebase for dynamic dynamic content injection.
+
+---
 
 ---
 

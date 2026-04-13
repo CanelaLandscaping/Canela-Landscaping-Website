@@ -8,7 +8,7 @@ const Contact = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="pt-32 pb-32 bg-slate-50/50">
+    <section className="pt-40 pb-32 bg-slate-50/50 px-6 md:px-12">
       <div className="container-custom">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
           <div>
@@ -89,7 +89,7 @@ const Contact = () => {
           </motion.div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

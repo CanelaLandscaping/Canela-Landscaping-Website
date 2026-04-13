@@ -4,11 +4,12 @@
     "services": "Servicios",
     "gallery": "Galería",
     "contact": "Contacto",
-    "getQuote": "Cotizar"
+    "getQuote": "Cotizar",
+    "dashboard": "Panel"
   },
   "hero": {
     "badge": "Jardinería de Primera",
-    "title": "Cuidado Experto para <1/> su Hogar Exterior.",
+    "title": "Cuidado Experto para su Hogar Exterior.",
     "subtitle": "Transformando sus espacios exteriores en obras maestras con precisión, pasión y experiencia inigualable.",
     "cta": "Obtenga un Presupuesto Gratis",
     "services": "Nuestros Servicios"
@@ -42,8 +43,8 @@
   "home": {
     "whatWeDo": {
       "badge": "Lo que hacemos",
-      "title": "Creando Experiencias <1/> Exteriores Excepcionales.",
-      "viewAll": "Ver Todos los Más de 15 Servicios",
+      "title": "Creando Experiencias Exteriores Excepcionales.",
+      "viewAll": "Ver Todos los 15+ Servicios",
       "viewProof": "Ver Prueba"
     },
     "whyUs": {
@@ -69,7 +70,7 @@
       "location": "Propietarios, Cleveland, Ohio"
     },
     "cta": {
-      "title": "¿Listo para comenzar su <1/> próximo proyecto?",
+      "title": "¿Listo para comenzar su próximo proyecto?",
       "subtitle": "Únase a cientos de propietarios felices hoy. Obtenga una cotización gratuita y sin compromiso.",
       "button": "Comenzar Mi Transformación"
     }
@@ -138,14 +139,14 @@
       "description": "Hermosos elementos de grava de bajo mantenimiento y soluciones de drenaje."
     },
     "snow-plow": {
-      "title": "Remoción de Nieve",
+      "title": "Eliminación de Nieve",
       "description": "Remoción de nieve confiable las 24 horas, los 7 días de la semana para entradas y pasillos durante el invierno."
     }
   },
   "about": {
     "story": {
       "badge": "Nuestra Historia",
-      "title": "Arraigados en la <1/> Calidad.",
+      "title": "Arraigados en la Calidad.",
       "content": "Fundada hace más de 15 años, Canela Landscaping comenzó con una misión simple: proporcionar el más alto nivel de artesanía y cuidado para cada espacio exterior que tocamos.",
       "quote": "\"No solo cortamos el césped; cultivamos entornos donde las familias crecen y se crean recuerdos.\""
     },
@@ -173,7 +174,7 @@
   },
   "servicesPage": {
     "badge": "Nuestra Experiencia",
-    "title": "Soluciones de Paisajismo <1/> Integrales.",
+    "title": "Soluciones de Paisajismo Integrales.",
     "subtitle": "Desde el mantenimiento de precisión del césped hasta reparaciones complejas de piedra y preparación estacional, cubrimos todos los aspectos de su entorno exterior.",
     "filters": {
       "all": "Todos",
@@ -194,14 +195,14 @@
     "subtitle": "Explore nuestra galería completa de transformaciones en todo Cleveland, organizada por tipos de servicio y categoría de proyecto.",
     "nav": "Navegación",
     "cta": {
-      "title": "¿Llisto para su <1/> próxima transformación?",
+      "title": "¿Llisto para su próxima transformación?",
       "subtitle": "Traiga la experiencia de Domingo Canela a su propiedad hoy.",
       "button": "Contactar Ahora"
     }
   },
   "contact": {
     "badge": "Hablemos",
-    "title": "Comience Su <1/> Transformación.",
+    "title": "Comience Su Transformación.",
     "subtitle": "¿Listo para elevar su espacio exterior? Complete el formulario, le proporcionaremos un presupuesto personalizado para su visión en el área de Cleveland.",
     "info": {
       "call": {
@@ -243,9 +244,187 @@
     }
   },
   "notFound": {
-    "title": "¡Vaya! Este camino está <1/> un poco descuidado.",
+    "title": "¡Vaya! Este camino está un poco descuidado.",
     "subtitle": "La página que busca no existe o se ha movido a un nuevo paisaje.",
     "backHome": "Volver al Inicio",
     "goBack": "Atrás"
+  },
+  "admin": {
+    "sidebar": {
+      "dashboard": "Panel de Control",
+      "contacts": "Contactos",
+      "services": "Servicios",
+      "settings": "Ajustes"
+    },
+    "dashboard": {
+      "welcome": "¡Bienvenido de nuevo, Equipo Canela!",
+      "subtitle": "El panel de control de su negocio está listo. Gestione sus contactos de clientes y solicitudes de remoción de nieve desde aquí.",
+      "stats": {
+        "totalLeads": "Contactos Totales",
+        "activeProjects": "Proyectos Activos",
+        "newInquiries": "Nuevas Consultas"
+      },
+      "recentLeads": {
+        "title": "Contactos Recientes",
+        "subtitle": "Últimas {{limit}} solicitudes de contacto desde la web.",
+        "viewAll": "Ver todo",
+        "noLeads": "No hay contactos recientes.",
+        "noLeadsDesc": "Cuando los clientes rellenen el formulario de contacto, sus detalles aparecerán aquí.",
+        "customer": "Cliente",
+        "service": "Servicio",
+        "date": "Fecha",
+        "status": "Estado"
+      }
+    },
+    "leads": {
+      "title": "Solicitudes de Contacto",
+      "subtitle": "Historial completo de todos los contactos del sitio web.",
+      "searchPlaceholder": "Buscar contactos...",
+      "noResults": "No se encontraron contactos.",
+      "noResultsDesc": "Intente buscar por un nombre, correo o servicio diferente.",
+      "noLeads": "No hay contactos aún.",
+      "noLeadsDesc": "Las solicitudes del formulario aparecerán aquí automáticamente.",
+      "customer": "Cliente",
+      "phone": "Teléfono",
+      "service": "Servicio",
+      "date": "Fecha",
+      "status": "Estado",
+      "new": "Nuevo",
+      "contacted": "Contactado",
+      "backToHistory": "Volver al Historial"
+    },
+    "leadDetail": {
+      "back": "Volver a la lista",
+      "title": "Detalles de la Solicitud",
+      "customerInfo": "Información del Cliente",
+      "projectInfo": "Información",
+      "message": "Mensaje de Consulta",
+      "noMessage": "No se proporcionó mensaje.",
+      "name": "Nombre",
+      "email": "Email",
+      "phone": "Teléfono",
+      "service": "Servicio",
+      "date": "Enviado",
+      "status": "Estado",
+      "statusInsight": "Estado",
+      "statusNote": "Este contacto está marcado actualmente como {{status}}.",
+      "notFound": "Lead no encontrado",
+      "notFoundDesc": "El contacto que busca no existe o ha sido eliminado.",
+      "backToLeads": "Volver a Contactos",
+      "loading": "Cargando detalles...",
+      "call": "Llamar",
+      "emailBtn": "Email"
+    },
+    "services": {
+      "title": "Servicios y Categorías",
+      "subtitle": "Gestione cómo se agrupan y muestran los servicios en el website público.",
+      "tabs": {
+        "services": "Servicios",
+        "categories": "Categorías",
+        "content": "Gestión de Contenido"
+      },
+      "content": {
+        "servicesHeader": "Encabezado de la Página de Servicios",
+        "servicesSubtitle": "Contenido del banner superior para su página de lista de servicios.",
+        "galleryHeader": "Encabezado de la Página de Galería",
+        "gallerySubtitle": "Contenido del banner superior para su página de portafolio de trabajo.",
+        "saveServices": "Guardar Contenido de Servicios",
+        "saveGallery": "Guardar Contenido de Galería",
+        "labels": {
+          "badgeLayout": "Distintivo (EN / ES)",
+          "badgeEn": "Distintivo en Inglés",
+          "badgeEs": "Distintivo en Español",
+          "titleLayout": "Título (EN / ES)",
+          "titleEn": "Título en Inglés",
+          "titleEs": "Título en Español",
+          "subtitleLayout": "Subtítulo (EN / ES)",
+          "subtitleEn": "Subtítulo en Inglés",
+          "subtitleEs": "Subtítulo en Español"
+        }
+      },
+      "categories": {
+        "title": "Categorías de Servicio",
+        "add": "Agregar Categoría",
+        "name": "Nombre (EN/ES)",
+        "order": "Orden",
+        "sorting": "Ordenación",
+        "actions": "Acciones"
+      },
+      "list": {
+        "title": "Servicios",
+        "total": "{{count}} Servicios Totales",
+        "add": "Agregar Servicio",
+        "service": "Servicio",
+        "category": "Categoría",
+        "featured": "Destacado",
+        "status": "Estado",
+        "actions": "Acciones",
+        "active": "Activo",
+        "hidden": "Oculto"
+      },
+      "modal": {
+        "add": "Agregar Nuevo",
+        "edit": "Editar",
+        "details": "Detalles del Servicio",
+        "gallery": "Fotos de Galería",
+        "save": "Guardar",
+        "cancel": "Cancelar",
+        "liveNote": "Todos los cambios se aplican al instante.",
+        "labels": {
+          "nameEn": "Nombre en Inglés",
+          "nameEs": "Nombre en Español",
+          "order": "Orden de Visualización",
+          "sorting": "Método de Ordenación",
+          "slug": "Clave del Servicio (Slug)",
+          "category": "Categoría",
+          "titleEn": "Título (Inglés)",
+          "titleEs": "Título (Español)",
+          "descEn": "Descripción (Inglés)",
+          "descEs": "Descripción (Español)",
+          "featured": "Destacado",
+          "active": "Activo",
+          "upload": "Subir desde dispositivo",
+          "uploadHint": "Click para subir foto",
+          "uploadLimit": "PNG, JPG, WebP (Máx 100KB automático)",
+          "link": "Adjuntar Enlace de Imagen",
+          "addLink": "Agregar Enlace",
+          "galleryTitle": "Galería Destino ({{count}})"
+        },
+        "placeholders": {
+          "slug": "ej. lawn-mowing",
+          "selectCategory": "Seleccionar Categoría",
+          "link": "https://..."
+        },
+        "confirmDeleteImg": "¿Eliminar esta imagen?",
+        "uploadError": "Error al subir imagen. Asegúrese de que Supabase Storage esté configurado."
+      }
+    },
+    "settings": {
+      "title": "Ajustes del Sitio",
+      "subtitle": "Gestione su cuenta y la configuración global del sitio.",
+      "leadsLimit": "Límite de Contactos Recientes (Panel)",
+      "leadsLimitDesc": "Elija cuántas solicitudes de contacto se muestran en su panel de control (rango: 4 a 10).",
+      "save": "Guardar Configuración",
+      "saved": "Ajustes Guardados",
+      "account": "Cuenta",
+      "role": "Administrador Maestro",
+      "signOut": "Cerrar Sesión",
+      "config": "Configuración del Sitio",
+      "autoMarkRead": "Marcar leads como leídos automáticamente",
+      "autoMarkReadDesc": "Cambiar automáticamente el estado a 'Leído' al abrir la página de detalles del lead.",
+      "footerServices": "Servicios del Footer",
+      "footerServicesDesc": "Selecciona y ordena hasta 10 servicios para mostrar en el pie de página del sitio web. Idealmente 5 por columna.",
+      "sortAlpha": "Ordenar A-Z",
+      "activeFooter": "Servicios Seleccionados",
+      "availableServices": "Servicios Disponibles"
+    },
+    "login": {
+      "title": "Acceso Admin",
+      "subtitle": "Portal de Gestión Canela Landscaping",
+      "email": "Correo Electrónico",
+      "password": "Contraseña",
+      "button": "Iniciar Sesión",
+      "error": "Credenciales de acceso inválidas."
+    }
   }
 }

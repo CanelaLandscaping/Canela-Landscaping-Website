@@ -21,7 +21,9 @@ const StorySection = ({
   quote,
   imageUrl,
 }: StorySectionProps) => (
-  <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center mb-40">
+  <section className="mb-40 px-6 md:px-12">
+    <div className="container-custom">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
     {/* Image col */}
     <motion.div
       initial={{ opacity: 0, x: -50 }}
@@ -68,7 +70,9 @@ const StorySection = ({
         {quote}
       </p>
     </motion.div>
+    </div>
   </div>
+</section>
 );
 
 export default StorySection;

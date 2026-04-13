@@ -28,7 +28,7 @@ const WhyUsSection = ({
   imageUrl,
   points,
 }: WhyUsSectionProps) => (
-  <section className="py-32 bg-slate-50/50">
+  <section className="py-32 bg-slate-50/50 px-6 md:px-12">
     <div className="container-custom grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
       {/* Image col */}
       <motion.div
@@ -73,7 +73,7 @@ const WhyUsSection = ({
           <span className="text-emerald-600 font-bold text-sm uppercase tracking-widest mb-4 block">
             {badge}
           </span>
-          <h2 className="text-4xl md:text-5xl font-black text-slate-950 leading-tight">
+          <h2 className="text-4xl md:text-5xl font-black text-slate-950 leading-tight max-w-[800px]">
             {title}
           </h2>
         </div>

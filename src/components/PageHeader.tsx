@@ -28,7 +28,7 @@ const PageHeader = ({
     <span className="text-emerald-600 font-bold text-sm uppercase tracking-widest mb-4 block underline decoration-emerald-200 underline-offset-8">
       {badge}
     </span>
-    <h1 className="text-5xl md:text-7xl font-black text-slate-950 mb-8 tracking-tight">
+    <h1 className="text-5xl md:text-7xl font-black text-slate-950 mb-8 tracking-tight whitespace-pre-line">
       {title}
     </h1>
     {subtitle && (

@@ -36,8 +36,9 @@ Read this file before making any code changes.
 1. **No magic strings** — use `src/config/constants.ts` for phone, email, and location values. Never hardcode them in components.
 2. **All user-facing text goes through i18n** — use `t("key")` from `useTranslation()`. Never write raw English strings in JSX if they should be bilingual.
 3. **Supabase queries live in `src/supabase/queries.ts`** — never import `supabase` directly from a component. Go through the query layer.
-4. **TypeScript `strict` mode is on** — no `any` types allowed. Define proper interfaces.
-5. **Never put secrets in source code** — all sensitive values must be in `.env` (which is gitignored).
+4. **TypeScript `strict` mode is on** — no `any` types allowed. Avoid "Implicit Any" for parameters (e.g., in `filter` or `map` callbacks). Always define proper interfaces or use imported types.
+5. **No Duplicate Imports** — Always verify that refactored imports don't lead to redundant declarations at the top of the file.
+6. **Never put secrets in source code** — all sensitive values must be in `.env` (which is gitignored).
 
 ---
 
@@ -53,8 +54,14 @@ Read this file before making any code changes.
 const { t } = useTranslation();
 <label>{t("contact.form.labels.name")}</label>
 
-// ❌ Wrong — untranslatable
+// ❌ Wrong — untranslatable or inconsistent terminology
 <label>Full Name</label>
+<label>Status Insight</label> // Use "Estado" in ES instead of literal "Insight"
+
+- **Terminology Standardization**:
+  - Prefer "Contactos" over "Leads" in Spanish.
+  - Standard term for snow plowing: "Eliminación de Nieve".
+- **Dynamic Content Priority**: When displaying items with bilingual fields (e.g., `name_en`, `name_es`), prioritize the field matching `i18n.language` in the primary UI position.
 ```
 
 ---
@@ -70,6 +77,7 @@ const { t } = useTranslation();
   - Border radius: prefer `rounded-2xl` or `rounded-3xl` for cards/inputs
 - **Responsive design is mandatory** — always include responsive prefixes (`md:`, `lg:`).
 - **Animations** — use `framer-motion` for interactive animations. Do not use raw CSS `@keyframes` for entrance effects.
+- **Sticky Offsets**: Standardized desktop sticky panels (sidebars, navs) should use `top-24`. Avoid arbitrary offsets like `top-32` unless required by layout constraints.
 
 ```tsx
 // ✅ Correct — uses brand colors and responsive sizing

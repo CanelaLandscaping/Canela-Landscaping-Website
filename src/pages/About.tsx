@@ -25,46 +25,44 @@ const About = () => {
   ];
 
   return (
-    <div className="pt-32 pb-32 bg-slate-50/30 overflow-hidden">
-      <div className="container-custom">
-        {/* Story */}
-        <StorySection
-          badge={t("about.story.badge")}
-          title={
-            <Trans i18nKey="about.story.title">
-              Rooted in <br />
-              Quality.
-            </Trans>
-          }
-          content={t("about.story.content")}
-          quote={t("about.story.quote")}
-          imageUrl={STORY_IMAGE_URL}
-        />
+    <div className="pt-28 lg:pt-40 pb-20 bg-slate-50/30 overflow-hidden">
+      {/* Story */}
+      <StorySection
+        badge={t("about.story.badge")}
+        title={
+          <Trans i18nKey="about.story.title">
+            Rooted in <br />
+            Quality.
+          </Trans>
+        }
+        content={t("about.story.content")}
+        quote={t("about.story.quote")}
+        imageUrl={STORY_IMAGE_URL}
+      />
 
-        {/* Mission / Values grid */}
-        <ValuesGrid
-          mission={{
-            title: t("about.mission.title"),
-            content: t("about.mission.content"),
-          }}
-          promise={{
-            title: t("about.promise.title"),
-            content: t("about.promise.content"),
-          }}
-          team={{
-            title: t("about.team.card.title"),
-            content: t("about.team.card.description"),
-          }}
-        />
+      {/* Mission / Values grid */}
+      <ValuesGrid
+        mission={{
+          title: t("about.mission.title"),
+          content: t("about.mission.content"),
+        }}
+        promise={{
+          title: t("about.promise.title"),
+          content: t("about.promise.content"),
+        }}
+        team={{
+          title: t("about.team.card.title"),
+          content: t("about.team.card.description"),
+        }}
+      />
 
-        {/* Team */}
-        <TeamSection
-          badge={t("about.team.badge")}
-          title={t("about.team.title")}
-          description={t("about.team.description")}
-          members={members}
-        />
-      </div>
+      {/* Team */}
+      <TeamSection
+        badge={t("about.team.badge")}
+        title={t("about.team.title")}
+        description={t("about.team.description")}
+        members={members}
+      />
     </div>
   );
 };

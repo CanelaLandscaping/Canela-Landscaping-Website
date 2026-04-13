@@ -31,7 +31,7 @@ const itemVariants: Variants = {
  * Used in the Home page below the hero section.
  */
 const TrustBadgesBar = ({ badges }: TrustBadgesBarProps) => (
-  <section className="bg-slate-50 py-12 border-b border-slate-100">
+  <section className="bg-slate-50 py-12 border-b border-slate-100 px-6 md:px-12">
     <motion.div
       variants={containerVariants}
       initial="hidden"
