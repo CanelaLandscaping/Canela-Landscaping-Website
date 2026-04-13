@@ -1,4 +1,4 @@
-import { motion, type Variants } from "framer-motion";
+import { motion } from "framer-motion";
 
 export interface TeamMember {
   id: string;
@@ -14,19 +14,6 @@ interface TeamSectionProps {
   members: TeamMember[];
 }
 
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
-};
-
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
-  },
-};
 /**
  * Team members grid section used on the About page.
  * Accepts the section header copy and an array of member objects.
