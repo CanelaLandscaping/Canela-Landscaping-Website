@@ -28,11 +28,12 @@ import {
   Star,
   Award,
   Leaf,
-  CheckCircle2,
+  CircleCheck,
   Zap,
   Mountain,
   Fence,
   CloudRain,
+  type LucideIcon,
 } from "lucide-react";
 
 const ICON_OPTIONS = [
@@ -52,7 +53,7 @@ const ICON_OPTIONS = [
   "Star",
   "Award",
   "Leaf",
-  "CheckCircle2",
+  "CircleCheck",
   "Zap",
   "Mountain",
   "Fence",
@@ -61,7 +62,7 @@ const ICON_OPTIONS = [
 ];
 
 const IconRenderer = ({ name, size = 20, className = "" }: { name: string; size?: number; className?: string }) => {
-  const icons: Record<string, any> = {
+  const icons: Record<string, LucideIcon> = {
     Scissors,
     Trees,
     Flower,
@@ -78,7 +79,7 @@ const IconRenderer = ({ name, size = 20, className = "" }: { name: string; size?
     Star,
     Award,
     Leaf,
-    CheckCircle2,
+    CircleCheck,
     Zap,
     Mountain,
     Fence,

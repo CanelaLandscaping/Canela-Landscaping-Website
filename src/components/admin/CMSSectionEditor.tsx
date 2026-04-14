@@ -18,9 +18,7 @@ import {
   type TeamContent,
   type TestimonialContent,
   type CTAContent,
-  type ValuesContent,
   type TrustBadgesContent,
-  type FeaturedServicesContent,
 } from "../../supabase/queries";
 
 interface CMSSectionEditorProps {
@@ -61,20 +59,20 @@ const CMSSectionEditor = ({
       const newContent = JSON.parse(JSON.stringify(prev));
       const keys = path.split(".");
       const lastKey = keys.pop()!;
-      let current = newContent as any;
-      
+      let current = newContent as Record<string, unknown>;
+
       for (const key of keys) {
         if (!current[key]) current[key] = {};
-        current = current[key];
+        current = current[key] as Record<string, unknown>;
       }
-      
+
       current[lastKey] = value;
       return newContent as CMSSectionContent;
     });
   };
 
-  const getNestedValue = (obj: any, path: string): any => {
-    return path.split(".").reduce((prev, curr) => prev?.[curr], obj);
+  const getNestedValue = (obj: unknown, path: string): unknown => {
+    return path.split(".").reduce((prev, curr) => (prev as Record<string, unknown>)?.[curr], obj);
   };
 
   const handleFileUpload = async (
@@ -192,7 +190,7 @@ const CMSSectionEditor = ({
           </label>
           {type === "textarea" ? (
             <textarea
-              value={getNestedValue(content, `${fieldBase}_en`) || ""}
+              value={String(getNestedValue(content, `${fieldBase}_en`) || "")}
               onChange={(e) => updateContent(`${fieldBase}_en`, e.target.value)}
               rows={3}
               className="w-full bg-slate-50 border border-slate-100 rounded-2xl p-4 font-bold text-slate-900 focus:ring-2 focus:ring-emerald-500 transition-all outline-none"
@@ -200,7 +198,7 @@ const CMSSectionEditor = ({
           ) : (
             <input
               type="text"
-              value={getNestedValue(content, `${fieldBase}_en`) || ""}
+              value={String(getNestedValue(content, `${fieldBase}_en`) || "")}
               onChange={(e) => updateContent(`${fieldBase}_en`, e.target.value)}
               className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-4 py-3.5 font-bold text-slate-900 focus:ring-2 focus:ring-emerald-500 transition-all outline-none"
             />
@@ -212,7 +210,7 @@ const CMSSectionEditor = ({
           </label>
           {type === "textarea" ? (
             <textarea
-              value={getNestedValue(content, `${fieldBase}_es`) || ""}
+              value={String(getNestedValue(content, `${fieldBase}_es`) || "")}
               onChange={(e) => updateContent(`${fieldBase}_es`, e.target.value)}
               rows={3}
               className="w-full bg-slate-50 border border-slate-100 rounded-2xl p-4 font-bold text-slate-900 focus:ring-2 focus:ring-emerald-500 transition-all outline-none"
@@ -220,7 +218,7 @@ const CMSSectionEditor = ({
           ) : (
             <input
               type="text"
-              value={getNestedValue(content, `${fieldBase}_es`) || ""}
+              value={String(getNestedValue(content, `${fieldBase}_es`) || "")}
               onChange={(e) => updateContent(`${fieldBase}_es`, e.target.value)}
               className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-4 py-3.5 font-bold text-slate-900 focus:ring-2 focus:ring-emerald-500 transition-all outline-none"
             />
@@ -359,7 +357,6 @@ const CMSSectionEditor = ({
         );
       }
       case "values": {
-        const values = content as ValuesContent;
         return (
           <div className="space-y-12">
             <div className="p-6 bg-slate-50 rounded-[2rem] border border-slate-100 space-y-6">
@@ -451,11 +448,7 @@ const CMSSectionEditor = ({
         const testimonial = content as TestimonialContent;
         return (
           <div className="space-y-6">
-            <BilingualInput
-              label="Quote"
-              fieldBase="quote"
-              type="textarea"
-            />
+            <BilingualInput label="Quote" fieldBase="quote" type="textarea" />
             <div className="space-y-2">
               <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-2">
                 Author Name
@@ -515,7 +508,7 @@ const CMSSectionEditor = ({
                         value={badge.icon}
                         onChange={(e) => {
                           const badges = [...trust.badges];
-                          badges[idx].icon = e.target.value as any;
+                          badges[idx].icon = e.target.value;
                           updateContent("badges", badges);
                         }}
                         className="w-full bg-white border border-slate-100 rounded-xl px-4 py-2 text-sm font-bold outline-none"
@@ -537,7 +530,6 @@ const CMSSectionEditor = ({
       }
 
       case "featured-services": {
-        const featured = content as FeaturedServicesContent;
         return (
           <div className="space-y-6">
             <BilingualInput label="Badge" fieldBase="badge" />

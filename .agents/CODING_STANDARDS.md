@@ -36,9 +36,10 @@ Read this file before making any code changes.
 1. **No magic strings** — use `src/config/constants.ts` for phone, email, and location values. Never hardcode them in components.
 2. **All user-facing text goes through i18n** — use `t("key")` from `useTranslation()`. Never write raw English strings in JSX if they should be bilingual.
 3. **Supabase queries live in `src/supabase/queries.ts`** — never import `supabase` directly from a component. Go through the query layer.
-4. **TypeScript `strict` mode is on** — no `any` types allowed. Avoid "Implicit Any" for parameters (e.g., in `filter` or `map` callbacks). Always define proper interfaces or use imported types.
-5. **No Duplicate Imports** — Always verify that refactored imports don't lead to redundant declarations at the top of the file.
-6. **Never put secrets in source code** — all sensitive values must be in `.env` (which is gitignored).
+4. **TypeScript `strict` mode is on** — **DO NOT use the `any` type.** Avoid "Implicit Any" for parameters (e.g., in `filter` or `map` callbacks). Always define proper interfaces or use imported types for complex data.
+5. **Always look for errors** — Before submitting, verify that your changes don't introduce new lint warnings or TypeScript errors. Proactively search for and fix type issues.
+6. **No Duplicate Imports** — Always verify that refactored imports don't lead to redundant declarations at the top of the file.
+7. **Never put secrets in source code** — all sensitive values must be in `.env` (which is gitignored).
 
 ---
 
