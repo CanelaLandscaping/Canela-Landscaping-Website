@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import SEO from "../components/SEO";
 import ServiceCard from "../components/ServiceCard";
 import HeroSection from "../components/HeroSection";
 import TrustBadgesBar, { type TrustBadge } from "../components/TrustBadgesBar";
@@ -24,7 +25,7 @@ import {
 import type { Service } from "../data/services";
 
 const Home = () => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [sections, setSections] = useState<CMSSection[]>([]);
   const [featuredServices, setFeaturedServices] = useState<CMSService[]>([]);
   const [loading, setLoading] = useState(true);
@@ -204,6 +205,11 @@ const Home = () => {
 
   return (
     <div className="overflow-hidden">
+      <SEO 
+        title={t("seo.home.title")} 
+        description={t("seo.home.description")} 
+        canonical="/" 
+      />
       {loading ? (
         <div className="min-h-screen flex flex-col items-center justify-center text-slate-400">
           <Loader2 size={40} className="animate-spin mb-4 text-emerald-600" />

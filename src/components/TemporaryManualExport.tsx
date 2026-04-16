@@ -1,4 +1,4 @@
-import { FileDown } from 'lucide-react';
+import { FileDown } from "lucide-react";
 
 const TemporaryManualExport = () => {
   const handlePrint = () => {
@@ -10,10 +10,14 @@ const TemporaryManualExport = () => {
       {/* Utility Bar - Only visible on screen */}
       <div className="print:hidden bg-emerald-900 text-white p-4 flex items-center justify-between sticky top-0 z-[100] shadow-xl">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center font-black">C</div>
-          <span className="font-bold tracking-tight">UTILIDAD: Exportar Manual del Propietario</span>
+          <div className="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center font-black">
+            C
+          </div>
+          <span className="font-bold tracking-tight">
+            UTILIDAD: Exportar Manual del Propietario
+          </span>
         </div>
-        <button 
+        <button
           onClick={handlePrint}
           className="bg-white text-emerald-900 px-6 py-2 rounded-full font-black flex items-center gap-2 hover:bg-emerald-50 transition-all active:scale-95"
         >
@@ -24,7 +28,9 @@ const TemporaryManualExport = () => {
 
       {/* Printable Content - Only visible when printing */}
       <div className="hidden print:block p-12 bg-white text-slate-900 font-sans max-w-4xl mx-auto print-manual-container">
-        <style dangerouslySetInnerHTML={{ __html: `
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
           @media print {
             /* Fix: Hide all other content without reserving space */
             @page {
@@ -76,60 +82,133 @@ const TemporaryManualExport = () => {
               visibility: hidden !important;
             }
           }
-        `}} />
+        `,
+          }}
+        />
 
         <div className="print-manual">
           <div className="text-center mb-16">
-            <h1 className="border-none text-6xl uppercase tracking-tighter">Canela Landscaping</h1>
-            <p className="text-xl font-bold text-emerald-600">Manual Oficial del Propietario (Alojamiento sin Costo)</p>
+            <h1 className="border-none text-6xl uppercase tracking-tighter">
+              Canela Landscaping
+            </h1>
+            <p className="text-xl font-bold text-emerald-600">
+              Manual Oficial del Propietario (Alojamiento sin Costo)
+            </p>
           </div>
 
           <section>
             <hr className="my-8 opacity-20" />
 
             <h2>🛠️ Fase 1: Configuración de GitHub (Su Código)</h2>
-            <p>GitHub es donde se almacenan los "planos" (el código) de su sitio web. Al crear una cuenta personal, usted es el dueño del código mientras permite que su desarrollador trabaje en él de forma gratuita.</p>
+            <p>
+              GitHub es donde se almacenan los "planos" (el código) de su sitio
+              web. Al crear una cuenta personal, usted es el dueño del código
+              mientras permite que su desarrollador trabaje en él de forma
+              gratuita.
+            </p>
             <ol>
-              <li><strong>Crear una Cuenta:</strong> Regístrese para obtener una cuenta personal gratuita en github.com.</li>
-              <li><strong>Crear un Repositorio Privado:</strong> Haga clic en el botón + (New). Nómbrelo "CanelaLandscaping". Asegúrese de seleccionar Private.</li>
-              <li><strong>Invitar a su Desarrollador:</strong> Vaya a la pestaña Settings de su nuevo repositorio, haga clic en Collaborators a la izquierda e invite a @leoalfonso14 (o leandroalfonso14@gmail.com).</li>
+              <li>
+                <strong>Crear una Cuenta:</strong> Regístrese para obtener una
+                cuenta personal gratuita en github.com.
+              </li>
+              <li>
+                <strong>Crear un Repositorio Privado:</strong> Haga clic en el
+                botón + (New). Nómbrelo "CanelaLandscaping". Asegúrese de
+                seleccionar Private.
+              </li>
+              <li>
+                <strong>Invitar a su Desarrollador:</strong> Vaya a la pestaña
+                Settings de su nuevo repositorio, haga clic en Collaborators a
+                la izquierda e invite a @leoalfonso14 (o
+                leandroalfonso14@gmail.com).
+              </li>
             </ol>
 
             <div className="page-break" />
 
             <h2>🛠️ Fase 2: Configuración de Supabase (Su Base de Datos)</h2>
-            <p>Supabase almacena los mensajes de "Contacto" de sus clientes. Esto asegura que nunca pierda un cliente potencial.</p>
+            <p>
+              Supabase almacena los mensajes de "Contacto" de sus clientes. Esto
+              asegura que nunca pierda un cliente potencial.
+            </p>
             <ol>
-              <li><strong>Crear una Cuenta:</strong> Regístrese en supabase.com.</li>
-              <li><strong>Crear un Proyecto:</strong> Haga clic en + New Project. Nómbrelo "Canela Landscaping".</li>
-              <li><strong>Establecer una Contraseña:</strong> ¡Elija una contraseña de base de datos segura y guárdela bien!</li>
-              <li><strong>Invitar a su Desarrollador:</strong> Vaya a Settings &gt; Team e invite a leandroalfonso14@gmail.com como Owner (Propietario).</li>
+              <li>
+                <strong>Crear una Cuenta:</strong> Regístrese en supabase.com.
+              </li>
+              <li>
+                <strong>Crear un Proyecto:</strong> Haga clic en + New Project.
+                Nómbrelo "Canela Landscaping".
+              </li>
+              <li>
+                <strong>Establecer una Contraseña:</strong> ¡Elija una
+                contraseña de base de datos segura y guárdela bien!
+              </li>
+              <li>
+                <strong>Invitar a su Desarrollador:</strong> Vaya a Settings
+                &gt; Team e invite a leandroalfonso14@gmail.com como Owner
+                (Propietario).
+              </li>
             </ol>
 
             <div className="page-break" />
 
-            <h2>🛠️ Fase 3: Configuración de Vercel (Su Alojamiento Gratuito)</h2>
-            <p>Vercel es el "hogar" de su sitio web. El <strong>Plan Hobby es 100% gratuito</strong> y le permite usar su propio nombre de dominio (por ejemplo, canelalandscaping.com) sin costo adicional.</p>
+            <h2>
+              🛠️ Fase 3: Configuración de Vercel (Su Alojamiento Gratuito)
+            </h2>
+            <p>
+              Vercel es el "hogar" de su sitio web. El{" "}
+              <strong>Plan Hobby es 100% gratuito</strong> y le permite usar su
+              propio nombre de dominio (por ejemplo, canela-landscaping.com) sin
+              costo adicional.
+            </p>
             <ol>
-              <li><strong>Crear una Cuenta:</strong> Regístrese en vercel.com usando su cuenta de GitHub.</li>
-              <li><strong>Importar Proyecto:</strong> Seleccione Add New Project y elija el repositorio "Canela Landscaping" que acaba de crear.</li>
-              <li><strong>Añadir su Dominio:</strong> Una vez desplegado, vaya a Settings &gt; Domains en Vercel para conectar su dirección comercial oficial. Añadir un dominio en el plan Hobby es Gratis.</li>
+              <li>
+                <strong>Crear una Cuenta:</strong> Regístrese en vercel.com
+                usando su cuenta de GitHub.
+              </li>
+              <li>
+                <strong>Importar Proyecto:</strong> Seleccione Add New Project y
+                elija el repositorio "Canela Landscaping" que acaba de crear.
+              </li>
+              <li>
+                <strong>Añadir su Dominio:</strong> Una vez desplegado, vaya a
+                Settings &gt; Domains en Vercel para conectar su dirección
+                comercial oficial. Añadir un dominio en el plan Hobby es Gratis.
+              </li>
             </ol>
 
             <div className="page-break" />
 
-            <h2>🛠️ Fase 4: Configuración de Resend (Sus Correos Electrónicos)</h2>
-            <p>Resend permite que el sitio web le envíe una notificación por correo electrónico cada vez que un cliente complete su formulario de contacto.</p>
+            <h2>
+              🛠️ Fase 4: Configuración de Resend (Sus Correos Electrónicos)
+            </h2>
+            <p>
+              Resend permite que el sitio web le envíe una notificación por
+              correo electrónico cada vez que un cliente complete su formulario
+              de contacto.
+            </p>
             <ol>
-              <li><strong>Crear una Cuenta:</strong> Regístrese en resend.com.</li>
-              <li><strong>Clave API:</strong> Vaya a la pestaña API Keys a la izquierda.</li>
-              <li><strong>Generar Clave:</strong> Haga clic en + Create API Key. Nómbrela "Website Notifications".</li>
-              <li><strong>Enviar al Desarrollador:</strong> Copie la clave (comienza con re_) y envíela de forma segura a su desarrollador.</li>
+              <li>
+                <strong>Crear una Cuenta:</strong> Regístrese en resend.com.
+              </li>
+              <li>
+                <strong>Clave API:</strong> Vaya a la pestaña API Keys a la
+                izquierda.
+              </li>
+              <li>
+                <strong>Generar Clave:</strong> Haga clic en + Create API Key.
+                Nómbrela "Website Notifications".
+              </li>
+              <li>
+                <strong>Enviar al Desarrollador:</strong> Copie la clave
+                (comienza con re_) y envíela de forma segura a su desarrollador.
+              </li>
             </ol>
           </section>
 
           <footer className="mt-20 text-center text-slate-400 font-bold uppercase tracking-widest text-xs">
-            © {new Date().getFullYear()} Canela Landscaping & Snow Plow - Documentación Oficial de Entrega
+            © {new Date().getFullYear()} Canela Landscaping & Snow Plow -
+            Documentación Oficial de Entrega
           </footer>
         </div>
       </div>

@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, MessageSquare } from "lucide-react";
 import { useTranslation, Trans } from "react-i18next";
 import ContactForm from "../components/ContactForm";
+import SEO from "../components/SEO";
 import { PHONE_NUMBER, EMAIL_ADDRESS, LOCATION_TEXT } from "../config/constants";
 
 const Contact = () => {
@@ -9,6 +10,11 @@ const Contact = () => {
 
   return (
     <section className="pt-40 pb-32 bg-slate-50/50 px-6 md:px-12">
+      <SEO 
+        title={t("seo.contact.title")} 
+        description={t("seo.contact.description")} 
+        canonical="/contact" 
+      />
       <div className="container-custom">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
           <div>

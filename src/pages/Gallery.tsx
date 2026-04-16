@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import { useTranslation, Trans } from "react-i18next";
 import PageHeader from "../components/PageHeader";
 import SectionCTA from "../components/SectionCTA";
+import SEO from "../components/SEO";
 import {
   getCategories,
   getServices,
@@ -130,6 +131,11 @@ const Gallery = () => {
 
   return (
     <section className="pt-48 md:pt-36 pb-32 bg-white/50 px-6 md:px-12">
+      <SEO 
+        title={t("seo.gallery.title")} 
+        description={t("seo.gallery.description")} 
+        canonical="/gallery" 
+      />
       {/* Mobile/Tablet Fixed Navigation Bar */}
       <div className="lg:hidden fixed top-[72px] left-0 w-full bg-white/95 backdrop-blur-md z-40 border-b border-slate-100 shadow-sm overflow-x-auto scrollbar-hide">
         <div className="container-custom py-6 flex gap-4 px-6">

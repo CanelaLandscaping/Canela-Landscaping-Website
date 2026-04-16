@@ -7,6 +7,28 @@
     "getQuote": "Cotizar",
     "dashboard": "Panel"
   },
+  "seo": {
+    "home": {
+      "title": "Inicio",
+      "description": "Servicios premium de diseño y mantenimiento de paisajes para espacios exteriores hermosos y funcionales en Denver, Colorado."
+    },
+    "services": {
+      "title": "Nuestros Servicios",
+      "description": "Explore nuestros servicios integrales de paisajismo que incluyen cuidado del césped, mantenimiento, mampostería especializada y limpieza estacional."
+    },
+    "about": {
+      "title": "Sobre Nosotros",
+      "description": "Conozca Canela Landscaping, nuestro negocio familiar con más de 15 años de experiencia brindando un cuidado de calidad al aire libre."
+    },
+    "gallery": {
+      "title": "Galería de Proyectos",
+      "description": "Explore nuestro portafolio de espacios al aire libre transformados, patios y céspedes bellamente mantenidos."
+    },
+    "contact": {
+      "title": "Contáctenos",
+      "description": "Póngase en contacto para obtener un presupuesto gratuito para su próximo proyecto exterior. Contacte a Canela Landscaping hoy mismo."
+    }
+  },
   "hero": {
     "badge": "Jardinería de Primera",
     "title": "Cuidado Experto para su Hogar Exterior.",

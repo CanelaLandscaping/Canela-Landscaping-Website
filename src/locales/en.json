@@ -7,6 +7,28 @@
     "getQuote": "Get Quote",
     "dashboard": "Dashboard"
   },
+  "seo": {
+    "home": {
+      "title": "Home",
+      "description": "Premium landscape design and maintenance services for beautiful, functional outdoor spaces in Denver, Colorado."
+    },
+    "services": {
+      "title": "Our Services",
+      "description": "Explore our comprehensive landscaping services including lawn care, maintenance, specialty stonework, and seasonal clean-up."
+    },
+    "about": {
+      "title": "About Us",
+      "description": "Learn about Canela Landscaping, our family-owned business with over 15 years of experience delivering quality outdoor care."
+    },
+    "gallery": {
+      "title": "Project Gallery",
+      "description": "Browse our portfolio of transformed outdoor spaces, patios, and beautifully maintained lawns."
+    },
+    "contact": {
+      "title": "Contact Us",
+      "description": "Get in touch for a free estimate on your next outdoor project. Contact Canela Landscaping today."
+    }
+  },
   "hero": {
     "badge": "Premium Landscaping",
     "title": "Expert Care for Your Outdoor Home.",

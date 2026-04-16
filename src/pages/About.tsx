@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { useState, useEffect } from "react";
+import SEO from "../components/SEO";
 import StorySection from "../components/StorySection";
 import ValuesGrid from "../components/ValuesGrid";
 import TeamSection, { type TeamMember } from "../components/TeamSection";
@@ -17,7 +18,7 @@ import {
 import { Loader2 } from "lucide-react";
 
 const About = () => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [sections, setSections] = useState<CMSSection[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -132,6 +133,11 @@ const About = () => {
 
   return (
     <div className="pt-28 lg:pt-40 pb-20 bg-slate-50/30 overflow-hidden">
+      <SEO 
+        title={t("seo.about.title")} 
+        description={t("seo.about.description")} 
+        canonical="/about" 
+      />
       {loading ? (
         <div className="py-20 flex flex-col items-center justify-center text-slate-400">
           <Loader2 size={40} className="animate-spin mb-4 text-emerald-600" />

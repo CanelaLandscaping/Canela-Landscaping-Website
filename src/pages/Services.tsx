@@ -12,6 +12,7 @@ import { type Service } from "../data/services";
 import ServiceCard from "../components/ServiceCard";
 import PageHeader from "../components/PageHeader";
 import SectionCTA from "../components/SectionCTA";
+import SEO from "../components/SEO";
 import { Loader2 } from "lucide-react";
 
 interface PageHeaderContent {
@@ -86,6 +87,11 @@ const Services = () => {
 
   return (
     <section className="pt-40 pb-32 bg-slate-50/50 px-6 md:px-12 min-h-screen">
+      <SEO 
+        title={t("seo.services.title")} 
+        description={t("seo.services.description")} 
+        canonical="/services" 
+      />
       <div className="container-custom">
         {/* Page header */}
         <PageHeader
