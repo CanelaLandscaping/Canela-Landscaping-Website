@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Plus,
   Settings,
@@ -32,6 +33,7 @@ const AdminPageCMS = ({ pageId, pageTitle }: AdminPageCMSProps) => {
   const [editingSection, setEditingSection] =
     useState<Partial<CMSSection> | null>(null);
   const [isEditorOpen, setIsEditorOpen] = useState(false);
+  const { t } = useTranslation();
 
   const fetchSections = async () => {
     setLoading(true);
@@ -60,7 +62,7 @@ const AdminPageCMS = ({ pageId, pageTitle }: AdminPageCMSProps) => {
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm("Are you sure you want to delete this section?")) return;
+    if (!confirm(t("admin.cms.deleteConfirm"))) return;
     try {
       await deletePageSection(id);
       fetchSections();
@@ -126,15 +128,14 @@ const AdminPageCMS = ({ pageId, pageTitle }: AdminPageCMSProps) => {
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
         <div>
           <span className="text-emerald-600 font-bold text-sm uppercase tracking-widest mb-3 block underline decoration-emerald-200 underline-offset-8">
-            CMS Management
+            {t("admin.cms.management")}
           </span>
           <h1 className="text-5xl font-black text-slate-950 tracking-tight flex items-center gap-4">
             <Layout className="text-emerald-600" size={40} />
             {pageTitle}
           </h1>
           <p className="text-slate-500 mt-4 text-lg max-w-2xl">
-            Design your page layout by adding, removing, and reordering content
-            sections.
+            {t("admin.cms.subtitle")}
           </p>
         </div>
 
@@ -142,11 +143,11 @@ const AdminPageCMS = ({ pageId, pageTitle }: AdminPageCMSProps) => {
           <div className="relative group">
             <button className="bg-slate-900 text-white px-6 py-4 rounded-2xl font-bold hover:bg-emerald-600 transition-all flex items-center gap-2 shadow-xl shadow-slate-900/10 active:scale-95">
               <PlusCircle size={20} />
-              Add Section
+              {t("admin.cms.addSection")}
             </button>
             <div className="absolute right-0 mt-2 w-56 bg-white rounded-2xl shadow-2xl border border-slate-100 py-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
               <p className="px-4 py-2 text-[10px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-50 mb-2">
-                Available Components
+                {t("admin.cms.availableComponents")}
               </p>
               {pageId === "home" ? (
                 <>
@@ -163,7 +164,7 @@ const AdminPageCMS = ({ pageId, pageTitle }: AdminPageCMSProps) => {
                       onClick={() => handleAddSection(type)}
                       className="w-full text-left px-4 py-2.5 text-sm font-bold text-slate-700 hover:bg-slate-50 hover:text-emerald-600 capitalize"
                     >
-                      {type.replace("-", " ")}
+                      {t(`admin.cms.components.${type}`)}
                     </button>
                   ))}
                 </>
@@ -175,7 +176,7 @@ const AdminPageCMS = ({ pageId, pageTitle }: AdminPageCMSProps) => {
                       onClick={() => handleAddSection(type)}
                       className="w-full text-left px-4 py-2.5 text-sm font-bold text-slate-700 hover:bg-slate-50 hover:text-emerald-600 capitalize"
                     >
-                      {type}
+                      {t(`admin.cms.components.${type}`)}
                     </button>
                   ))}
                 </>
@@ -188,7 +189,7 @@ const AdminPageCMS = ({ pageId, pageTitle }: AdminPageCMSProps) => {
       {loading && sections.length === 0 ? (
         <div className="py-20 flex flex-col items-center justify-center text-slate-400 bg-white rounded-[2.5rem] border border-slate-100">
           <Loader2 size={40} className="animate-spin mb-4 text-emerald-600" />
-          <p className="font-bold">Syncing layout...</p>
+          <p className="font-bold">{t("admin.cms.syncing")}</p>
         </div>
       ) : (
         <div className="space-y-4">
@@ -228,12 +229,15 @@ const AdminPageCMS = ({ pageId, pageTitle }: AdminPageCMSProps) => {
                     </span>
                     {!section.is_active && (
                       <span className="flex items-center gap-1 text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                        <EyeOff size={10} /> Hidden
+                        <EyeOff size={10} /> {t("admin.cms.hidden")}
                       </span>
                     )}
                   </div>
                   <h4 className="text-xl font-bold text-slate-900 group-hover:text-emerald-600 transition-colors capitalize">
-                    {section.type.replace("-", " ")} Section
+                    {t("admin.cms.sectionTitleFormat", { 
+                      name: t(`admin.cms.components.${section.type}`), 
+                      suffix: t("admin.cms.sectionSuffix") 
+                    })}
                   </h4>
                 </div>
               </div>
@@ -241,7 +245,7 @@ const AdminPageCMS = ({ pageId, pageTitle }: AdminPageCMSProps) => {
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => handleToggleActive(section)}
-                  title={section.is_active ? "Hide section" : "Show section"}
+                  title={section.is_active ? t("admin.cms.hidden") : t("admin.cms.components.hero")}
                   className={`p-3 rounded-xl transition-all ${section.is_active ? "text-slate-400 hover:bg-slate-50 hover:text-slate-600" : "text-emerald-500 bg-emerald-50 hover:bg-emerald-100"}`}
                 >
                   {section.is_active ? <Eye size={20} /> : <EyeOff size={20} />}
@@ -268,9 +272,9 @@ const AdminPageCMS = ({ pageId, pageTitle }: AdminPageCMSProps) => {
           {sections.length === 0 && (
             <div className="py-20 border-2 border-dashed border-slate-200 rounded-[2.5rem] flex flex-col items-center justify-center text-slate-400">
               <Plus size={48} className="mb-4 opacity-20" />
-              <p className="font-bold text-lg">No sections yet.</p>
+              <p className="font-bold text-lg">{t("admin.cms.noSections")}</p>
               <p className="text-sm">
-                Click "Add Section" to begin building your page.
+                {t("admin.cms.noSectionsDesc")}
               </p>
             </div>
           )}

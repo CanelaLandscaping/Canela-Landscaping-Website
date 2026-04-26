@@ -287,6 +287,19 @@ export const updateLeadStatus = async (id: string, status: Lead['status']): Prom
   }
 };
 
+export const deleteLead = async (id: string): Promise<void> => {
+  if (!isSupabaseConfigured) return;
+  const { error } = await supabase
+    .from('contact_submissions')
+    .delete()
+    .eq('id', id);
+
+  if (error) {
+    console.error("Error deleting lead:", error);
+    throw error;
+  }
+};
+
 /**
  * CMS & Settings Queries
  */

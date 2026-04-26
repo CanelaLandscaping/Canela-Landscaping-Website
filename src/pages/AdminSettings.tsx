@@ -16,6 +16,8 @@ import {
   SortAsc,
   Trash2,
   PlusCircle,
+  ExternalLink,
+  PlayCircle,
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import AdminLayout from "../components/AdminLayout";
@@ -346,6 +348,35 @@ const AdminSettings = () => {
               </button>
             </div>
           </div>
+        </div>
+
+        {/* Help & Tutorials Section */}
+        <div className="bg-emerald-900 text-white rounded-[2.5rem] p-10 relative overflow-hidden shadow-2xl shadow-emerald-900/20">
+          <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-8">
+            <div className="max-w-xl">
+              <div className="inline-flex items-center gap-2 bg-emerald-800/50 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest mb-4">
+                <PlayCircle size={12} />
+                Resources
+              </div>
+              <h2 className="text-3xl font-black mb-3 tracking-tight">
+                {t("admin.settings.help.title")}
+              </h2>
+              <p className="text-emerald-100 font-medium opacity-80 leading-relaxed">
+                {t("admin.settings.help.subtitle")}
+              </p>
+            </div>
+            <a
+              href="https://github.com/CanelaLandscaping/Canela-Landscaping-Website#admin-video-guides"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 bg-white text-emerald-900 px-8 py-4 rounded-2xl font-black text-sm hover:bg-emerald-50 transition-all active:scale-95 shadow-xl shrink-0"
+            >
+              {t("admin.settings.help.button")}
+              <ExternalLink size={18} />
+            </a>
+          </div>
+          {/* Abstract background shape */}
+          <div className="absolute top-0 right-0 w-64 h-full bg-emerald-800/20 skew-x-[-20deg] translate-x-32" />
         </div>
       </div>
     </AdminLayout>

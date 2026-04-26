@@ -13,11 +13,11 @@ import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminLeads from "./pages/AdminLeads";
 import AdminLeadDetail from "./pages/AdminLeadDetail";
-import AdminSettings from "./pages/AdminSettings";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 import { AuthProvider } from "./context/AuthProvider";
 import AdminServices from "./pages/AdminServices";
+import AdminSettings from "./pages/AdminSettings";
 import AdminHome from "./pages/AdminHome";
 import AdminAbout from "./pages/AdminAbout";
 
@@ -88,14 +88,6 @@ function App() {
               }
             />
             <Route
-              path="/admin/settings"
-              element={
-                <ProtectedRoute>
-                  <AdminSettings />
-                </ProtectedRoute>
-              }
-            />
-            <Route
               path="/admin/home"
               element={
                 <ProtectedRoute>
@@ -108,6 +100,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <AdminAbout />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/settings"
+              element={
+                <ProtectedRoute>
+                  <AdminSettings />
                 </ProtectedRoute>
               }
             />

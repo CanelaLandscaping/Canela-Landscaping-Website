@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   X,
   Save,
@@ -37,6 +38,7 @@ const CMSSectionEditor = ({
   );
   const [isSaving, setIsSaving] = useState(false);
   const [uploadingField, setUploadingField] = useState<string | null>(null);
+  const { t } = useTranslation();
 
   const handleSave = async () => {
     setIsSaving(true);
@@ -147,7 +149,7 @@ const CMSSectionEditor = ({
               ) : (
                 <Upload size={20} />
               )}
-              Upload
+              {t("admin.cms.editor.upload")}
             </label>
           </div>
         </div>
@@ -288,7 +290,7 @@ const CMSSectionEditor = ({
             <div className="space-y-4 pt-4 border-t border-slate-100">
               <div className="flex items-center justify-between">
                 <h6 className="font-black text-slate-900 text-sm uppercase tracking-widest">
-                  Points List
+                  {t("admin.cms.editor.pointsList")}
                 </h6>
                 <button
                   onClick={() => {
@@ -305,7 +307,7 @@ const CMSSectionEditor = ({
                   }}
                   className="text-emerald-600 font-bold text-xs flex items-center gap-1 hover:underline"
                 >
-                  <Plus size={14} /> Add Point
+                  <Plus size={14} /> {t("admin.cms.editor.addPoint")}
                 </button>
               </div>
               {((content as WhyUsContent).points || []).map(
@@ -362,7 +364,7 @@ const CMSSectionEditor = ({
             <div className="p-6 bg-slate-50 rounded-[2rem] border border-slate-100 space-y-6">
               <h5 className="font-black text-slate-900 uppercase tracking-widest text-sm flex items-center gap-2">
                 <div className="w-2 h-2 bg-emerald-500 rounded-full" />
-                Mission Section
+                {t("admin.cms.editor.mission")}
               </h5>
               <BilingualInput label="Mission Title" fieldBase="mission.title" />
               <BilingualInput
@@ -375,7 +377,7 @@ const CMSSectionEditor = ({
             <div className="p-6 bg-slate-50 rounded-[2rem] border border-slate-100 space-y-6">
               <h5 className="font-black text-slate-900 uppercase tracking-widest text-sm flex items-center gap-2">
                 <div className="w-2 h-2 bg-emerald-500 rounded-full" />
-                Promise Section
+                {t("admin.cms.editor.promise")}
               </h5>
               <BilingualInput label="Promise Title" fieldBase="promise.title" />
               <BilingualInput
@@ -388,7 +390,7 @@ const CMSSectionEditor = ({
             <div className="p-6 bg-slate-50 rounded-[2rem] border border-slate-100 space-y-6">
               <h5 className="font-black text-slate-900 uppercase tracking-widest text-sm flex items-center gap-2">
                 <div className="w-2 h-2 bg-emerald-500 rounded-full" />
-                Team Value Section
+                {t("admin.cms.editor.team")}
               </h5>
               <BilingualInput label="Team Title" fieldBase="team.title" />
               <BilingualInput
@@ -572,7 +574,7 @@ const CMSSectionEditor = ({
             <div className="space-y-4 pt-4 border-t border-slate-100">
               <div className="flex items-center justify-between">
                 <h6 className="font-black text-slate-900 text-sm uppercase tracking-widest">
-                  Team Members
+                  {t("admin.cms.editor.teamMembers")}
                 </h6>
                 <button
                   onClick={() => {
@@ -589,7 +591,7 @@ const CMSSectionEditor = ({
                   }}
                   className="text-emerald-600 font-bold text-xs flex items-center gap-1 hover:underline"
                 >
-                  <Plus size={14} /> Add Member
+                  <Plus size={14} /> {t("admin.cms.editor.addMember")}
                 </button>
               </div>
               {((content as TeamContent).members || []).map(
@@ -677,10 +679,13 @@ const CMSSectionEditor = ({
         <div className="px-10 py-8 border-b border-slate-50 flex items-center justify-between bg-slate-50/50">
           <div>
             <span className="bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest mb-2 inline-block">
-              {section.type} Editor
+              {t("admin.cms.editorTitleFormat", {
+                name: t(`admin.cms.components.${section.type}`),
+                suffix: t("admin.cms.editorSuffix")
+              })}
             </span>
             <h2 className="text-3xl font-black text-slate-950 tracking-tight">
-              Edit Section Content
+              {t("admin.cms.editor.title")}
             </h2>
           </div>
           <button
@@ -702,7 +707,7 @@ const CMSSectionEditor = ({
             onClick={onClose}
             className="px-6 py-3.5 text-slate-500 font-bold hover:text-slate-700 transition-all"
           >
-            Cancel
+            {t("admin.cms.editor.cancel")}
           </button>
           <button
             onClick={handleSave}
@@ -714,7 +719,7 @@ const CMSSectionEditor = ({
             ) : (
               <Save size={20} />
             )}
-            Save Changes
+            {t("admin.cms.editor.save")}
           </button>
         </div>
       </div>

@@ -337,7 +337,11 @@
       "backToLeads": "Volver a Contactos",
       "loading": "Cargando detalles...",
       "call": "Llamar",
-      "emailBtn": "Email"
+      "emailBtn": "Correo",
+      "delete": "Eliminar Prospecto",
+      "confirmDelete": "¿Está seguro de que desea eliminar este prospecto? Esta acción no se puede deshacer.",
+      "email": "Correo Electrónico",
+      "phone": "Número de Teléfono"
     },
     "services": {
       "title": "Servicios y Categorías",
@@ -442,7 +446,12 @@
       "footerServicesDesc": "Selecciona y ordena hasta 10 servicios para mostrar en el pie de página del sitio web. Idealmente 5 por columna.",
       "sortAlpha": "Ordenar A-Z",
       "activeFooter": "Servicios Seleccionados",
-      "availableServices": "Servicios Disponibles"
+      "availableServices": "Servicios Disponibles",
+      "help": {
+        "title": "¿Necesita Ayuda?",
+        "subtitle": "Aprenda a dominar su sitio web con nuestras guías en video.",
+        "button": "Ver Tutoriales en Video"
+      }
     },
     "login": {
       "title": "Acceso Admin",
@@ -451,6 +460,47 @@
       "password": "Contraseña",
       "button": "Iniciar Sesión",
       "error": "Credenciales de acceso inválidas."
+    },
+    "cms": {
+      "management": "Gestión de CMS",
+      "homeTitle": "Constructor de Página de Inicio",
+      "aboutTitle": "Constructor de Página Sobre Nosotros",
+      "subtitle": "Diseñe el diseño de su página agregando, eliminando y reordenando secciones de contenido.",
+      "addSection": "Agregar Sección",
+      "availableComponents": "Componentes Disponibles",
+      "syncing": "Sincronizando diseño...",
+      "hidden": "Oculto",
+      "noSections": "No hay secciones aún.",
+      "noSectionsDesc": "Haga clic en \"Agregar Sección\" para comenzar a construir su página.",
+      "sectionSuffix": "Sección",
+      "sectionTitleFormat": "{{suffix}} {{name}}",
+      "editorSuffix": "Editor",
+      "editorTitleFormat": "{{suffix}} de {{name}}",
+      "deleteConfirm": "¿Está seguro de que desea eliminar esta sección?",
+      "editor": {
+        "title": "Editar Contenido de la Sección",
+        "save": "Guardar Cambios",
+        "cancel": "Cancelar",
+        "upload": "Subir",
+        "pointsList": "Lista de Puntos",
+        "addPoint": "Agregar Punto",
+        "teamMembers": "Miembros del Equipo",
+        "addMember": "Agregar Miembro",
+        "mission": "Sección de Misión",
+        "promise": "Sección de Promesa",
+        "team": "Sección de Valores del Equipo"
+      },
+      "components": {
+        "hero": "Principal",
+        "trust-badges": "Distintivos de Confianza",
+        "featured-services": "Servicios Destacados",
+        "why-us": "Por Qué Nosotros",
+        "testimonial": "Testimonio",
+        "cta": "Llamada a la Acción",
+        "story": "Nuestra Historia",
+        "values": "Valores Fundamentales",
+        "team": "Nuestro Equipo"
+      }
     }
   }
 }

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { getLeadById, updateLeadStatus, getSiteSettings, type Lead } from "../supabase/queries";
+import { getLeadById, updateLeadStatus, deleteLead, getSiteSettings, type Lead } from "../supabase/queries";
 import AdminLayout from "../components/AdminLayout";
 import { useTranslation } from "react-i18next";
 import {
@@ -14,6 +14,7 @@ import {
   Loader2,
   CheckCircle2,
   AlertCircle,
+  Trash2,
 } from "lucide-react";
 
 const AdminLeadDetail = () => {
@@ -60,6 +61,19 @@ const AdminLeadDetail = () => {
       setLead({ ...lead, status: newStatus });
     } catch (err) {
       console.error("Error updating status:", err);
+    }
+  };
+ 
+  const handleDelete = async () => {
+    if (!id || !lead) return;
+    if (!window.confirm(t("admin.leadDetail.confirmDelete"))) return;
+ 
+    try {
+      await deleteLead(id);
+      navigate("/admin/contacts");
+    } catch (err) {
+      console.error("Error deleting lead:", err);
+      alert("Failed to delete lead. Please try again.");
     }
   };
 
@@ -166,6 +180,13 @@ const AdminLeadDetail = () => {
                 {t("admin.leadDetail.call")}
               </a>
             )}
+            <button
+              onClick={handleDelete}
+              className="flex items-center justify-center gap-2 px-6 py-3 bg-red-50 text-red-600 rounded-2xl font-bold hover:bg-red-100 transition-all border border-red-100"
+              title={t("admin.leadDetail.delete")}
+            >
+              <Trash2 size={18} />
+            </button>
           </div>
         </div>
 
@@ -231,6 +252,36 @@ const AdminLeadDetail = () => {
                     </p>
                   </div>
                 </div>
+ 
+                <div className="flex items-start gap-4 border-t border-slate-50 pt-4">
+                  <div className="w-10 h-10 bg-slate-50 text-slate-400 rounded-xl flex items-center justify-center shrink-0">
+                    <Mail size={20} />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-0.5">
+                      {t("admin.leadDetail.email")}
+                    </p>
+                    <p className="font-bold text-slate-900 break-all">
+                      {lead.email}
+                    </p>
+                  </div>
+                </div>
+ 
+                {lead.phone && (
+                  <div className="flex items-start gap-4 border-t border-slate-50 pt-4">
+                    <div className="w-10 h-10 bg-slate-50 text-slate-400 rounded-xl flex items-center justify-center shrink-0">
+                      <Phone size={20} />
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-0.5">
+                        {t("admin.leadDetail.phone")}
+                      </p>
+                      <p className="font-bold text-slate-900">
+                        {lead.phone}
+                      </p>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
 

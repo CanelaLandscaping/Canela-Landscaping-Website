@@ -337,7 +337,11 @@
       "backToLeads": "Back to Contacts",
       "loading": "Loading details...",
       "call": "Call",
-      "emailBtn": "Email"
+      "emailBtn": "Email",
+      "delete": "Delete Lead",
+      "confirmDelete": "Are you sure you want to delete this lead? This action cannot be undone.",
+      "email": "Email Address",
+      "phone": "Phone Number"
     },
     "services": {
       "title": "Services & Categories",
@@ -442,7 +446,12 @@
       "footerServicesDesc": "Select and order up to 10 services to display in the website footer. Ideally 5 per column.",
       "sortAlpha": "Sort A-Z",
       "activeFooter": "Selected Services",
-      "availableServices": "Available Services"
+      "availableServices": "Available Services",
+      "help": {
+        "title": "Need Help?",
+        "subtitle": "Learn how to master your website with our video guides.",
+        "button": "Watch Video Tutorials"
+      }
     },
     "login": {
       "title": "Admin Access",
@@ -451,6 +460,47 @@
       "password": "Password",
       "button": "Sign In",
       "error": "Invalid login credentials."
+    },
+    "cms": {
+      "management": "CMS Management",
+      "homeTitle": "Home Page Builder",
+      "aboutTitle": "About Page Builder",
+      "subtitle": "Design your page layout by adding, removing, and reordering content sections.",
+      "addSection": "Add Section",
+      "availableComponents": "Available Components",
+      "syncing": "Syncing layout...",
+      "hidden": "Hidden",
+      "noSections": "No sections yet.",
+      "noSectionsDesc": "Click \"Add Section\" to begin building your page.",
+      "sectionSuffix": "Section",
+      "sectionTitleFormat": "{{name}} {{suffix}}",
+      "editorSuffix": "Editor",
+      "editorTitleFormat": "{{name}} {{suffix}}",
+      "deleteConfirm": "Are you sure you want to delete this section?",
+      "editor": {
+        "title": "Edit Section Content",
+        "save": "Save Changes",
+        "cancel": "Cancel",
+        "upload": "Upload",
+        "pointsList": "Points List",
+        "addPoint": "Add Point",
+        "teamMembers": "Team Members",
+        "addMember": "Add Member",
+        "mission": "Mission Section",
+        "promise": "Promise Section",
+        "team": "Team Value Section"
+      },
+      "components": {
+        "hero": "Hero",
+        "trust-badges": "Trust Badges",
+        "featured-services": "Featured Services",
+        "why-us": "Why Us",
+        "testimonial": "Testimonial",
+        "cta": "Call to Action",
+        "story": "Our Story",
+        "values": "Core Values",
+        "team": "Our Team"
+      }
     }
   }
 }
