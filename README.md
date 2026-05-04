@@ -6,7 +6,7 @@ A premium, multi-page landscaping website built for **Domingo Canela** in Clevel
 
 ¿Necesita ayuda para gestionar su sitio web? Hemos preparado breves tutoriales en video para ayudarle a dominar el Panel de Administración.
 
-- **Gestión de Prospectos y Contactos**: Aprenda a ver, buscar y responder a las consultas de los clientes. [Ver Video](LOOM_LINK_HERE)
+- **Gestión de Prospectos y Contactos**: Aprenda a ver, buscar y responder a las consultas de los clientes. [Ver Video](https://www.loom.com/share/4dd71b4c868f4e55872358f24401d660)
 - **Actualización de Servicios**: Cómo agregar, editar u ocultar servicios y cambiar sus iconos. [Ver Video](LOOM_LINK_HERE)
 - **Edición de Contenido de la Página (CMS)**: Una guía sobre el uso del Constructor de Páginas para actualizar texto e imágenes en sus páginas de Inicio y Sobre Nosotros. [Ver Video](LOOM_LINK_HERE)
 - **Ajustes del Sitio y Pie de Página**: Gestión de límites del panel y elección de qué servicios aparecen en el pie de página. [Ver Video](LOOM_LINK_HERE)
