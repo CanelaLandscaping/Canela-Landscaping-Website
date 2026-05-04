@@ -129,7 +129,7 @@ const AdminDashboard = () => {
                 size={40}
                 className="animate-spin mb-4 text-emerald-600"
               />
-              <p className="font-bold">Fetching leads...</p>
+              <p className="font-bold">{t("admin.loading")}</p>
             </div>
           ) : leads.length === 0 ? (
             <div className="p-20 flex flex-col items-center justify-center text-center">
@@ -195,7 +195,10 @@ const AdminDashboard = () => {
                       </td>
                       <td className="px-4 py-5 text-center">
                         <span className="text-xs font-bold text-slate-600">
-                          {new Date(lead.created_at).toLocaleDateString()}
+                          {new Date(lead.created_at).toLocaleString(undefined, {
+                            dateStyle: "short",
+                            timeStyle: "short",
+                          })}
                         </span>
                       </td>
                       <td className="hidden md:table-cell px-4 py-5 text-center">

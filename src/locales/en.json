@@ -272,6 +272,7 @@
     "goBack": "Go Back"
   },
   "admin": {
+    "loading": "Loading...",
     "sidebar": {
       "dashboard": "Dashboard",
       "contacts": "Contacts",
@@ -314,6 +315,7 @@
       "date": "Date",
       "status": "Status",
       "new": "New",
+      "read": "Read",
       "contacted": "Contacted",
       "backToHistory": "Back to History"
     },
@@ -325,8 +327,8 @@
       "message": "Inquiry Message",
       "noMessage": "No message provided.",
       "name": "Name",
-      "email": "Email",
-      "phone": "Phone",
+      "email": "Email Address",
+      "phone": "Phone Number",
       "service": "Service",
       "date": "Submitted",
       "status": "Status",
@@ -339,9 +341,7 @@
       "call": "Call",
       "emailBtn": "Email",
       "delete": "Delete Lead",
-      "confirmDelete": "Are you sure you want to delete this lead? This action cannot be undone.",
-      "email": "Email Address",
-      "phone": "Phone Number"
+      "confirmDelete": "Are you sure you want to delete this lead? This action cannot be undone."
     },
     "services": {
       "title": "Services & Categories",

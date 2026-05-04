@@ -316,19 +316,33 @@ const AdminServices = () => {
               {t("admin.services.subtitle")}
             </p>
           </div>
-          <button
-            onClick={() => setActiveTab("content")}
-            className={`px-6 py-3 rounded-xl text-sm font-bold transition-all ${activeTab === "content" ? "bg-white text-emerald-600 shadow-sm" : "text-slate-500 hover:text-slate-700"}`}
-          >
-            {t("admin.services.tabs.content")}
-          </button>
+          <div className="flex bg-slate-100 p-1 rounded-2xl">
+            <button
+              onClick={() => setActiveTab("services")}
+              className={`px-6 py-3 rounded-xl text-sm font-bold transition-all ${activeTab === "services" ? "bg-white text-emerald-600 shadow-sm" : "text-slate-500 hover:text-slate-700"}`}
+            >
+              {t("admin.services.tabs.services")}
+            </button>
+            <button
+              onClick={() => setActiveTab("categories")}
+              className={`px-6 py-3 rounded-xl text-sm font-bold transition-all ${activeTab === "categories" ? "bg-white text-emerald-600 shadow-sm" : "text-slate-500 hover:text-slate-700"}`}
+            >
+              {t("admin.services.tabs.categories")}
+            </button>
+            <button
+              onClick={() => setActiveTab("content")}
+              className={`px-6 py-3 rounded-xl text-sm font-bold transition-all ${activeTab === "content" ? "bg-white text-emerald-600 shadow-sm" : "text-slate-500 hover:text-slate-700"}`}
+            >
+              {t("admin.services.tabs.content")}
+            </button>
+          </div>
         </div>
       </div>
 
       {loading ? (
         <div className="py-20 flex flex-col items-center justify-center text-slate-400 bg-white rounded-[2.5rem] border border-slate-100">
           <Loader2 size={40} className="animate-spin mb-4 text-emerald-600" />
-          <p className="font-bold">Syncing with database...</p>
+          <p className="font-bold">{t("admin.loading")}</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-6">
@@ -683,7 +697,7 @@ const AdminServices = () => {
                           </span>
                         </td>
                         <td className="px-8 py-6 text-right">
-                          <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <div className="flex items-center justify-end gap-2 opacity-100 lg:opacity-0 group-hover:opacity-100 transition-opacity">
                             <button
                               onClick={() => startEdit("cat", cat)}
                               className="p-2 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-all"
@@ -758,14 +772,23 @@ const AdminServices = () => {
                               <IconRenderer name={serv.icon} size={16} />
                             </div>
                             <div className="font-bold text-slate-900 truncate max-w-[150px] lg:max-w-none">
-                              {serv.title_en}
+                              {i18n.language.startsWith("es")
+                                ? serv.title_es
+                                : serv.title_en}
                             </div>
                           </div>
                         </td>
                         <td className="px-4 py-5">
                           <span className="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-500 text-[10px] font-black uppercase tracking-wider">
-                            {categories.find((c) => c.id === serv.category_id)
-                              ?.name_en || "Uncategorized"}
+                            {(() => {
+                              const cat = categories.find(
+                                (c) => c.id === serv.category_id,
+                              );
+                              if (!cat) return "Uncategorized";
+                              return i18n.language.startsWith("es")
+                                ? cat.name_es
+                                : cat.name_en;
+                            })()}
                           </span>
                         </td>
                         <td className="px-4 py-5 text-center">
@@ -787,10 +810,21 @@ const AdminServices = () => {
                           </span>
                         </td>
                         <td className="pl-4 pr-8 py-5 text-right">
-                          <div className="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <div className="flex items-center justify-end gap-1 opacity-100 lg:opacity-0 group-hover:opacity-100 transition-opacity">
+                            <button
+                              onClick={() => {
+                                startEdit("serv", serv);
+                                setModalTab("images");
+                              }}
+                              className="p-2 text-slate-400 hover:text-blue-600 hover:bg-white rounded-lg transition-all shadow-sm hover:shadow-md active:scale-95 border border-transparent hover:border-blue-100"
+                              title={t("admin.services.modal.gallery")}
+                            >
+                              <ImageIcon size={16} />
+                            </button>
                             <button
                               onClick={() => startEdit("serv", serv)}
                               className="p-2 text-slate-400 hover:text-emerald-600 hover:bg-white rounded-lg transition-all shadow-sm hover:shadow-md active:scale-95 border border-transparent hover:border-emerald-100"
+                              title={t("admin.services.modal.edit")}
                             >
                               <Edit size={16} />
                             </button>
@@ -927,9 +961,15 @@ const AdminServices = () => {
                                   className="w-full bg-slate-50 border border-slate-100 p-4 rounded-2xl font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all appearance-none"
                                 >
                                   <option value="alphabetical">
-                                    Alphabetical
+                                    {i18n.language.startsWith("es")
+                                      ? "Alfabético"
+                                      : "Alphabetical"}
                                   </option>
-                                  <option value="custom">Custom Order</option>
+                                  <option value="custom">
+                                    {i18n.language.startsWith("es")
+                                      ? "Orden Personalizado"
+                                      : "Custom Order"}
+                                  </option>
                                 </select>
                               </div>
                             </div>
@@ -983,7 +1023,9 @@ const AdminServices = () => {
                                     </option>
                                     {categories.map((c) => (
                                       <option key={c.id} value={c.id}>
-                                        {c.name_en}
+                                        {i18n.language.startsWith("es")
+                                          ? c.name_es
+                                          : c.name_en}
                                       </option>
                                     ))}
                                   </select>

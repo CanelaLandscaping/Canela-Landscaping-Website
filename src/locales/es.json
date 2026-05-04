@@ -272,6 +272,7 @@
     "goBack": "Atrás"
   },
   "admin": {
+    "loading": "Cargando...",
     "sidebar": {
       "dashboard": "Panel de Control",
       "contacts": "Contactos",
@@ -314,6 +315,7 @@
       "date": "Fecha",
       "status": "Estado",
       "new": "Nuevo",
+      "read": "Leído",
       "contacted": "Contactado",
       "backToHistory": "Volver al Historial"
     },
@@ -325,8 +327,8 @@
       "message": "Mensaje de Consulta",
       "noMessage": "No se proporcionó mensaje.",
       "name": "Nombre",
-      "email": "Email",
-      "phone": "Teléfono",
+      "email": "Correo Electrónico",
+      "phone": "Número de Teléfono",
       "service": "Servicio",
       "date": "Enviado",
       "status": "Estado",
@@ -339,9 +341,7 @@
       "call": "Llamar",
       "emailBtn": "Correo",
       "delete": "Eliminar Prospecto",
-      "confirmDelete": "¿Está seguro de que desea eliminar este prospecto? Esta acción no se puede deshacer.",
-      "email": "Correo Electrónico",
-      "phone": "Número de Teléfono"
+      "confirmDelete": "¿Está seguro de que desea eliminar este prospecto? Esta acción no se puede deshacer."
     },
     "services": {
       "title": "Servicios y Categorías",

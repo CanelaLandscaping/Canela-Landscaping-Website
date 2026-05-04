@@ -3,6 +3,7 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import { getLeadById, updateLeadStatus, deleteLead, getSiteSettings, type Lead } from "../supabase/queries";
 import AdminLayout from "../components/AdminLayout";
 import { useTranslation } from "react-i18next";
+import { formatPhoneNumber } from "../utils/formatters";
 import {
   ArrowLeft,
   Mail,
@@ -155,7 +156,7 @@ const AdminLeadDetail = () => {
               </div>
               <span className="flex items-center gap-1.5 text-xs font-bold text-slate-400 uppercase tracking-widest">
                 <Clock size={12} />
-                {new Date(lead.created_at).toLocaleDateString()}
+                {new Date(lead.created_at).toLocaleDateString()} @ {new Date(lead.created_at).toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" })}
               </span>
             </div>
             <h1 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight">
@@ -248,7 +249,10 @@ const AdminLeadDetail = () => {
                       {t("admin.leadDetail.date")}
                     </p>
                     <p className="font-bold text-slate-900">
-                      {new Date(lead.created_at).toLocaleString()}
+                      {new Date(lead.created_at).toLocaleString(undefined, {
+                        dateStyle: "short",
+                        timeStyle: "short",
+                      })}
                     </p>
                   </div>
                 </div>
@@ -277,7 +281,7 @@ const AdminLeadDetail = () => {
                         {t("admin.leadDetail.phone")}
                       </p>
                       <p className="font-bold text-slate-900">
-                        {lead.phone}
+                        {lead.phone ? formatPhoneNumber(lead.phone) : "-"}
                       </p>
                     </div>
                   </div>
