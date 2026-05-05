@@ -17,7 +17,7 @@ A premium, multi-page landscaping website built for **Domingo Canela** in Clevel
 
 Need help managing your website? We've prepared short video tutorials to help you master the Admin Panel.
 
-- **Managing Leads & Contacts**: Learn how to view, search, and respond to customer inquiries. [Watch Video]([LOOM_LINK_HERE](https://www.loom.com/share/4dd71b4c868f4e55872358f24401d660))
+- **Managing Leads & Contacts**: Learn how to view, search, and respond to customer inquiries. [Watch Video](https://www.loom.com/share/4dd71b4c868f4e55872358f24401d660)
 - **Updating Services**: How to add, edit, or hide services and change their icons. [Watch Video](https://www.loom.com/share/315801ed373f437abd1b13513cba1950), [Watch Video 2](https://www.loom.com/share/9431ac12f35443ebb14c6b3200b2d20f)
 - **Editing Page Content (CMS)**: A guide on using the Page Builder to update text and images on your Home and About pages. [Watch Video](https://www.loom.com/share/e3863965f5254d83a606a043089310c6)
 - **Site Settings & Footer**: Managing dashboard limits and choosing which services appear in your footer. [Watch Video](https://www.loom.com/share/bbffdb53e32f4182a74cd1d28d54e32a) [Watch Video 2](https://www.loom.com/share/00957923dc564805b52781f02c9242c1)
