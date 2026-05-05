@@ -23,6 +23,12 @@ interface PageHeaderContent {
   title_es: string;
   subtitle_en: string;
   subtitle_es: string;
+  cta_title_en?: string;
+  cta_title_es?: string;
+  cta_subtitle_en?: string;
+  cta_subtitle_es?: string;
+  cta_button_en?: string;
+  cta_button_es?: string;
 }
 
 const Gallery = () => {
@@ -288,15 +294,34 @@ const Gallery = () => {
           variant="dark"
           bgImage="https://images.unsplash.com/photo-1592419044706-39796d40f98c?auto=format&fit=crop&q=80&w=2000"
           title={
-            <Trans i18nKey="gallery.cta.title">
-              Ready for your <br />
-              <span className="text-emerald-500 italic">
-                next transformation?
-              </span>
-            </Trans>
+            i18n.language.startsWith("es")
+              ? headerContent?.cta_title_es || (
+                  <Trans i18nKey="gallery.cta.title">
+                    Ready for your <br />
+                    <span className="text-emerald-500 italic">
+                      next transformation?
+                    </span>
+                  </Trans>
+                )
+              : headerContent?.cta_title_en || (
+                  <Trans i18nKey="gallery.cta.title">
+                    Ready for your <br />
+                    <span className="text-emerald-500 italic">
+                      next transformation?
+                    </span>
+                  </Trans>
+                )
           }
-          subtitle={t("gallery.cta.subtitle")}
-          buttonText={t("gallery.cta.button")}
+          subtitle={
+            i18n.language.startsWith("es")
+              ? headerContent?.cta_subtitle_es || t("gallery.cta.subtitle")
+              : headerContent?.cta_subtitle_en || t("gallery.cta.subtitle")
+          }
+          buttonText={
+            i18n.language.startsWith("es")
+              ? headerContent?.cta_button_es || t("gallery.cta.button")
+              : headerContent?.cta_button_en || t("gallery.cta.button")
+          }
           buttonTo="/contact"
         />
       </div>

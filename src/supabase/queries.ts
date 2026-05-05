@@ -373,6 +373,24 @@ export const upsertService = async (service: Partial<CMSService>) => {
   if (error) throw error;
 };
 
+export const updateServicesOrder = async (orderings: { id: string; display_order: number }[]) => {
+  if (!isSupabaseConfigured) return;
+  const { error } = await supabase
+    .from('cms_services')
+    .upsert(orderings.map(o => ({ ...o, updated_at: new Date().toISOString() })));
+
+  if (error) throw error;
+};
+
+export const updateCategoriesOrder = async (orderings: { id: string; display_order: number }[]) => {
+  if (!isSupabaseConfigured) return;
+  const { error } = await supabase
+    .from('cms_categories')
+    .upsert(orderings.map(o => ({ ...o, updated_at: new Date().toISOString() })));
+
+  if (error) throw error;
+};
+
 export const deleteCategory = async (id: string) => {
   if (!isSupabaseConfigured) return;
   const { error } = await supabase

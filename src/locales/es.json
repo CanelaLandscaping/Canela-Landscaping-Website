@@ -286,7 +286,7 @@
       "subtitle": "El panel de control de su negocio está listo. Gestione sus contactos de clientes y solicitudes de remoción de nieve desde aquí.",
       "stats": {
         "totalLeads": "Contactos Totales",
-        "activeProjects": "Proyectos Activos",
+        "topService": "Más Solicitado",
         "newInquiries": "Nuevas Consultas"
       },
       "recentLeads": {
@@ -352,9 +352,9 @@
         "content": "Gestión de Contenido"
       },
       "content": {
-        "servicesHeader": "Encabezado de la Página de Servicios",
+        "servicesHeader": "Página de Servicios",
         "servicesSubtitle": "Contenido del banner superior para su página de lista de servicios.",
-        "galleryHeader": "Encabezado de la Página de Galería",
+        "galleryHeader": "Página de Galería",
         "gallerySubtitle": "Contenido del banner superior para su página de portafolio de trabajo.",
         "saveServices": "Guardar Contenido de Servicios",
         "saveGallery": "Guardar Contenido de Galería",
@@ -367,7 +367,16 @@
           "titleEs": "Título en Español",
           "subtitleLayout": "Subtítulo (EN / ES)",
           "subtitleEn": "Subtítulo en Inglés",
-          "subtitleEs": "Subtítulo en Español"
+          "subtitleEs": "Subtítulo en Español",
+          "ctaTitleLayout": "Título del CTA Inferior (EN / ES)",
+          "ctaTitleEn": "Título CTA en Inglés",
+          "ctaTitleEs": "Título CTA en Español",
+          "ctaSubtitleLayout": "Subtítulo del CTA Inferior (EN / ES)",
+          "ctaSubtitleEn": "Subtítulo CTA en Inglés",
+          "ctaSubtitleEs": "Subtítulo CTA en Español",
+          "ctaButtonLayout": "Texto del Botón CTA (EN / ES)",
+          "ctaButtonEn": "Botón CTA en Inglés",
+          "ctaButtonEs": "Botón CTA en Español"
         }
       },
       "categories": {
@@ -403,6 +412,10 @@
           "nameEs": "Nombre en Español",
           "order": "Orden de Visualización",
           "sorting": "Método de Ordenación",
+          "sortingValues": {
+            "alphabetical": "Alfabético",
+            "custom": "Personalizado (Arrastrar para ordenar)"
+          },
           "slug": "Clave del Servicio (Slug)",
           "category": "Categoría",
           "titleEn": "Título (Inglés)",
@@ -447,6 +460,18 @@
       "sortAlpha": "Ordenar A-Z",
       "activeFooter": "Servicios Seleccionados",
       "availableServices": "Servicios Disponibles",
+      "socialLinks": "Enlaces de Redes Sociales",
+      "facebook": "URL de Facebook",
+      "instagram": "URL de Instagram",
+      "showSocial": "Mostrar enlaces sociales en el pie de página",
+      "businessInfo": {
+        "title": "Información de Contacto",
+        "phone": "Teléfono del Negocio",
+        "email": "Correo del Negocio",
+        "hours": "Horario de Atención",
+        "reply": "Tiempo de Respuesta",
+        "edit": "Editar Información"
+      },
       "help": {
         "title": "¿Necesita Ayuda?",
         "subtitle": "Aprenda a dominar su sitio web con nuestras guías en video.",

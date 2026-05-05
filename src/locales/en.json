@@ -286,7 +286,7 @@
       "subtitle": "Your landscaping business dashboard is ready. Manage your customer leads and snow plowing requests from here.",
       "stats": {
         "totalLeads": "Total Leads",
-        "activeProjects": "Active Projects",
+        "topService": "Most Requested",
         "newInquiries": "New Inquiries"
       },
       "recentLeads": {
@@ -352,9 +352,9 @@
         "content": "Content Management"
       },
       "content": {
-        "servicesHeader": "Services Page Header",
+        "servicesHeader": "Services Page",
         "servicesSubtitle": "Top banner content for your services list page.",
-        "galleryHeader": "Gallery Page Header",
+        "galleryHeader": "Gallery Page",
         "gallerySubtitle": "Top banner content for your work portfolio page.",
         "saveServices": "Save Services Content",
         "saveGallery": "Save Gallery Content",
@@ -367,7 +367,16 @@
           "titleEs": "Spanish Title",
           "subtitleLayout": "Subtitle (EN / ES)",
           "subtitleEn": "English Subtitle",
-          "subtitleEs": "Spanish Subtitle"
+          "subtitleEs": "Spanish Subtitle",
+          "ctaTitleLayout": "Bottom CTA Title (EN / ES)",
+          "ctaTitleEn": "English CTA Title",
+          "ctaTitleEs": "Spanish CTA Title",
+          "ctaSubtitleLayout": "Bottom CTA Subtitle (EN / ES)",
+          "ctaSubtitleEn": "English CTA Subtitle",
+          "ctaSubtitleEs": "Spanish CTA Subtitle",
+          "ctaButtonLayout": "Bottom CTA Button Text (EN / ES)",
+          "ctaButtonEn": "English CTA Button",
+          "ctaButtonEs": "Spanish CTA Button"
         }
       },
       "categories": {
@@ -403,6 +412,10 @@
           "nameEs": "Spanish Name",
           "order": "Display Order",
           "sorting": "Sorting Method",
+          "sortingValues": {
+            "alphabetical": "Alphabetical",
+            "custom": "Custom (Drag to Order)"
+          },
           "slug": "Service Key (Slug)",
           "category": "Category",
           "titleEn": "Title (English)",
@@ -447,6 +460,18 @@
       "sortAlpha": "Sort A-Z",
       "activeFooter": "Selected Services",
       "availableServices": "Available Services",
+      "socialLinks": "Social Media Links",
+      "facebook": "Facebook URL",
+      "instagram": "Instagram URL",
+      "showSocial": "Show Social Links in Footer",
+      "businessInfo": {
+        "title": "Business Contact Info",
+        "phone": "Business Phone",
+        "email": "Business Email",
+        "hours": "Operating Hours",
+        "reply": "Email Reply Time",
+        "edit": "Edit Contact Info"
+      },
       "help": {
         "title": "Need Help?",
         "subtitle": "Learn how to master your website with our video guides.",

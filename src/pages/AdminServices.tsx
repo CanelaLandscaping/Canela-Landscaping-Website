@@ -2,7 +2,6 @@ import { useTranslation } from "react-i18next";
 import {
   Plus,
   Trash2,
-  Edit,
   Save,
   Layers,
   X,
@@ -34,7 +33,18 @@ import {
   Fence,
   CloudRain,
   type LucideIcon,
+  GripVertical,
 } from "lucide-react";
+import {
+  DragDropContext,
+  Droppable,
+  Draggable,
+  type DropResult,
+} from "@hello-pangea/dnd";
+import {
+  updateServicesOrder,
+  updateCategoriesOrder,
+} from "../supabase/queries";
 
 const ICON_OPTIONS = [
   "Scissors",
@@ -61,7 +71,15 @@ const ICON_OPTIONS = [
   "Layers",
 ];
 
-const IconRenderer = ({ name, size = 20, className = "" }: { name: string; size?: number; className?: string }) => {
+const IconRenderer = ({
+  name,
+  size = 20,
+  className = "",
+}: {
+  name: string;
+  size?: number;
+  className?: string;
+}) => {
   const icons: Record<string, LucideIcon> = {
     Scissors,
     Trees,
@@ -133,6 +151,12 @@ const AdminServices = () => {
     title_es: "",
     subtitle_en: "",
     subtitle_es: "",
+    cta_title_en: "",
+    cta_title_es: "",
+    cta_subtitle_en: "",
+    cta_subtitle_es: "",
+    cta_button_en: "",
+    cta_button_es: "",
   });
   const [galleryHeader, setGalleryHeader] = useState({
     badge_en: "",
@@ -141,8 +165,65 @@ const AdminServices = () => {
     title_es: "",
     subtitle_en: "",
     subtitle_es: "",
+    cta_title_en: "",
+    cta_title_es: "",
+    cta_subtitle_en: "",
+    cta_subtitle_es: "",
+    cta_button_en: "",
+    cta_button_es: "",
   });
   const [isSavingContent, setIsSavingContent] = useState(false);
+
+  const onDragEnd = async (result: DropResult) => {
+    const { destination, source, type } = result;
+
+    if (!destination) return;
+    if (destination.index === source.index) return;
+
+    if (type === "services") {
+      const newItems = Array.from(services);
+      const [reorderedItem] = newItems.splice(source.index, 1);
+      newItems.splice(destination.index, 0, reorderedItem);
+
+      const updatedItems = newItems.map((item, index) => ({
+        ...item,
+        display_order: index + 1,
+      }));
+
+      setServices(updatedItems);
+      try {
+        await updateServicesOrder(
+          updatedItems.map((s) => ({
+            id: s.id,
+            display_order: s.display_order,
+          })),
+        );
+      } catch (err) {
+        console.error("Error updating services order:", err);
+      }
+    } else if (type === "categories") {
+      const newItems = Array.from(categories);
+      const [reorderedItem] = newItems.splice(source.index, 1);
+      newItems.splice(destination.index, 0, reorderedItem);
+
+      const updatedItems = newItems.map((item, index) => ({
+        ...item,
+        display_order: index + 1,
+      }));
+
+      setCategories(updatedItems);
+      try {
+        await updateCategoriesOrder(
+          updatedItems.map((c) => ({
+            id: c.id,
+            display_order: c.display_order,
+          })),
+        );
+      } catch (err) {
+        console.error("Error updating categories order:", err);
+      }
+    }
+  };
 
   useEffect(() => {
     fetchData();
@@ -347,295 +428,539 @@ const AdminServices = () => {
       ) : (
         <div className="grid grid-cols-1 gap-6">
           {activeTab === "content" ? (
-            <div className="space-y-8">
-              {/* Services Page Content */}
-              <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm overflow-hidden p-10">
-                <div className="flex items-center gap-4 mb-8">
-                  <div className="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center">
-                    <PlusCircle size={24} />
+            <>
+              <div className="space-y-8">
+                {/* Services Page Content */}
+                <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm overflow-hidden p-10">
+                  <div className="flex items-center gap-4 mb-8">
+                    <div className="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center">
+                      <PlusCircle size={24} />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-black text-slate-900 leading-tight">
+                        {t("admin.services.content.servicesHeader")}
+                      </h3>
+                      <p className="text-sm font-medium text-slate-500">
+                        {t("admin.services.content.servicesSubtitle")}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="text-xl font-black text-slate-900 leading-tight">
-                      {t("admin.services.content.servicesHeader")}
-                    </h3>
-                    <p className="text-sm font-medium text-slate-500">
-                      {t("admin.services.content.servicesSubtitle")}
-                    </p>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    {/* Badge */}
+                    <div className="space-y-4">
+                      <label className="block text-xs font-black text-slate-400 uppercase tracking-widest pl-1">
+                        Badge (EN / ES)
+                      </label>
+                      <div className="grid grid-cols-1 gap-3">
+                        <input
+                          type="text"
+                          placeholder={t(
+                            "admin.services.content.labels.badgeEn",
+                          )}
+                          value={servicesHeader.badge_en}
+                          onChange={(e) =>
+                            setServicesHeader({
+                              ...servicesHeader,
+                              badge_en: e.target.value,
+                            })
+                          }
+                          className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-emerald-500 transition-all font-bold text-slate-900"
+                        />
+                        <input
+                          type="text"
+                          placeholder={t(
+                            "admin.services.content.labels.badgeEs",
+                          )}
+                          value={servicesHeader.badge_es}
+                          onChange={(e) =>
+                            setServicesHeader({
+                              ...servicesHeader,
+                              badge_es: e.target.value,
+                            })
+                          }
+                          className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-emerald-500 transition-all font-bold text-slate-900"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Title */}
+                    <div className="space-y-4">
+                      <label className="block text-xs font-black text-slate-400 uppercase tracking-widest pl-1">
+                        {t("admin.services.content.labels.titleLayout")}
+                      </label>
+                      <div className="grid grid-cols-1 gap-3">
+                        <input
+                          type="text"
+                          placeholder={t(
+                            "admin.services.content.labels.titleEn",
+                          )}
+                          value={servicesHeader.title_en}
+                          onChange={(e) =>
+                            setServicesHeader({
+                              ...servicesHeader,
+                              title_en: e.target.value,
+                            })
+                          }
+                          className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-emerald-500 transition-all font-bold text-slate-900"
+                        />
+                        <input
+                          type="text"
+                          placeholder={t(
+                            "admin.services.content.labels.titleEs",
+                          )}
+                          value={servicesHeader.title_es}
+                          onChange={(e) =>
+                            setServicesHeader({
+                              ...servicesHeader,
+                              title_es: e.target.value,
+                            })
+                          }
+                          className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-emerald-500 transition-all font-bold text-slate-900"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Subtitle */}
+                    <div className="space-y-4 md:col-span-2">
+                      <label className="block text-xs font-black text-slate-400 uppercase tracking-widest pl-1">
+                        {t("admin.services.content.labels.subtitleLayout")}
+                      </label>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <textarea
+                          placeholder={t(
+                            "admin.services.content.labels.subtitleEn",
+                          )}
+                          value={servicesHeader.subtitle_en}
+                          onChange={(e) =>
+                            setServicesHeader({
+                              ...servicesHeader,
+                              subtitle_en: e.target.value,
+                            })
+                          }
+                          className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-emerald-500 transition-all font-medium text-slate-700 min-h-[100px]"
+                        />
+                        <textarea
+                          placeholder={t(
+                            "admin.services.content.labels.subtitleEs",
+                          )}
+                          value={servicesHeader.subtitle_es}
+                          onChange={(e) =>
+                            setServicesHeader({
+                              ...servicesHeader,
+                              subtitle_es: e.target.value,
+                            })
+                          }
+                          className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-emerald-500 transition-all font-medium text-slate-700 min-h-[100px]"
+                        />
+                      </div>
+                    </div>
+
+                    {/* CTA Title */}
+                    <div className="space-y-4">
+                      <label className="block text-xs font-black text-slate-400 uppercase tracking-widest pl-1">
+                        {t("admin.services.content.labels.ctaTitleLayout")}
+                      </label>
+                      <div className="grid grid-cols-1 gap-3">
+                        <input
+                          type="text"
+                          placeholder={t(
+                            "admin.services.content.labels.ctaTitleEn",
+                          )}
+                          value={servicesHeader.cta_title_en}
+                          onChange={(e) =>
+                            setServicesHeader({
+                              ...servicesHeader,
+                              cta_title_en: e.target.value,
+                            })
+                          }
+                          className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-emerald-500 transition-all font-bold text-slate-900"
+                        />
+                        <input
+                          type="text"
+                          placeholder={t(
+                            "admin.services.content.labels.ctaTitleEs",
+                          )}
+                          value={servicesHeader.cta_title_es}
+                          onChange={(e) =>
+                            setServicesHeader({
+                              ...servicesHeader,
+                              cta_title_es: e.target.value,
+                            })
+                          }
+                          className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-emerald-500 transition-all font-bold text-slate-900"
+                        />
+                      </div>
+                    </div>
+
+                    {/* CTA Button */}
+                    <div className="space-y-4">
+                      <label className="block text-xs font-black text-slate-400 uppercase tracking-widest pl-1">
+                        {t("admin.services.content.labels.ctaButtonLayout")}
+                      </label>
+                      <div className="grid grid-cols-1 gap-3">
+                        <input
+                          type="text"
+                          placeholder={t(
+                            "admin.services.content.labels.ctaButtonEn",
+                          )}
+                          value={servicesHeader.cta_button_en}
+                          onChange={(e) =>
+                            setServicesHeader({
+                              ...servicesHeader,
+                              cta_button_en: e.target.value,
+                            })
+                          }
+                          className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-emerald-500 transition-all font-bold text-slate-900"
+                        />
+                        <input
+                          type="text"
+                          placeholder={t(
+                            "admin.services.content.labels.ctaButtonEs",
+                          )}
+                          value={servicesHeader.cta_button_es}
+                          onChange={(e) =>
+                            setServicesHeader({
+                              ...servicesHeader,
+                              cta_button_es: e.target.value,
+                            })
+                          }
+                          className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-emerald-500 transition-all font-bold text-slate-900"
+                        />
+                      </div>
+                    </div>
+
+                    {/* CTA Subtitle */}
+                    <div className="space-y-4 md:col-span-2">
+                      <label className="block text-xs font-black text-slate-400 uppercase tracking-widest pl-1">
+                        {t("admin.services.content.labels.ctaSubtitleLayout")}
+                      </label>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <textarea
+                          placeholder={t(
+                            "admin.services.content.labels.ctaSubtitleEn",
+                          )}
+                          value={servicesHeader.cta_subtitle_en}
+                          onChange={(e) =>
+                            setServicesHeader({
+                              ...servicesHeader,
+                              cta_subtitle_en: e.target.value,
+                            })
+                          }
+                          className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-emerald-500 transition-all font-medium text-slate-700 min-h-[80px]"
+                        />
+                        <textarea
+                          placeholder={t(
+                            "admin.services.content.labels.ctaSubtitleEs",
+                          )}
+                          value={servicesHeader.cta_subtitle_es}
+                          onChange={(e) =>
+                            setServicesHeader({
+                              ...servicesHeader,
+                              cta_subtitle_es: e.target.value,
+                            })
+                          }
+                          className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-emerald-500 transition-all font-medium text-slate-700 min-h-[80px]"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mt-10 pt-8 border-t border-slate-50 flex justify-end">
+                    <button
+                      onClick={async () => {
+                        setIsSavingContent(true);
+                        try {
+                          await updateSiteSetting(
+                            "page_header_services",
+                            servicesHeader,
+                          );
+                          alert("Services header updated!");
+                        } catch (err) {
+                          console.error(err);
+                        } finally {
+                          setIsSavingContent(false);
+                        }
+                      }}
+                      disabled={isSavingContent}
+                      className="bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold hover:bg-emerald-600 transition-all flex items-center gap-2 shadow-xl shadow-slate-900/10"
+                    >
+                      {isSavingContent ? (
+                        <Loader2 className="animate-spin" size={20} />
+                      ) : (
+                        <Save size={20} />
+                      )}
+                      {t("admin.services.content.saveServices")}
+                    </button>
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  {/* Badge */}
-                  <div className="space-y-4">
-                    <label className="block text-xs font-black text-slate-400 uppercase tracking-widest pl-1">
-                      Badge (EN / ES)
-                    </label>
-                    <div className="grid grid-cols-1 gap-3">
-                      <input
-                        type="text"
-                        placeholder={t("admin.services.content.labels.badgeEn")}
-                        value={servicesHeader.badge_en}
-                        onChange={(e) =>
-                          setServicesHeader({
-                            ...servicesHeader,
-                            badge_en: e.target.value,
-                          })
-                        }
-                        className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-emerald-500 transition-all font-bold text-slate-900"
-                      />
-                      <input
-                        type="text"
-                        placeholder={t("admin.services.content.labels.badgeEs")}
-                        value={servicesHeader.badge_es}
-                        onChange={(e) =>
-                          setServicesHeader({
-                            ...servicesHeader,
-                            badge_es: e.target.value,
-                          })
-                        }
-                        className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-emerald-500 transition-all font-bold text-slate-900"
-                      />
+                {/* Gallery Page Content */}
+                <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm overflow-hidden p-10">
+                  <div className="flex items-center gap-4 mb-8">
+                    <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center">
+                      <ImageIcon size={24} />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-black text-slate-900 leading-tight">
+                        {t("admin.services.content.galleryHeader")}
+                      </h3>
+                      <p className="text-sm font-medium text-slate-500">
+                        {t("admin.services.content.gallerySubtitle")}
+                      </p>
                     </div>
                   </div>
 
-                  {/* Title */}
-                  <div className="space-y-4">
-                    <label className="block text-xs font-black text-slate-400 uppercase tracking-widest pl-1">
-                      {t("admin.services.content.labels.titleLayout")}
-                    </label>
-                    <div className="grid grid-cols-1 gap-3">
-                      <input
-                        type="text"
-                        placeholder={t("admin.services.content.labels.titleEn")}
-                        value={servicesHeader.title_en}
-                        onChange={(e) =>
-                          setServicesHeader({
-                            ...servicesHeader,
-                            title_en: e.target.value,
-                          })
-                        }
-                        className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-emerald-500 transition-all font-bold text-slate-900"
-                      />
-                      <input
-                        type="text"
-                        placeholder={t("admin.services.content.labels.titleEs")}
-                        value={servicesHeader.title_es}
-                        onChange={(e) =>
-                          setServicesHeader({
-                            ...servicesHeader,
-                            title_es: e.target.value,
-                          })
-                        }
-                        className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-emerald-500 transition-all font-bold text-slate-900"
-                      />
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    {/* Badge */}
+                    <div className="space-y-4">
+                      <label className="block text-xs font-black text-slate-400 uppercase tracking-widest pl-1">
+                        {t("admin.services.content.labels.badgeLayout")}
+                      </label>
+                      <div className="grid grid-cols-1 gap-3">
+                        <input
+                          type="text"
+                          placeholder={t(
+                            "admin.services.content.labels.badgeEn",
+                          )}
+                          value={galleryHeader.badge_en}
+                          onChange={(e) =>
+                            setGalleryHeader({
+                              ...galleryHeader,
+                              badge_en: e.target.value,
+                            })
+                          }
+                          className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-emerald-500 transition-all font-bold text-slate-900"
+                        />
+                        <input
+                          type="text"
+                          placeholder={t(
+                            "admin.services.content.labels.badgeEs",
+                          )}
+                          value={galleryHeader.badge_es}
+                          onChange={(e) =>
+                            setGalleryHeader({
+                              ...galleryHeader,
+                              badge_es: e.target.value,
+                            })
+                          }
+                          className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-emerald-500 transition-all font-bold text-slate-900"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Title */}
+                    <div className="space-y-4">
+                      <label className="block text-xs font-black text-slate-400 uppercase tracking-widest pl-1">
+                        {t("admin.services.content.labels.titleLayout")}
+                      </label>
+                      <div className="grid grid-cols-1 gap-3">
+                        <input
+                          type="text"
+                          placeholder={t(
+                            "admin.services.content.labels.titleEn",
+                          )}
+                          value={galleryHeader.title_en}
+                          onChange={(e) =>
+                            setGalleryHeader({
+                              ...galleryHeader,
+                              title_en: e.target.value,
+                            })
+                          }
+                          className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-emerald-500 transition-all font-bold text-slate-900"
+                        />
+                        <input
+                          type="text"
+                          placeholder={t(
+                            "admin.services.content.labels.titleEs",
+                          )}
+                          value={galleryHeader.title_es}
+                          onChange={(e) =>
+                            setGalleryHeader({
+                              ...galleryHeader,
+                              title_es: e.target.value,
+                            })
+                          }
+                          className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-emerald-500 transition-all font-bold text-slate-900"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Subtitle */}
+                    <div className="space-y-4 md:col-span-2">
+                      <label className="block text-xs font-black text-slate-400 uppercase tracking-widest pl-1">
+                        {t("admin.services.content.labels.subtitleLayout")}
+                      </label>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <textarea
+                          placeholder={t(
+                            "admin.services.content.labels.subtitleEn",
+                          )}
+                          value={galleryHeader.subtitle_en}
+                          onChange={(e) =>
+                            setGalleryHeader({
+                              ...galleryHeader,
+                              subtitle_en: e.target.value,
+                            })
+                          }
+                          className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-emerald-500 transition-all font-medium text-slate-700 min-h-[100px]"
+                        />
+                        <textarea
+                          placeholder={t(
+                            "admin.services.content.labels.subtitleEs",
+                          )}
+                          value={galleryHeader.subtitle_es}
+                          onChange={(e) =>
+                            setGalleryHeader({
+                              ...galleryHeader,
+                              subtitle_es: e.target.value,
+                            })
+                          }
+                          className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-emerald-500 transition-all font-medium text-slate-700 min-h-[100px]"
+                        />
+                      </div>
+                    </div>
+
+                    {/* CTA Title */}
+                    <div className="space-y-4">
+                      <label className="block text-xs font-black text-slate-400 uppercase tracking-widest pl-1">
+                        {t("admin.services.content.labels.ctaTitleLayout")}
+                      </label>
+                      <div className="grid grid-cols-1 gap-3">
+                        <input
+                          type="text"
+                          placeholder={t(
+                            "admin.services.content.labels.ctaTitleEn",
+                          )}
+                          value={galleryHeader.cta_title_en}
+                          onChange={(e) =>
+                            setGalleryHeader({
+                              ...galleryHeader,
+                              cta_title_en: e.target.value,
+                            })
+                          }
+                          className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-emerald-500 transition-all font-bold text-slate-900"
+                        />
+                        <input
+                          type="text"
+                          placeholder={t(
+                            "admin.services.content.labels.ctaTitleEs",
+                          )}
+                          value={galleryHeader.cta_title_es}
+                          onChange={(e) =>
+                            setGalleryHeader({
+                              ...galleryHeader,
+                              cta_title_es: e.target.value,
+                            })
+                          }
+                          className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-emerald-500 transition-all font-bold text-slate-900"
+                        />
+                      </div>
+                    </div>
+
+                    {/* CTA Button */}
+                    <div className="space-y-4">
+                      <label className="block text-xs font-black text-slate-400 uppercase tracking-widest pl-1">
+                        {t("admin.services.content.labels.ctaButtonLayout")}
+                      </label>
+                      <div className="grid grid-cols-1 gap-3">
+                        <input
+                          type="text"
+                          placeholder={t(
+                            "admin.services.content.labels.ctaButtonEn",
+                          )}
+                          value={galleryHeader.cta_button_en}
+                          onChange={(e) =>
+                            setGalleryHeader({
+                              ...galleryHeader,
+                              cta_button_en: e.target.value,
+                            })
+                          }
+                          className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-emerald-500 transition-all font-bold text-slate-900"
+                        />
+                        <input
+                          type="text"
+                          placeholder={t(
+                            "admin.services.content.labels.ctaButtonEs",
+                          )}
+                          value={galleryHeader.cta_button_es}
+                          onChange={(e) =>
+                            setGalleryHeader({
+                              ...galleryHeader,
+                              cta_button_es: e.target.value,
+                            })
+                          }
+                          className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-emerald-500 transition-all font-bold text-slate-900"
+                        />
+                      </div>
+                    </div>
+
+                    {/* CTA Subtitle */}
+                    <div className="space-y-4 md:col-span-2">
+                      <label className="block text-xs font-black text-slate-400 uppercase tracking-widest pl-1">
+                        {t("admin.services.content.labels.ctaSubtitleLayout")}
+                      </label>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <textarea
+                          placeholder={t(
+                            "admin.services.content.labels.ctaSubtitleEn",
+                          )}
+                          value={galleryHeader.cta_subtitle_en}
+                          onChange={(e) =>
+                            setGalleryHeader({
+                              ...galleryHeader,
+                              cta_subtitle_en: e.target.value,
+                            })
+                          }
+                          className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-emerald-500 transition-all font-medium text-slate-700 min-h-[80px]"
+                        />
+                        <textarea
+                          placeholder={t(
+                            "admin.services.content.labels.ctaSubtitleEs",
+                          )}
+                          value={galleryHeader.cta_subtitle_es}
+                          onChange={(e) =>
+                            setGalleryHeader({
+                              ...galleryHeader,
+                              cta_subtitle_es: e.target.value,
+                            })
+                          }
+                          className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-emerald-500 transition-all font-medium text-slate-700 min-h-[80px]"
+                        />
+                      </div>
                     </div>
                   </div>
 
-                  {/* Subtitle */}
-                  <div className="space-y-4 md:col-span-2">
-                    <label className="block text-xs font-black text-slate-400 uppercase tracking-widest pl-1">
-                      {t("admin.services.content.labels.subtitleLayout")}
-                    </label>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                      <textarea
-                        placeholder={t("admin.services.content.labels.subtitleEn")}
-                        value={servicesHeader.subtitle_en}
-                        onChange={(e) =>
-                          setServicesHeader({
-                            ...servicesHeader,
-                            subtitle_en: e.target.value,
-                          })
+                  <div className="mt-10 pt-8 border-t border-slate-50 flex justify-end">
+                    <button
+                      onClick={async () => {
+                        setIsSavingContent(true);
+                        try {
+                          await updateSiteSetting(
+                            "page_header_gallery",
+                            galleryHeader,
+                          );
+                          alert("Gallery header updated!");
+                        } catch (err) {
+                          console.error(err);
+                        } finally {
+                          setIsSavingContent(false);
                         }
-                        className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-emerald-500 transition-all font-medium text-slate-700 min-h-[100px]"
-                      />
-                      <textarea
-                        placeholder={t("admin.services.content.labels.subtitleEs")}
-                        value={servicesHeader.subtitle_es}
-                        onChange={(e) =>
-                          setServicesHeader({
-                            ...servicesHeader,
-                            subtitle_es: e.target.value,
-                          })
-                        }
-                        className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-emerald-500 transition-all font-medium text-slate-700 min-h-[100px]"
-                      />
-                    </div>
+                      }}
+                      disabled={isSavingContent}
+                      className="bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold hover:bg-emerald-600 transition-all flex items-center gap-2 shadow-xl shadow-slate-900/10"
+                    >
+                      {isSavingContent ? (
+                        <Loader2 className="animate-spin" size={20} />
+                      ) : (
+                        <Save size={20} />
+                      )}
+                      {t("admin.services.content.saveGallery")}
+                    </button>
                   </div>
-                </div>
-
-                <div className="mt-10 pt-8 border-t border-slate-50 flex justify-end">
-                  <button
-                    onClick={async () => {
-                      setIsSavingContent(true);
-                      try {
-                        await updateSiteSetting(
-                          "page_header_services",
-                          servicesHeader,
-                        );
-                        alert("Services header updated!");
-                      } catch (err) {
-                        console.error(err);
-                      } finally {
-                        setIsSavingContent(false);
-                      }
-                    }}
-                    disabled={isSavingContent}
-                    className="bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold hover:bg-emerald-600 transition-all flex items-center gap-2 shadow-xl shadow-slate-900/10"
-                  >
-                    {isSavingContent ? (
-                      <Loader2 className="animate-spin" size={20} />
-                    ) : (
-                      <Save size={20} />
-                    )}
-                    {t("admin.services.content.saveServices")}
-                  </button>
                 </div>
               </div>
-
-              {/* Gallery Page Content */}
-              <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm overflow-hidden p-10">
-                <div className="flex items-center gap-4 mb-8">
-                  <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center">
-                    <ImageIcon size={24} />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-black text-slate-900 leading-tight">
-                      {t("admin.services.content.galleryHeader")}
-                    </h3>
-                    <p className="text-sm font-medium text-slate-500">
-                      {t("admin.services.content.gallerySubtitle")}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  {/* Badge */}
-                  <div className="space-y-4">
-                    <label className="block text-xs font-black text-slate-400 uppercase tracking-widest pl-1">
-                      {t("admin.services.content.labels.badgeLayout")}
-                    </label>
-                    <div className="grid grid-cols-1 gap-3">
-                      <input
-                        type="text"
-                        placeholder={t("admin.services.content.labels.badgeEn")}
-                        value={galleryHeader.badge_en}
-                        onChange={(e) =>
-                          setGalleryHeader({
-                            ...galleryHeader,
-                            badge_en: e.target.value,
-                          })
-                        }
-                        className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-emerald-500 transition-all font-bold text-slate-900"
-                      />
-                      <input
-                        type="text"
-                        placeholder={t("admin.services.content.labels.badgeEs")}
-                        value={galleryHeader.badge_es}
-                        onChange={(e) =>
-                          setGalleryHeader({
-                            ...galleryHeader,
-                            badge_es: e.target.value,
-                          })
-                        }
-                        className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-emerald-500 transition-all font-bold text-slate-900"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Title */}
-                  <div className="space-y-4">
-                    <label className="block text-xs font-black text-slate-400 uppercase tracking-widest pl-1">
-                      {t("admin.services.content.labels.titleLayout")}
-                    </label>
-                    <div className="grid grid-cols-1 gap-3">
-                      <input
-                        type="text"
-                        placeholder={t("admin.services.content.labels.titleEn")}
-                        value={galleryHeader.title_en}
-                        onChange={(e) =>
-                          setGalleryHeader({
-                            ...galleryHeader,
-                            title_en: e.target.value,
-                          })
-                        }
-                        className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-emerald-500 transition-all font-bold text-slate-900"
-                      />
-                      <input
-                        type="text"
-                        placeholder={t("admin.services.content.labels.titleEs")}
-                        value={galleryHeader.title_es}
-                        onChange={(e) =>
-                          setGalleryHeader({
-                            ...galleryHeader,
-                            title_es: e.target.value,
-                          })
-                        }
-                        className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-emerald-500 transition-all font-bold text-slate-900"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Subtitle */}
-                  <div className="space-y-4 md:col-span-2">
-                    <label className="block text-xs font-black text-slate-400 uppercase tracking-widest pl-1">
-                      {t("admin.services.content.labels.subtitleLayout")}
-                    </label>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                      <textarea
-                        placeholder={t("admin.services.content.labels.subtitleEn")}
-                        value={galleryHeader.subtitle_en}
-                        onChange={(e) =>
-                          setGalleryHeader({
-                            ...galleryHeader,
-                            subtitle_en: e.target.value,
-                          })
-                        }
-                        className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-emerald-500 transition-all font-medium text-slate-700 min-h-[100px]"
-                      />
-                      <textarea
-                        placeholder={t("admin.services.content.labels.subtitleEs")}
-                        value={galleryHeader.subtitle_es}
-                        onChange={(e) =>
-                          setGalleryHeader({
-                            ...galleryHeader,
-                            subtitle_es: e.target.value,
-                          })
-                        }
-                        className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-emerald-500 transition-all font-medium text-slate-700 min-h-[100px]"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-10 pt-8 border-t border-slate-50 flex justify-end">
-                  <button
-                    onClick={async () => {
-                      setIsSavingContent(true);
-                      try {
-                        await updateSiteSetting(
-                          "page_header_gallery",
-                          galleryHeader,
-                        );
-                        alert("Gallery header updated!");
-                      } catch (err) {
-                        console.error(err);
-                      } finally {
-                        setIsSavingContent(false);
-                      }
-                    }}
-                    disabled={isSavingContent}
-                    className="bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold hover:bg-emerald-600 transition-all flex items-center gap-2 shadow-xl shadow-slate-900/10"
-                  >
-                    {isSavingContent ? (
-                      <Loader2 className="animate-spin" size={20} />
-                    ) : (
-                      <Save size={20} />
-                    )}
-                    {t("admin.services.content.saveGallery")}
-                  </button>
-                </div>
-              </div>
-            </div>
+            </>
           ) : activeTab === "categories" ? (
             <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm overflow-hidden">
               <div className="p-8 border-b border-slate-100 flex items-center justify-between">
@@ -651,71 +976,100 @@ const AdminServices = () => {
               </div>
 
               <div className="overflow-x-auto">
-                <table className="w-full text-left">
-                  <thead>
-                    <tr className="bg-slate-50/50">
-                      <th className="px-8 py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                        {t("admin.services.categories.name")}
-                      </th>
-                      <th className="px-8 py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                        {t("admin.services.categories.order")}
-                      </th>
-                      <th className="px-8 py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                        {t("admin.services.categories.sorting")}
-                      </th>
-                      <th className="px-8 py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest text-right">
-                        {t("admin.services.categories.actions")}
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-50">
-                    {categories.map((cat) => (
-                      <tr
-                        key={cat.id}
-                        className="group hover:bg-slate-50/50 transition-colors"
-                      >
-                        <td className="px-8 py-6">
-                          <div className="font-bold text-slate-900">
-                            {i18n.language.startsWith("es")
-                              ? cat.name_es
-                              : cat.name_en}
-                          </div>
-                          <div className="text-xs font-medium text-slate-400">
-                            {i18n.language.startsWith("es")
-                              ? cat.name_en
-                              : cat.name_es}
-                          </div>
-                        </td>
-                        <td className="px-8 py-6 font-bold text-slate-600">
-                          {cat.display_order}
-                        </td>
-                        <td className="px-8 py-6">
-                          <span
-                            className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider ${cat.sort_type === "alphabetical" ? "bg-blue-50 text-blue-600" : "bg-orange-50 text-orange-600"}`}
-                          >
-                            {cat.sort_type}
-                          </span>
-                        </td>
-                        <td className="px-8 py-6 text-right">
-                          <div className="flex items-center justify-end gap-2 opacity-100 lg:opacity-0 group-hover:opacity-100 transition-opacity">
-                            <button
-                              onClick={() => startEdit("cat", cat)}
-                              className="p-2 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-all"
-                            >
-                              <Edit size={18} />
-                            </button>
-                            <button
-                              onClick={() => handleDelete("cat", cat.id)}
-                              className="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all"
-                            >
-                              <Trash2 size={18} />
-                            </button>
-                          </div>
-                        </td>
+                <DragDropContext onDragEnd={onDragEnd}>
+                  <table className="w-full text-left">
+                    <thead>
+                      <tr className="bg-slate-50/50 text-slate-400 ring-1 ring-slate-100/50">
+                        <th className="w-12"></th>
+                        <th className="pl-8 pr-4 py-4 text-[10px] font-black uppercase tracking-widest">
+                          {t("admin.services.categories.name")}
+                        </th>
+                        <th className="px-8 py-4 text-[10px] font-black uppercase tracking-widest">
+                          {t("admin.services.categories.order")}
+                        </th>
+                        <th className="px-8 py-4 text-[10px] font-black uppercase tracking-widest">
+                          {t("admin.services.categories.sorting")}
+                        </th>
+                        <th className="px-8 py-4 text-[10px] font-black uppercase tracking-widest text-right">
+                          {t("admin.services.categories.actions")}
+                        </th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <Droppable droppableId="categories" type="categories">
+                      {(provided) => (
+                        <tbody
+                          {...provided.droppableProps}
+                          ref={provided.innerRef}
+                          className="divide-y divide-slate-50"
+                        >
+                          {categories.map((cat, index) => (
+                            <Draggable
+                              key={cat.id}
+                              draggableId={cat.id}
+                              index={index}
+                            >
+                              {(provided, snapshot) => (
+                                <tr
+                                  ref={provided.innerRef}
+                                  {...provided.draggableProps}
+                                  onClick={() => startEdit("cat", cat)}
+                                  className={`group hover:bg-slate-50/50 transition-colors cursor-pointer ${snapshot.isDragging ? "bg-white shadow-xl z-50 ring-2 ring-emerald-500/20" : ""}`}
+                                >
+                                  <td
+                                    className="pl-6 py-6"
+                                    {...provided.dragHandleProps}
+                                  >
+                                    <div className="text-slate-300 group-hover:text-slate-400 transition-colors">
+                                      <GripVertical size={18} />
+                                    </div>
+                                  </td>
+                                  <td className="pl-8 pr-4 py-6">
+                                    <div className="font-bold text-slate-900">
+                                      {i18n.language.startsWith("es")
+                                        ? cat.name_es
+                                        : cat.name_en}
+                                    </div>
+                                    <div className="text-xs font-medium text-slate-400">
+                                      {i18n.language.startsWith("es")
+                                        ? cat.name_en
+                                        : cat.name_es}
+                                    </div>
+                                  </td>
+                                  <td className="px-8 py-6 font-bold text-slate-600">
+                                    {cat.display_order}
+                                  </td>
+                                  <td className="px-8 py-6">
+                                    <span
+                                      className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider ${cat.sort_type === "alphabetical" ? "bg-blue-50 text-blue-600" : "bg-orange-50 text-orange-600"}`}
+                                    >
+                                      {t(
+                                        `admin.services.modal.labels.sortingValues.${cat.sort_type}`,
+                                      )}
+                                    </span>
+                                  </td>
+                                  <td className="px-8 py-6 text-right">
+                                    <div className="flex items-center justify-end gap-2 opacity-100 lg:opacity-0 group-hover:opacity-100 transition-opacity">
+                                      <button
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          handleDelete("cat", cat.id);
+                                        }}
+                                        className="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all"
+                                      >
+                                        <Trash2 size={18} />
+                                      </button>
+                                    </div>
+                                  </td>
+                                </tr>
+                              )}
+                            </Draggable>
+                          ))}
+                          {provided.placeholder}
+                        </tbody>
+                      )}
+                    </Droppable>
+                  </table>
+                </DragDropContext>
               </div>
             </div>
           ) : (
@@ -740,106 +1094,141 @@ const AdminServices = () => {
               </div>
 
               <div className="overflow-x-auto">
-                <table className="w-full text-left">
-                  <thead>
-                    <tr className="bg-slate-50/50 text-slate-400 ring-1 ring-slate-100/50">
-                      <th className="pl-8 pr-4 py-4 text-[10px] font-black uppercase tracking-widest">
-                        {t("admin.services.list.service")}
-                      </th>
-                      <th className="px-4 py-4 text-[10px] font-black uppercase tracking-widest">
-                        {t("admin.services.list.category")}
-                      </th>
-                      <th className="px-4 py-4 text-[10px] font-black uppercase tracking-widest text-center">
-                        {t("admin.services.list.featured")}
-                      </th>
-                      <th className="px-4 py-4 text-[10px] font-black uppercase tracking-widest text-center">
-                        {t("admin.services.list.status")}
-                      </th>
-                      <th className="pl-4 pr-8 py-4 text-[10px] font-black uppercase tracking-widest text-right">
-                        {t("admin.services.list.actions")}
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-50">
-                    {services.map((serv) => (
-                      <tr
-                        key={serv.id}
-                        className="group hover:bg-slate-50/50 transition-colors"
-                      >
-                        <td className="pl-8 pr-4 py-5">
-                          <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 bg-slate-50 rounded-lg flex items-center justify-center text-slate-400 group-hover:bg-white transition-colors">
-                              <IconRenderer name={serv.icon} size={16} />
-                            </div>
-                            <div className="font-bold text-slate-900 truncate max-w-[150px] lg:max-w-none">
-                              {i18n.language.startsWith("es")
-                                ? serv.title_es
-                                : serv.title_en}
-                            </div>
-                          </div>
-                        </td>
-                        <td className="px-4 py-5">
-                          <span className="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-500 text-[10px] font-black uppercase tracking-wider">
-                            {(() => {
-                              const cat = categories.find(
-                                (c) => c.id === serv.category_id,
-                              );
-                              if (!cat) return "Uncategorized";
-                              return i18n.language.startsWith("es")
-                                ? cat.name_es
-                                : cat.name_en;
-                            })()}
-                          </span>
-                        </td>
-                        <td className="px-4 py-5 text-center">
-                          {serv.is_featured ? (
-                            <div className="w-5 h-5 bg-emerald-50 rounded-full flex items-center justify-center mx-auto ring-1 ring-emerald-100">
-                              <Check className="text-emerald-600" size={12} />
-                            </div>
-                          ) : (
-                            <span className="text-slate-200">--</span>
-                          )}
-                        </td>
-                        <td className="px-4 py-5 text-center">
-                          <span
-                            className={`px-2 py-0.5 rounded-md text-[10px] font-black uppercase tracking-widest ${serv.is_active ? "bg-emerald-50 text-emerald-600" : "bg-slate-100 text-slate-400"}`}
-                          >
-                            {serv.is_active
-                              ? t("admin.services.list.active")
-                              : t("admin.services.list.hidden")}
-                          </span>
-                        </td>
-                        <td className="pl-4 pr-8 py-5 text-right">
-                          <div className="flex items-center justify-end gap-1 opacity-100 lg:opacity-0 group-hover:opacity-100 transition-opacity">
-                            <button
-                              onClick={() => {
-                                startEdit("serv", serv);
-                                setModalTab("images");
-                              }}
-                              className="p-2 text-slate-400 hover:text-blue-600 hover:bg-white rounded-lg transition-all shadow-sm hover:shadow-md active:scale-95 border border-transparent hover:border-blue-100"
-                              title={t("admin.services.modal.gallery")}
-                            >
-                              <ImageIcon size={16} />
-                            </button>
-                            <button
-                              onClick={() => startEdit("serv", serv)}
-                              className="p-2 text-slate-400 hover:text-emerald-600 hover:bg-white rounded-lg transition-all shadow-sm hover:shadow-md active:scale-95 border border-transparent hover:border-emerald-100"
-                              title={t("admin.services.modal.edit")}
-                            >
-                              <Edit size={16} />
-                            </button>
-                            <button
-                              onClick={() => handleDelete("serv", serv.id)}
-                              className="p-2 text-slate-400 hover:text-red-500 hover:bg-white rounded-lg transition-all shadow-sm hover:shadow-md active:scale-95 border border-transparent hover:border-red-100"
-                            >
-                              <Trash2 size={16} />
-                            </button>
-                          </div>
-                        </td>
+                <DragDropContext onDragEnd={onDragEnd}>
+                  <table className="w-full text-left">
+                    <thead>
+                      <tr className="bg-slate-50/50 text-slate-400 ring-1 ring-slate-100/50">
+                        <th className="w-12"></th>
+                        <th className="pl-8 pr-4 py-4 text-[10px] font-black uppercase tracking-widest">
+                          {t("admin.services.list.service")}
+                        </th>
+                        <th className="px-4 py-4 text-[10px] font-black uppercase tracking-widest">
+                          {t("admin.services.list.category")}
+                        </th>
+                        <th className="px-4 py-4 text-[10px] font-black uppercase tracking-widest text-center">
+                          {t("admin.services.list.featured")}
+                        </th>
+                        <th className="px-4 py-4 text-[10px] font-black uppercase tracking-widest text-center">
+                          {t("admin.services.list.status")}
+                        </th>
+                        <th className="pl-4 pr-8 py-4 text-[10px] font-black uppercase tracking-widest text-right">
+                          {t("admin.services.list.actions")}
+                        </th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <Droppable droppableId="services" type="services">
+                      {(provided) => (
+                        <tbody
+                          {...provided.droppableProps}
+                          ref={provided.innerRef}
+                          className="divide-y divide-slate-50"
+                        >
+                          {services.map((serv, index) => (
+                            <Draggable
+                              key={serv.id}
+                              draggableId={serv.id}
+                              index={index}
+                            >
+                              {(provided, snapshot) => (
+                                <tr
+                                  ref={provided.innerRef}
+                                  {...provided.draggableProps}
+                                  onClick={() => startEdit("serv", serv)}
+                                  className={`group hover:bg-slate-50/50 transition-colors cursor-pointer ${snapshot.isDragging ? "bg-white shadow-xl z-50 ring-2 ring-emerald-500/20" : ""}`}
+                                >
+                                  <td
+                                    className="pl-6 py-5"
+                                    {...provided.dragHandleProps}
+                                  >
+                                    <div className="text-slate-300 group-hover:text-slate-400 transition-colors">
+                                      <GripVertical size={18} />
+                                    </div>
+                                  </td>
+                                  <td className="pl-8 pr-4 py-5">
+                                    <div className="flex items-center gap-3">
+                                      <div className="w-8 h-8 bg-slate-50 rounded-lg flex items-center justify-center text-slate-400 group-hover:bg-white transition-colors">
+                                        <IconRenderer
+                                          name={serv.icon}
+                                          size={16}
+                                        />
+                                      </div>
+                                      <div className="font-bold text-slate-900 truncate max-w-[150px] lg:max-w-none">
+                                        {i18n.language.startsWith("es")
+                                          ? serv.title_es
+                                          : serv.title_en}
+                                      </div>
+                                    </div>
+                                  </td>
+                                  <td className="px-4 py-5">
+                                    <span className="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-500 text-[10px] font-black uppercase tracking-wider">
+                                      {(() => {
+                                        const cat = categories.find(
+                                          (c) => c.id === serv.category_id,
+                                        );
+                                        if (!cat) return "Uncategorized";
+                                        return i18n.language.startsWith("es")
+                                          ? cat.name_es
+                                          : cat.name_en;
+                                      })()}
+                                    </span>
+                                  </td>
+                                  <td className="px-4 py-5 text-center">
+                                    {serv.is_featured ? (
+                                      <div className="w-5 h-5 bg-emerald-50 rounded-full flex items-center justify-center mx-auto ring-1 ring-emerald-100">
+                                        <Check
+                                          className="text-emerald-600"
+                                          size={12}
+                                        />
+                                      </div>
+                                    ) : (
+                                      <span className="text-slate-200">--</span>
+                                    )}
+                                  </td>
+                                  <td className="px-4 py-5 text-center">
+                                    <span
+                                      className={`px-2 py-0.5 rounded-md text-[10px] font-black uppercase tracking-widest ${serv.is_active ? "bg-emerald-50 text-emerald-600" : "bg-slate-100 text-slate-400"}`}
+                                    >
+                                      {serv.is_active
+                                        ? t("admin.services.list.active")
+                                        : t("admin.services.list.hidden")}
+                                    </span>
+                                  </td>
+                                  <td className="pl-4 pr-8 py-5 text-right">
+                                    <div className="flex items-center justify-end gap-1 opacity-100 lg:opacity-0 group-hover:opacity-100 transition-opacity">
+                                      <button
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          startEdit("serv", serv);
+                                          setModalTab("images");
+                                        }}
+                                        className="p-2 text-slate-400 hover:text-blue-600 hover:bg-white rounded-lg transition-all shadow-sm hover:shadow-md active:scale-95 border border-transparent hover:border-blue-100"
+                                        title={t(
+                                          "admin.services.modal.gallery",
+                                        )}
+                                      >
+                                        <ImageIcon size={16} />
+                                      </button>
+                                      <button
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          handleDelete("serv", serv.id);
+                                        }}
+                                        className="p-2 text-slate-400 hover:text-red-500 hover:bg-white rounded-lg transition-all shadow-sm hover:shadow-md active:scale-95 border border-transparent hover:border-red-100"
+                                      >
+                                        <Trash2 size={16} />
+                                      </button>
+                                    </div>
+                                  </td>
+                                </tr>
+                              )}
+                            </Draggable>
+                          ))}
+                          {provided.placeholder}
+                        </tbody>
+                      )}
+                    </Droppable>
+                  </table>
+                </DragDropContext>
               </div>
             </div>
           )}

@@ -2,7 +2,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { getLeads, getSiteSettings, type Lead } from "../supabase/queries";
 import AdminLayout from "../components/AdminLayout";
 import { useTranslation } from "react-i18next";
-import { TrendingUp, Clock, Mail, ChevronRight, Loader2 } from "lucide-react";
+import { Flame, Clock, Mail, ChevronRight, Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const AdminDashboard = () => {
@@ -40,11 +40,20 @@ const AdminDashboard = () => {
       bg: "bg-emerald-500/10",
     },
     {
-      label: t("admin.dashboard.stats.activeProjects"),
-      value: "0",
-      icon: TrendingUp,
-      color: "text-blue-500",
-      bg: "bg-blue-500/10",
+      label: t("admin.dashboard.stats.topService"),
+      value: (() => {
+        if (leads.length === 0) return "—";
+        const freq: Record<string, number> = {};
+        leads.forEach((l) => {
+          freq[l.service] = (freq[l.service] || 0) + 1;
+        });
+        const top = Object.entries(freq).sort((a, b) => b[1] - a[1])[0];
+        return top ? top[0] : "—";
+      })(),
+      icon: Flame,
+      color: "text-amber-500",
+      bg: "bg-amber-500/10",
+      isSmallText: true,
     },
     {
       label: t("admin.dashboard.stats.newInquiries"),
@@ -90,7 +99,7 @@ const AdminDashboard = () => {
                 <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">
                   {stat.label}
                 </p>
-                <h3 className="text-4xl font-black text-slate-900">
+                <h3 className={`font-black text-slate-900 ${stat.isSmallText ? "text-lg leading-snug" : "text-4xl"}`}>
                   {stat.value}
                 </h3>
               </div>

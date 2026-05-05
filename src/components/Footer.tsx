@@ -16,13 +16,20 @@ import {
 const Footer = () => {
   const { t, i18n } = useTranslation();
   const [footerServices, setFooterServices] = useState<CMSService[]>([]);
+  const [socials, setSocials] = useState<{ facebook?: string, instagram?: string, show: boolean }>({ show: true });
+  const [contactInfo, setContactInfo] = useState({ phone: PHONE_NUMBER, email: EMAIL_ADDRESS });
 
   useEffect(() => {
     const fetchFooterData = async () => {
       try {
-        const [selection, allServices] = await Promise.all([
+        const [selection, allServices, fb, ig, show, phone, email] = await Promise.all([
           getSiteSettings("footer_services"),
           getServices(),
+          getSiteSettings("facebook_url"),
+          getSiteSettings("instagram_url"),
+          getSiteSettings("show_social_links"),
+          getSiteSettings("business_phone"),
+          getSiteSettings("business_email"),
         ]);
 
         const selectedIds: string[] = Array.isArray(selection)
@@ -39,14 +46,25 @@ const Footer = () => {
 
           if (orderedServices.length > 0) {
             setFooterServices(orderedServices);
-            return;
+          } else {
+            setFooterServices(allServices.filter((s) => s.is_active).slice(0, 10));
           }
+        } else {
+          setFooterServices(allServices.filter((s) => s.is_active).slice(0, 10));
         }
 
-        // Fallback: take the first 10 active services
-        setFooterServices(allServices.filter((s) => s.is_active).slice(0, 10));
+        setSocials({
+          facebook: fb,
+          instagram: ig,
+          show: show === true || show === "true" || show === null // Default to true if null
+        });
+
+        setContactInfo({
+          phone: phone || PHONE_NUMBER,
+          email: email || EMAIL_ADDRESS
+        });
       } catch (err) {
-        console.error("Error fetching footer services:", err);
+        console.error("Error fetching footer data:", err);
       }
     };
     fetchFooterData();
@@ -69,52 +87,58 @@ const Footer = () => {
             <p className="text-sm leading-relaxed md:max-w-xs">
               {t("footer.description")}
             </p>
-            <div className="flex space-x-4 text-emerald-500">
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-white transition-colors"
-                aria-label="Facebook"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-                </svg>
-              </a>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-white transition-colors"
-                aria-label="Instagram"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                </svg>
-              </a>
-            </div>
+            {socials.show && (socials.facebook || socials.instagram) && (
+              <div className="flex space-x-4 text-emerald-500">
+                {socials.facebook && (
+                  <a
+                    href={socials.facebook}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-white transition-colors"
+                    aria-label="Facebook"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                    </svg>
+                  </a>
+                )}
+                {socials.instagram && (
+                  <a
+                    href={socials.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-white transition-colors"
+                    aria-label="Instagram"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                  </a>
+                )}
+              </div>
+            )}
           </div>
 
           {/* Quick Links - Order 3 on mobile, Order 2 on md+ */}
@@ -217,11 +241,11 @@ const Footer = () => {
             <ul className="space-y-4 text-sm">
               <li className="flex items-start space-x-3">
                 <Phone size={18} className="text-emerald-500 shrink-0 mt-0.5" />
-                <span>{PHONE_NUMBER}</span>
+                <span>{contactInfo.phone}</span>
               </li>
               <li className="flex items-start space-x-3">
                 <Mail size={18} className="text-emerald-500 shrink-0 mt-0.5" />
-                <span className="break-all">{EMAIL_ADDRESS}</span>
+                <span className="break-all">{contactInfo.email}</span>
               </li>
               <li className="flex items-start space-x-3">
                 <MapPin

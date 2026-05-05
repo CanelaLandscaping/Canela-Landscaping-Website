@@ -22,6 +22,12 @@ interface PageHeaderContent {
   title_es: string;
   subtitle_en: string;
   subtitle_es: string;
+  cta_title_en?: string;
+  cta_title_es?: string;
+  cta_subtitle_en?: string;
+  cta_subtitle_es?: string;
+  cta_button_en?: string;
+  cta_button_es?: string;
 }
 
 const Services = () => {
@@ -184,9 +190,21 @@ const Services = () => {
         {/* Bottom CTA */}
         <SectionCTA
           variant="emerald"
-          title={t("servicesPage.cta.title")}
-          subtitle={t("servicesPage.cta.subtitle")}
-          buttonText={t("servicesPage.cta.button")}
+          title={
+            i18n.language.startsWith("es")
+              ? headerContent?.cta_title_es || t("servicesPage.cta.title")
+              : headerContent?.cta_title_en || t("servicesPage.cta.title")
+          }
+          subtitle={
+            i18n.language.startsWith("es")
+              ? headerContent?.cta_subtitle_es || t("servicesPage.cta.subtitle")
+              : headerContent?.cta_subtitle_en || t("servicesPage.cta.subtitle")
+          }
+          buttonText={
+            i18n.language.startsWith("es")
+              ? headerContent?.cta_button_es || t("servicesPage.cta.button")
+              : headerContent?.cta_button_en || t("servicesPage.cta.button")
+          }
           buttonTo="/contact"
         />
       </div>

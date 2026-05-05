@@ -1,19 +1,67 @@
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, MessageSquare } from "lucide-react";
 import { useTranslation, Trans } from "react-i18next";
+import { useEffect, useState } from "react";
 import ContactForm from "../components/ContactForm";
 import SEO from "../components/SEO";
-import { PHONE_NUMBER, EMAIL_ADDRESS, LOCATION_TEXT } from "../config/constants";
+import {
+  PHONE_NUMBER,
+  EMAIL_ADDRESS,
+  LOCATION_TEXT,
+} from "../config/constants";
+import { getSiteSettings } from "../supabase/queries";
 
 const Contact = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const [contactInfo, setContactInfo] = useState({
+    phone: PHONE_NUMBER,
+    email: EMAIL_ADDRESS,
+    hours: { en: "Mon - Fri, 8am - 6pm", es: "Lun - Vie, 8am - 6pm" },
+    reply: { en: "We reply within 24h", es: "Respondemos en menos de 24h" },
+  });
+
+  useEffect(() => {
+    const fetchContactInfo = async () => {
+      try {
+        const [phone, email, hours, hoursEs, reply, replyEs] = await Promise.all([
+          getSiteSettings("business_phone"),
+          getSiteSettings("business_email"),
+          getSiteSettings("business_hours"),
+          getSiteSettings("business_hours_es"),
+          getSiteSettings("email_reply_time"),
+          getSiteSettings("email_reply_time_es"),
+        ]);
+
+        setContactInfo({
+          phone: phone || PHONE_NUMBER,
+          email: email || EMAIL_ADDRESS,
+          hours: {
+            en: hours || "Mon - Fri, 8am - 6pm",
+            es: hoursEs || "Lun - Vie, 8am - 6pm",
+          },
+          reply: {
+            en: reply || "We reply within 24h",
+            es: replyEs || "Respondemos en menos de 24h",
+          },
+        });
+      } catch (err) {
+        console.error("Error fetching contact info:", err);
+      }
+    };
+    fetchContactInfo();
+  }, []);
+
+  const currentHours =
+    i18n.language === "es" ? contactInfo.hours.es : contactInfo.hours.en;
+  const currentReply =
+    i18n.language === "es" ? contactInfo.reply.es : contactInfo.reply.en;
 
   return (
     <section className="pt-40 pb-32 bg-slate-50/50 px-6 md:px-12">
-      <SEO 
-        title={t("seo.contact.title")} 
-        description={t("seo.contact.description")} 
-        canonical="/contact" 
+      <SEO
+        title={t("seo.contact.title")}
+        description={t("seo.contact.description")}
+        canonical="/contact"
       />
       <div className="container-custom">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
@@ -40,9 +88,9 @@ const Contact = () => {
                   <h4 className="text-xl font-bold text-slate-900 mb-1">
                     {t("contact.info.call.title")}
                   </h4>
-                  <p className="text-slate-500 font-medium">{PHONE_NUMBER}</p>
+                  <p className="text-slate-500 font-medium">{contactInfo.phone}</p>
                   <p className="text-xs text-slate-400 mt-1 uppercase tracking-tighter">
-                    {t("contact.info.call.hours")}
+                    {currentHours}
                   </p>
                 </div>
               </div>
@@ -55,11 +103,9 @@ const Contact = () => {
                   <h4 className="text-xl font-bold text-slate-900 mb-1">
                     {t("contact.info.email.title")}
                   </h4>
-                  <p className="text-slate-500 font-medium">
-                    {EMAIL_ADDRESS}
-                  </p>
+                  <p className="text-slate-500 font-medium">{contactInfo.email}</p>
                   <p className="text-xs text-slate-400 mt-1 uppercase tracking-tighter">
-                    {t("contact.info.email.reply")}
+                    {currentReply}
                   </p>
                 </div>
               </div>
@@ -72,9 +118,7 @@ const Contact = () => {
                   <h4 className="text-xl font-bold text-slate-900 mb-1">
                     {t("contact.info.area.title")}
                   </h4>
-                  <p className="text-slate-500 font-medium">
-                    {LOCATION_TEXT}
-                  </p>
+                  <p className="text-slate-500 font-medium">{LOCATION_TEXT}</p>
                 </div>
               </div>
             </div>
